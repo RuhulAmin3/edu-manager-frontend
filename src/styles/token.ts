@@ -19,6 +19,9 @@ export const EDU_MANAGER_TOKENS = {
     "edu-pink-bg-opacity": "var(--edu-pink-bg-opacity)",
     "edu-purple-bg-opacity": "var(--edu-purple-bg-opacity)",
 
+    /* hover colors */
+    "edu-primary-hover-color": "var(--edu-primary-hover-color)",
+
     /* text colors */
     "edu-text-primary-color": "var(--text-primary-color)",
     "edu-text-secondary-color": "var(--text-secondary-color)",
@@ -34,6 +37,7 @@ export const EDU_MANAGER_TOKENS = {
 
     /* form colors */
     "edu-form-label-color": "var(--edu-form-label-color)",
+    "edu-form-invalid-border-color": "var(--edu-form-invalid-border-color)",
     // "edu-form-valid-color": "var(--edu-form-valid-color)",
     // "edu-form-valid-border-color": "var(--edu-form-valid-border-color)",
     // "edu-form-invalid-color": "var(--edu-form-invalid-color)",

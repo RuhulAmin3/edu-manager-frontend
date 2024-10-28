@@ -36,6 +36,9 @@ h6 {
   --edu-pink-bg-opacity: rgba(253, 60, 151, 0.1);
   --edu-purple-bg-opacity: rgba(115, 103, 240, 0.1);
 
+  /* hover colors */
+  --edu-primary-hover-color: #20bb59;
+
   /* text colors */
   --text-primary-color: var(--edu-dark-gray);
   --text-secondary-color: #96a0b5;
@@ -55,10 +58,10 @@ h6 {
 
   /* form colors */
   --edu-form-label-color: #656d9a;
-  /* --edu-form-valid-color: #7adc9e;
+  --edu-form-valid-color: #7adc9e;
   --edu-form-valid-border-color: #7adc9e;
   --edu-form-invalid-color: #f5949a;
-  --edu-form-invalid-border-color: #f5949a; */
+  --edu-form-invalid-border-color: #f5949a;
 
   /* font sizes */
   --edu-font-sm: 12px;

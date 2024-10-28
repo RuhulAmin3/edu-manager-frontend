@@ -1,58 +1,35 @@
 // Internal Import
 import logo from "../../assets/edu-manger-logo.png";
-import bg from "../../assets/auth-bg.png";
 import { EDU_MANAGER_TOKENS } from "../../styles/token";
-import CustomInput from "../../components/CustomInput";
-import CustomFormItem from "../../components/CustomFormItem";
+import CustomInput from "../../components/Form/CustomInput";
+import CustomFormItem from "../../components/Form/CustomFormItem";
+import PrimaryButton from "../../components/ui/PrimaryButton";
+import CustomForm from "../../components/Form/CustomForm";
+import { LoginStyle } from "../../features/auth/Login.style";
 
 // external Import
-import styled from "styled-components";
-import { Flex, Form, Image, Space, Typography } from "antd";
-
-const Wrapper = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100vh;
-  width: 100vw;
-  background: url(${bg}) center / cover no-repeat;
-`;
-
-const FlexBox = styled(Flex)`
-  background: ${EDU_MANAGER_TOKENS.colors["edu-white"]};
-  box-shadow: ${EDU_MANAGER_TOKENS.shadow["edu-card-shadow"]};
-  border-radius: ${EDU_MANAGER_TOKENS.borderRadius["edu-border-radius-base"]};
-  min-width: 90%; /* Mobile default */
-  margin: 15px;
-  /* Tablet */
-  @media (min-width: 768px) {
-    min-width: 50%;
-  }
-
-  /* Desktop */
-  @media (min-width: 1024px) {
-    min-width: 33%;
-  }
-`;
+import { Form, Image, Typography } from "antd";
+import { PiSignInBold } from "react-icons/pi";
+import { loginSchema } from "../../features/auth/Login.schema";
 
 const LoginPage = () => {
   const { Title, Text } = Typography;
+  const [form] = Form.useForm();
+
+  const handleSubmit = (values: unknown) => {
+    console.log(values);
+    form.resetFields();
+  };
 
   return (
-    <Wrapper>
-      <FlexBox vertical gap={"large"}>
-        <Space
+    <LoginStyle.Wrapper>
+      <LoginStyle.FlexBox vertical gap={"large"}>
+        <LoginStyle.FlexBoxTop
           direction="vertical"
           align="center"
           content="center"
-          style={{
-            padding: "24px",
-            borderTopLeftRadius: `${EDU_MANAGER_TOKENS.borderRadius["edu-border-radius-base"]}`,
-            borderTopRightRadius: `${EDU_MANAGER_TOKENS.borderRadius["edu-border-radius-base"]}`,
-            background: `${EDU_MANAGER_TOKENS.colors["edu-dark-gray"]}`,
-          }}
         >
-          <Image src={logo} width={80} preview={false} />
+          <Image src={logo} width={90} preview={false} />
           <Title
             level={4}
             style={{
@@ -68,25 +45,41 @@ const LoginPage = () => {
           >
             Sign in to continue to Edu Manager
           </Text>
-        </Space>
-        <Form style={{ padding: "24px" }} layout="vertical">
-          <CustomFormItem label="UserId" layout="vertical" name="userId">
+        </LoginStyle.FlexBoxTop>
+        <CustomForm
+          style={{ padding: "24px" }}
+          layout="vertical"
+          form={form}
+          onFinish={handleSubmit}
+        >
+          <CustomFormItem
+            label="UserId"
+            layout="vertical"
+            name="userId"
+            rules={[loginSchema.userId]}
+          >
             <CustomInput placeholder={"Enter userId"} size="large" />
           </CustomFormItem>
 
-          <CustomFormItem label="Password" layout="vertical" name="password">
+          <CustomFormItem
+            label="Password"
+            layout="vertical"
+            name="password"
+            rules={[loginSchema.password]}
+          >
             <CustomInput
               type="password"
+              isPassword={true}
               placeholder="Enter password"
               size="large"
             />
           </CustomFormItem>
-          {/* <Form.Item label="UserId" layout="vertical" name="userId">
-            <CustomInput placeholder={"Enter userId"} size="large" />
-          </Form.Item> */}
-        </Form>
-      </FlexBox>
-    </Wrapper>
+          <PrimaryButton type="primary" size="large" block htmlType="submit">
+            Log In <PiSignInBold />
+          </PrimaryButton>
+        </CustomForm>
+      </LoginStyle.FlexBox>
+    </LoginStyle.Wrapper>
   );
 };
 
