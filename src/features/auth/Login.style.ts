@@ -1,7 +1,10 @@
-import { Flex, Space } from "antd";
-import styled from "styled-components";
+// External Import
 import { EDU_MANAGER_TOKENS } from "../../styles/token";
 import bg from "../../assets/auth-bg.png";
+
+// Internal Import
+import { Flex, Space } from "antd";
+import styled from "styled-components";
 
 const Wrapper = styled.div`
   display: flex;

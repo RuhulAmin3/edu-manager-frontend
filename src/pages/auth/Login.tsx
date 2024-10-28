@@ -8,12 +8,12 @@ import CustomForm from "../../components/Form/CustomForm";
 import { LoginStyle } from "../../features/auth/Login.style";
 
 // external Import
-import { Form, Image, Typography } from "antd";
+import { Form, Image } from "antd";
 import { PiSignInBold } from "react-icons/pi";
-import { loginSchema } from "../../features/auth/Login.schema";
+import { Link } from "react-router-dom";
+import NormalText from "../../components/ui/NormalText";
 
 const LoginPage = () => {
-  const { Title, Text } = Typography;
   const [form] = Form.useForm();
 
   const handleSubmit = (values: unknown) => {
@@ -30,25 +30,26 @@ const LoginPage = () => {
           content="center"
         >
           <Image src={logo} width={90} preview={false} />
-          <Title
-            level={4}
-            style={{
-              color: `${EDU_MANAGER_TOKENS.colors["edu-white"]}`,
-            }}
+          <NormalText
+            level={3}
+            textType="large"
+            textColor={EDU_MANAGER_TOKENS.colors["edu-yellow"]}
+            fontSize={EDU_MANAGER_TOKENS.fontSize["edu-font-xl"]}
           >
             Let's Get Started With Edu Manager
-          </Title>
-          <Text
-            style={{
-              color: `${EDU_MANAGER_TOKENS.colors["edu-text-secondary-color"]}`,
-            }}
+          </NormalText>
+          <NormalText
+            textColor={EDU_MANAGER_TOKENS.colors["edu-text-secondary-color"]}
           >
             Sign in to continue to Edu Manager
-          </Text>
+          </NormalText>
         </LoginStyle.FlexBoxTop>
         <CustomForm
           style={{ padding: "24px" }}
           layout="vertical"
+          validateMessages={{
+            required: "please provide ${label}!",
+          }}
           form={form}
           onFinish={handleSubmit}
         >
@@ -56,7 +57,7 @@ const LoginPage = () => {
             label="UserId"
             layout="vertical"
             name="userId"
-            rules={[loginSchema.userId]}
+            rules={[{ required: true }]}
           >
             <CustomInput placeholder={"Enter userId"} size="large" />
           </CustomFormItem>
@@ -65,7 +66,8 @@ const LoginPage = () => {
             label="Password"
             layout="vertical"
             name="password"
-            rules={[loginSchema.password]}
+            required
+            rules={[{ required: true }]}
           >
             <CustomInput
               type="password"
@@ -74,6 +76,11 @@ const LoginPage = () => {
               size="large"
             />
           </CustomFormItem>
+          <Link to={"/forgot-password"}>
+            <NormalText textColor={EDU_MANAGER_TOKENS.colors["edu-secondary"]}>
+              Forgot Password
+            </NormalText>
+          </Link>
           <PrimaryButton type="primary" size="large" block htmlType="submit">
             Log In <PiSignInBold />
           </PrimaryButton>

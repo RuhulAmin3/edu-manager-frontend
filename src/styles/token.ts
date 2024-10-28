@@ -9,6 +9,7 @@ export const EDU_MANAGER_TOKENS = {
     "edu-light-gray": "var(--edu-light-gray)",
     "edu-dark-gray": "var(--edu-dark-gray)",
     "edu-white": "var(--edu-white)",
+    "edu-yellow": "var(--edu-yellow)",
     "edu-primary-bg-opacity": "var(--edu-primary-bg-opacity)",
     "edu-secondary-bg-opacity": "var(--edu-secondary-bg-opacity)",
     "edu-success-bg-opacity": "var(--edu-success-bg-opacity)",
