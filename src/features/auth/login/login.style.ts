@@ -1,6 +1,6 @@
 // External Import
-import { EDU_MANAGER_TOKENS } from "../../styles/token";
-import bg from "../../assets/auth-bg.png";
+import { EDU_MANAGER_TOKENS } from "../../../styles/token";
+import bg from "../../../assets/auth-bg.png";
 
 // Internal Import
 import { Flex, Space } from "antd";

@@ -1,7 +1,8 @@
 import App from "../../App";
-import ChangePasswordPage from "../../pages/auth/ChangePassword";
-import ForgotPasswordPage from "../../pages/auth/ForgotPassword";
-import LoginPage from "../../pages/auth/Login";
+import ChangePasswordPage from "../../pages/auth/change-password";
+import ForgotPasswordPage from "../../pages/auth/forgot-password";
+import GuardianRegisterPage from "../../pages/auth/guardian-register";
+import LoginPage from "../../pages/auth/login";
 
 export const commonRoutes = [
   {
@@ -19,5 +20,9 @@ export const commonRoutes = [
   {
     path: "forgot-password",
     element: ForgotPasswordPage,
+  },
+  {
+    path: "register",
+    element: GuardianRegisterPage,
   },
 ];

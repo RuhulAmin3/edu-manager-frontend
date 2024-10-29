@@ -1,7 +1,7 @@
 import { Button, ButtonProps as AntButtonProps } from "antd";
 import styled from "styled-components";
-import { EDU_MANAGER_TOKENS } from "../../styles/token";
 import { FC, PropsWithChildren } from "react";
+import { EDU_MANAGER_TOKENS } from "../../styles/token";
 
 const CustomButton = styled(Button)`
   &.ant-btn-primary {
