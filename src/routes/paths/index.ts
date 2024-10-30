@@ -1,16 +1,15 @@
 import App from "../../App";
 import { ROLE } from "../../common/constants";
-import { USER } from "../../common/constants/local-storage.constant";
-import { getFromLocalStorage } from "../../common/utils/local-storage.utils";
-import RootLayout from "../../layouts";
+import AdminSummaryPage from "../../pages/admin";
+import AddGuardianPage from "../../pages/admin/guardian/add-guardian";
 import ChangePasswordPage from "../../pages/auth/change-password";
 import ForgotPasswordPage from "../../pages/auth/forgot-password";
 import GuardianRegisterPage from "../../pages/auth/guardian-register";
 import LoginPage from "../../pages/auth/login";
+import GuardianSummaryPage from "../../pages/guardian";
 import NotFoundPage from "../../pages/not-found";
-import TeacherList from "../../pages/teacher";
-
-const user: Record<string, string> | null = getFromLocalStorage(USER);
+import StudentSummaryPage from "../../pages/student";
+import TeacherSummaryPage from "../../pages/teacher";
 
 export const commonRoutes = [
   {
@@ -20,10 +19,12 @@ export const commonRoutes = [
   {
     path: "login",
     element: LoginPage,
+    public: true,
   },
   {
     path: "forgot-password",
     element: ForgotPasswordPage,
+    public: true,
   },
   {
     path: "change-password",
@@ -32,6 +33,7 @@ export const commonRoutes = [
   {
     path: "register",
     element: GuardianRegisterPage,
+    public: true,
   },
   {
     path: "*",
@@ -39,25 +41,23 @@ export const commonRoutes = [
   },
 ];
 
-export const adminRoutes = [{}];
-export const teacherRoutes = [{ index: true, element: TeacherList }];
-export const studentRoutes = [{}];
-export const guardianRoutes = [{}];
+export const adminRoutes = [
+  { index: true, element: AdminSummaryPage, roles: [ROLE.ADMIN] },
+  {
+    path: "add-guardian",
+    element: AddGuardianPage,
+    roles: [ROLE.ADMIN, ROLE.TEACHER, ROLE.GUARDIAN],
+  },
+];
 
-export const layoutRoutes =
-  user == null
-    ? []
-    : [
-        {
-          path: `${user?.role?.toLowerCase()}`,
-          element: RootLayout,
-          children:
-            user.role == ROLE.ADMIN
-              ? adminRoutes
-              : user.role == ROLE.TEACHER
-              ? teacherRoutes
-              : user.role == ROLE.GUARDIAN
-              ? guardianRoutes
-              : studentRoutes,
-        },
-      ];
+export const teacherRoutes = [
+  { index: true, element: TeacherSummaryPage, roles: [ROLE.TEACHER] },
+];
+
+export const studentRoutes = [
+  { index: true, element: StudentSummaryPage, roles: [ROLE.STUDENT] },
+];
+
+export const guardianRoutes = [
+  { index: true, element: GuardianSummaryPage, roles: [ROLE.GUARDIAN] },
+];
