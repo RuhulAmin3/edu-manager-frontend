@@ -34,8 +34,8 @@ const baseQueryWithReauth: BaseQueryFn<
   if (result.error) {
     const errorData: ResponseErrorType = result.error.data as ResponseErrorType;
     result.error = {
-      status: errorData.statusCode,
-      data: errorData.message,
+      status: errorData.statusCode || 500,
+      data: errorData.message || "something was wrong",
     };
     // console.log("error from api bottom", result.error);
   }

@@ -1,8 +1,7 @@
 // external Import
-import { Form, Image, Spin } from "antd";
+import { Form, Image } from "antd";
 import { PiSignInBold } from "react-icons/pi";
 import { Link } from "react-router-dom";
-import { RiLoaderLine } from "react-icons/ri";
 
 // Internal Import
 import logo from "../../../assets/edu-manger-logo.png";
@@ -19,6 +18,7 @@ import { WholeResponseType } from "./login.type";
 import { setCredentials } from "./login.slice";
 import { decodeToken } from "../../../common/utils";
 import { useAppDispatch } from "../../../common/hooks/redux.hooks";
+import LoadingSpin from "../../../components/ui/loading-spin";
 
 const Login = () => {
   const [form] = Form.useForm();
@@ -46,6 +46,7 @@ const Login = () => {
     dispatch(setCredentials(payload));
     form.resetFields();
   });
+
   return (
     <LoginStyle.Wrapper>
       <LoginStyle.FlexBox vertical gap={"large"}>
@@ -118,10 +119,7 @@ const Login = () => {
               block
               htmlType="submit"
             >
-              <Spin
-                indicator={<RiLoaderLine style={{ fontSize: 20 }} />}
-                spinning
-              />
+              <LoadingSpin color={EDU_MANAGER_TOKENS.colors["edu-white"]} />
             </PrimaryButton>
           ) : (
             <PrimaryButton type="primary" size="large" block htmlType="submit">
