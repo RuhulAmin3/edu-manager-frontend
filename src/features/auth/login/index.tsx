@@ -77,7 +77,6 @@ const Login = () => {
           validateMessages={{
             required: "please provide ${label}!",
           }}
-          // form={form}
           onFinish={handleSubmit}
         >
           <CustomFormItem

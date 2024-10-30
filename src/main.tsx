@@ -3,12 +3,12 @@ import { createRoot } from "react-dom/client";
 import { RouterProvider } from "react-router-dom";
 import { App as AntdApp } from "antd";
 
-import { routes } from "./routes/index.tsx";
 import { ConfigProvider } from "antd";
 import { Provider } from "react-redux";
 import { store } from "./redux/store.ts";
 import { EDU_MANAGER_TOKENS } from "./styles/token.ts";
 import "./styles/globals.css";
+import { router } from "./routes/index.tsx";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
@@ -47,7 +47,7 @@ createRoot(document.getElementById("root")!).render(
       >
         {" "}
         <Provider store={store}>
-          <RouterProvider router={routes} />
+          <RouterProvider router={router} />
         </Provider>
       </ConfigProvider>
     </AntdApp>

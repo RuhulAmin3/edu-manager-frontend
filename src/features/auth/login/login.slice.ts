@@ -7,7 +7,10 @@ import {
   removeFromLocalStorage,
   saveToLocalStorage,
 } from "../../../common/utils/local-storage.utils";
-import { ACCESS_TOKEN_KEY } from "../../../common/constants/local-storage.constant";
+import {
+  ACCESS_TOKEN_KEY,
+  USER,
+} from "../../../common/constants/local-storage.constant";
 
 // Define types for the initial state
 interface AuthState {
@@ -34,11 +37,13 @@ const authSlice = createSlice({
       state.user = action.payload.user;
       state.token = action.payload.token;
       saveToLocalStorage(ACCESS_TOKEN_KEY, action.payload.token);
+      saveToLocalStorage(USER, action.payload.user);
     },
     logout: (state) => {
       state.user = null;
       state.token = null;
       removeFromLocalStorage(ACCESS_TOKEN_KEY);
+      removeFromLocalStorage(USER);
     },
   },
 });
