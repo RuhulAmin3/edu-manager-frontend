@@ -9,10 +9,6 @@ import {
 import RootLayout from "../layouts";
 import PublicRouteGuard from "./public-route-guard";
 import PrivateRouteGuard from "./private-route-guard";
-import { USER } from "../common/constants/local-storage.constant";
-import { getFromLocalStorage } from "../common/utils/local-storage.utils";
-
-const user: Record<string, string> | null = getFromLocalStorage(USER);
 
 const routes = [
   ...commonRoutes.map((route) => {
@@ -29,7 +25,7 @@ const routes = [
     return { path: route.path, element: <route.element /> };
   }),
   {
-    path: `/${user?.role.toLowerCase()}`,
+    path: `/admin`,
     element: <RootLayout />,
     children: adminRoutes.map((route) => ({
       ...route,
@@ -41,7 +37,7 @@ const routes = [
     })),
   },
   {
-    path: `/${user?.role.toLowerCase()}`,
+    path: `/teacher`,
     element: <RootLayout />,
     children: teacherRoutes.map((route) => ({
       ...route,
@@ -53,7 +49,7 @@ const routes = [
     })),
   },
   {
-    path: `/${user?.role.toLowerCase()}`,
+    path: `/student`,
     element: <RootLayout />,
     children: studentRoutes.map((route) => ({
       ...route,
@@ -65,7 +61,7 @@ const routes = [
     })),
   },
   {
-    path: `/${user?.role.toLowerCase()}`,
+    path: `/guardian`,
     element: <RootLayout />,
     children: guardianRoutes.map((route) => ({
       ...route,
