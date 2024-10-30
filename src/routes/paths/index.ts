@@ -8,7 +8,7 @@ import ForgotPasswordPage from "../../pages/auth/forgot-password";
 import GuardianRegisterPage from "../../pages/auth/guardian-register";
 import LoginPage from "../../pages/auth/login";
 import NotFoundPage from "../../pages/not-found";
-import TeacherList from "../../pages/teacher";
+import TeacherSummaryPage from "../../pages/teacher";
 
 const user: Record<string, string> | null = getFromLocalStorage(USER);
 
@@ -40,7 +40,7 @@ export const commonRoutes = [
 ];
 
 export const adminRoutes = [{}];
-export const teacherRoutes = [{ index: true, element: TeacherList }];
+export const teacherRoutes = [{ index: true, element: TeacherSummaryPage }];
 export const studentRoutes = [{}];
 export const guardianRoutes = [{}];
 
