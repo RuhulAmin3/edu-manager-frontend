@@ -1,7 +1,7 @@
 // external Import
 import { Form, Image } from "antd";
 import { PiSignInBold } from "react-icons/pi";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 // Internal Import
 import logo from "../../../assets/edu-manger-logo.png";
@@ -28,6 +28,7 @@ const Login = () => {
   ]: WholeResponseType = useLoginUserMutation();
 
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
   const handleSubmit = (values: unknown) => {
     loginUser(values);
   };
@@ -45,6 +46,7 @@ const Login = () => {
     // set userId, role and token into redux and local storage;
     dispatch(setCredentials(payload));
     form.resetFields();
+    navigate(`/${decodedToken?.role.toLowerCase()}`, { replace: true });
   });
 
   return (
