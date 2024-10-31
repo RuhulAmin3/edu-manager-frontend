@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import {
   DesktopOutlined,
   FileOutlined,
@@ -7,10 +6,12 @@ import {
   UserOutlined,
 } from "@ant-design/icons";
 import type { MenuProps } from "antd";
-import { Layout, Menu, theme } from "antd";
+import { Breadcrumb, Layout, Menu, theme } from "antd";
 import { Outlet } from "react-router-dom";
+import Sidebar from "./components/sidebar";
+import SidebarBrand from "./components/sidebar-brand";
 
-const { Header, Content, Footer, Sider } = Layout;
+const { Header, Content, Footer } = Layout;
 
 type MenuItem = Required<MenuProps>["items"][number];
 
@@ -44,38 +45,28 @@ const items: MenuItem[] = [
 ];
 
 const RootLayout: React.FC = () => {
-  const [collapsed, setCollapsed] = useState(false);
   const {
-    token: { colorBgContainer, borderRadiusLG },
+    token: { borderRadiusLG },
   } = theme.useToken();
 
   return (
     <Layout style={{ minHeight: "100vh" }}>
-      <Sider
-        collapsible
-        collapsed={collapsed}
-        onCollapse={(value) => setCollapsed(value)}
-      >
-        <div className="demo-logo-vertical" />
-        <Menu
-          theme="dark"
-          defaultSelectedKeys={["1"]}
-          mode="inline"
-          items={items}
-        />
-      </Sider>
+      <Sidebar>
+        <SidebarBrand />
+        <Menu defaultSelectedKeys={["1"]} mode="inline" items={items} />
+      </Sidebar>
       <Layout>
-        <Header style={{ padding: 0, background: colorBgContainer }} />
+        <Header style={{ padding: 0, background: "white" }} />
         <Content style={{ margin: "0 16px" }}>
-          {/* <Breadcrumb style={{ margin: "16px 0" }}>
-            <Breadcrumb.Item>User</Breadcrumb.Item>
-            <Breadcrumb.Item>Bill</Breadcrumb.Item>
-          </Breadcrumb> */}
+          <Breadcrumb
+            style={{ margin: "16px 0" }}
+            items={[{ title: "layout" }]}
+          />
           <div
             style={{
               padding: 24,
               minHeight: 360,
-              background: colorBgContainer,
+              background: "white",
               borderRadius: borderRadiusLG,
             }}
           >
