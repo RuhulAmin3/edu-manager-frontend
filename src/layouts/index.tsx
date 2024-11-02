@@ -10,6 +10,7 @@ import { Breadcrumb, Layout, Menu, theme } from "antd";
 import { Outlet } from "react-router-dom";
 import Sidebar from "./components/sidebar";
 import SidebarBrand from "./components/sidebar-brand";
+import CustomMenu from "./components/menu";
 
 const { Header, Content, Footer } = Layout;
 
@@ -53,7 +54,12 @@ const RootLayout: React.FC = () => {
     <Layout style={{ minHeight: "100vh" }}>
       <Sidebar>
         <SidebarBrand />
-        <Menu defaultSelectedKeys={["1"]} mode="inline" items={items} />
+        <CustomMenu
+          defaultSelectedKeys={["1"]}
+          mode="inline"
+          items={items}
+          theme="light"
+        />
       </Sidebar>
       <Layout>
         <Header style={{ padding: 0, background: "white" }} />

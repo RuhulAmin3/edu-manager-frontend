@@ -20,6 +20,7 @@ export const EDU_MANAGER_TOKENS = {
     "edu-pink-bg-opacity": "var(--edu-pink-bg-opacity)",
     "edu-purple-bg-opacity": "var(--edu-purple-bg-opacity)",
 
+    "edu-primary-less-opacity": "var(--edu-primary-less-opacity)",
     /* hover colors */
     "edu-primary-hover-color": "var(--edu-primary-hover-color)",
 
