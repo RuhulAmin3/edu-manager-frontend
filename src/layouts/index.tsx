@@ -6,13 +6,18 @@ import {
   UserOutlined,
 } from "@ant-design/icons";
 import type { MenuProps } from "antd";
-import { Breadcrumb, Layout, Menu, theme } from "antd";
+import { Breadcrumb, Layout } from "antd";
 import { Outlet } from "react-router-dom";
-import Sidebar from "./components/sidebar";
+// import Sidebar from "./components/sidebar";
 import SidebarBrand from "./components/sidebar-brand";
 import CustomMenu from "./components/menu";
+import LayoutHeader from "./components/header";
+import { EDU_MANAGER_TOKENS } from "../styles/token";
+import styled from "styled-components";
+import { useState } from "react";
+import Sidebar from "./components/sidebar";
 
-const { Header, Content, Footer } = Layout;
+const { Content, Footer } = Layout;
 
 type MenuItem = Required<MenuProps>["items"][number];
 
@@ -45,14 +50,45 @@ const items: MenuItem[] = [
   getItem("Files", "9", <FileOutlined />),
 ];
 
+const CustomLayout = styled(Layout)<{
+  contentMarginleft?: number;
+  collapsed?: boolean;
+}>`
+  .ant-layout {
+    min-height: 100vh;
+    background: ${EDU_MANAGER_TOKENS.colors["edu-body-bg"]} !important;
+  }
+  .ant-layout-sider {
+    background: ${EDU_MANAGER_TOKENS.colors["edu-white"]};
+    position: fixed;
+    height: 100vh;
+  }
+  .ant-layout-content,
+  .ant-layout-footer,
+  .ant-layout-header {
+    margin-left: ${(props) => props.contentMarginleft}px !important;
+    transition: all 0.4s ease;
+    width: calc(100% - ${(props) => props.contentMarginleft}px);
+  }
+  .ant-layout-content {
+    margin-top: 80px !important;
+  }
+`;
+
 const RootLayout: React.FC = () => {
-  const {
-    token: { borderRadiusLG },
-  } = theme.useToken();
+  const [collapsed, setCollapsed] = useState<boolean>(false);
+  const [dynamicMargin, setDynamicMargin] = useState<number>(220);
 
   return (
-    <Layout style={{ minHeight: "100vh" }}>
-      <Sidebar>
+    <CustomLayout contentMarginleft={dynamicMargin}>
+      <Sidebar
+        collapsible
+        theme="light"
+        collapsed={collapsed}
+        setCollapsed={setCollapsed}
+        setDynamicMargin={setDynamicMargin}
+        trigger={null}
+      >
         <SidebarBrand />
         <CustomMenu
           defaultSelectedKeys={["1"]}
@@ -62,28 +98,19 @@ const RootLayout: React.FC = () => {
         />
       </Sidebar>
       <Layout>
-        <Header style={{ padding: 0, background: "white" }} />
+        <LayoutHeader />
         <Content style={{ margin: "0 16px" }}>
           <Breadcrumb
             style={{ margin: "16px 0" }}
             items={[{ title: "layout" }]}
           />
-          <div
-            style={{
-              padding: 24,
-              minHeight: 360,
-              background: "white",
-              borderRadius: borderRadiusLG,
-            }}
-          >
-            {<Outlet />}
-          </div>
+          <div>{<Outlet />}</div>
         </Content>
         <Footer style={{ textAlign: "center" }}>
           Ant Design ©{new Date().getFullYear()} Created by Ant UED
         </Footer>
       </Layout>
-    </Layout>
+    </CustomLayout>
   );
 };
 
