@@ -27,7 +27,10 @@ h6 {
   --edu-white: #ffffff;
   --edu-yellow: #ffff00;
 
-  --edu-primary-bg-opacity: rgba(34, 197, 94, 0.1);
+  /* less opacity color */
+  --edu-primary-less-opacity: rgba(34, 197, 94, 0.05);
+
+  --edu-primary-bg-opacity: rgba(34, 197, 94, 0.2);
   --edu-secondary-bg-opacity: rgba(149, 160, 197, 0.1);
   --edu-success-bg-opacity: rgba(34, 197, 173, 0.1);
   --edu-info-bg-opacity: rgba(65, 203, 216, 0.1);
@@ -76,4 +79,10 @@ h6 {
   --edu-border-radius-base: 12px;
   --edu-border-radius-sm: 6px;
   --edu-border-radius-full: 100%;
+}
+
+.ant-menu-item-selected,
+.ant-menu-item-active {
+  background: var(--edu-primary-less-opacity) !important;
+  color: var(--edu-primary) !important;
 }

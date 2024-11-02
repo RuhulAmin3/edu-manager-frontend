@@ -1,5 +1,5 @@
 const GuardianSummaryPage = () => {
-  return <div>GuardianSummaryPage</div>;
+  return <div style={{ height: "120vh" }}>GuardianSummaryPage</div>;
 };
 
 export default GuardianSummaryPage;

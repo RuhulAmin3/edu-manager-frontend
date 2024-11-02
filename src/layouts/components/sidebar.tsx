@@ -1,60 +1,73 @@
+/* eslint-disable @typescript-eslint/no-unused-expressions */
+import Sider, { SiderProps } from "antd/es/layout/Sider";
+import { FC, PropsWithChildren, useEffect } from "react";
+import { LuArrowLeftToLine, LuArrowRightToLine } from "react-icons/lu";
 import styled from "styled-components";
-import { Layout } from "antd";
-import { SiderProps } from "antd";
-import { LuArrowRightToLine, LuArrowLeftToLine } from "react-icons/lu";
-
-import { FC, PropsWithChildren, useState } from "react";
 import { EDU_MANAGER_TOKENS } from "../../styles/token";
+import { Dispatch, SetStateAction } from "react";
+import useScreenSize from "../../common/hooks/use-screen-size";
 
-// Styled-component for sidebar with dynamic hover and trigger button positioning
-const Sider = styled(Layout.Sider)<{
+const CustomSider = styled(Sider)<{
   triggerposition: number;
+  isMobile: boolean;
 }>`
-  &.ant-layout-sider {
-    background: ${EDU_MANAGER_TOKENS.colors["edu-white"]} !important;
-    border-right: 2px solid ${EDU_MANAGER_TOKENS.colors["edu-border-color"]};
-    .ant-layout-sider-trigger {
-      width: 30px !important;
-      height: 30px;
-      position: absolute;
-      top: 20px;
-      /* Left position updates dynamically based on sidebar width */
-      left: ${(props) => props.triggerposition}px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: white;
-      color: ${EDU_MANAGER_TOKENS.colors["edu-text-secondary-color"]};
-      border: 2px solid ${EDU_MANAGER_TOKENS.colors["edu-border-color"]};
-      border-radius: 7px;
-      &:hover {
-        color: ${EDU_MANAGER_TOKENS.colors["edu-dark-gray"]};
-      }
+  .ant-layout-sider-trigger {
+    width: 30px !important;
+    height: 30px;
+    position: absolute;
+    top: 20px;
+    left: ${(props) => props.triggerposition}px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: white;
+    color: ${EDU_MANAGER_TOKENS.colors["edu-text-secondary-color"]};
+    border: 2px solid ${EDU_MANAGER_TOKENS.colors["edu-border-color"]};
+    border-radius: 7px;
+
+    // Smooth color and border transition for the trigger button
+    transition: all 0.6s ease;
+    &:hover {
+      color: ${EDU_MANAGER_TOKENS.colors["edu-dark-gray"]};
     }
   }
 `;
 
-const Sidebar: FC<PropsWithChildren<SiderProps>> = ({ children, ...props }) => {
-  const [collapsed, setCollapsed] = useState(false);
-  const triggerPosition = collapsed ? 75 : 180;
+interface CustomSiderProps extends SiderProps {
+  collapsed: boolean;
+  setCollapsed: Dispatch<SetStateAction<boolean>>;
+  setDynamicMargin: Dispatch<SetStateAction<number>>;
+}
 
+const Sidebar: FC<PropsWithChildren<CustomSiderProps>> = ({
+  collapsed,
+  setCollapsed,
+  setDynamicMargin,
+  children,
+  ...props
+}) => {
+  const triggerPosition = collapsed ? 60 : 180;
+  const isMobile = useScreenSize();
+  useEffect(() => {
+    collapsed ? setDynamicMargin(100) : setDynamicMargin(220);
+  }, [collapsed, setDynamicMargin]);
   return (
-    <Sider
+    <CustomSider
       {...props}
-      collapsible
-      collapsed={collapsed}
       triggerposition={triggerPosition}
-      trigger={null}
+      collapsed={collapsed}
+      isMobile={isMobile}
     >
-      {/* Custom trigger button */}
       <div
         className="ant-layout-sider-trigger"
-        onClick={() => setCollapsed((prev) => !prev)} // Toggle collapsed state on click
+        onClick={() => {
+          setCollapsed((prev: boolean) => !prev);
+        }}
       >
-        {collapsed ? <LuArrowRightToLine /> : <LuArrowLeftToLine />}{" "}
+        {collapsed ? <LuArrowRightToLine /> : <LuArrowLeftToLine />}
       </div>
       {children}
-    </Sider>
+    </CustomSider>
   );
 };
 
