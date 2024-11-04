@@ -9,6 +9,7 @@ import {
 import RootLayout from "../layouts";
 import PublicRouteGuard from "./public-route-guard";
 import PrivateRouteGuard from "./private-route-guard";
+import { ROLE } from "../common/constants";
 
 const routes = [
   ...commonRoutes.map((route) => {
@@ -30,7 +31,7 @@ const routes = [
     children: adminRoutes.map((route) => ({
       ...route,
       element: (
-        <PrivateRouteGuard requiredRoles={route.roles}>
+        <PrivateRouteGuard requiredRoles={[ROLE.ADMIN]}>
           <route.element />
         </PrivateRouteGuard>
       ),
@@ -42,7 +43,7 @@ const routes = [
     children: teacherRoutes.map((route) => ({
       ...route,
       element: (
-        <PrivateRouteGuard requiredRoles={route.roles}>
+        <PrivateRouteGuard requiredRoles={[ROLE.TEACHER]}>
           <route.element />
         </PrivateRouteGuard>
       ),
@@ -54,7 +55,7 @@ const routes = [
     children: studentRoutes.map((route) => ({
       ...route,
       element: (
-        <PrivateRouteGuard requiredRoles={route.roles}>
+        <PrivateRouteGuard requiredRoles={[ROLE.STUDENT]}>
           <route.element />
         </PrivateRouteGuard>
       ),
@@ -66,7 +67,7 @@ const routes = [
     children: guardianRoutes.map((route) => ({
       ...route,
       element: (
-        <PrivateRouteGuard requiredRoles={route.roles}>
+        <PrivateRouteGuard requiredRoles={[ROLE.GUARDIAN]}>
           <route.element />
         </PrivateRouteGuard>
       ),

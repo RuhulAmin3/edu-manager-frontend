@@ -15,7 +15,7 @@ const CustomSider = styled(Sider)<{
     width: 30px !important;
     height: 30px;
     position: absolute;
-    top: 20px;
+    top: 25px;
     left: ${(props) => props.triggerposition}px;
     display: flex;
     align-items: center;
@@ -46,13 +46,14 @@ const Sidebar: FC<PropsWithChildren<CustomSiderProps>> = ({
   children,
   ...props
 }) => {
-  const triggerPosition = collapsed ? 60 : 180;
+  const triggerPosition = collapsed ? 70 : 255;
   const isMobile = useScreenSize();
   useEffect(() => {
-    collapsed ? setDynamicMargin(100) : setDynamicMargin(220);
+    collapsed ? setDynamicMargin(100) : setDynamicMargin(290);
   }, [collapsed, setDynamicMargin]);
   return (
     <CustomSider
+      width={270}
       {...props}
       triggerposition={triggerPosition}
       collapsed={collapsed}

@@ -3,7 +3,7 @@ import styled from "styled-components";
 import logo from "../../assets/edu-manger-logo.png";
 
 const Brand = styled.div`
-  margin-bottom: 5px;
+  margin-block: 10px;
   display: flex;
   align-items: center;
   justify-content: center;

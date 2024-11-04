@@ -1,16 +1,18 @@
 import { Header } from "antd/es/layout/layout";
 import styled from "styled-components";
-import { FC, PropsWithChildren, useEffect, useState } from "react";
-import { Avatar, Flex } from "antd";
+import { FC, PropsWithChildren } from "react";
+import { Flex } from "antd";
 import NormalText from "../../components/ui/normal-text";
 import { EDU_MANAGER_TOKENS } from "../../styles/token";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { GoScreenFull } from "react-icons/go";
-import { CiDark } from "react-icons/ci";
 import { MdLightMode } from "react-icons/md";
 import { UserOutlined } from "@ant-design/icons";
-import { getGreeting } from "../../common/utils";
+import { getGreeting, toggleFullscreen } from "../../common/utils";
 import useScreenSize from "../../common/hooks/use-screen-size";
+import CustomAvatar from "../../components/ui/avatar";
+import useScrollPosition from "../../common/hooks/use-scroll-position";
+import { IoIosAdd } from "react-icons/io";
 
 // Styled component for the header
 const CustomHeader = styled(Header)<{ isScrolled: boolean }>`
@@ -22,7 +24,7 @@ const CustomHeader = styled(Header)<{ isScrolled: boolean }>`
     box-shadow: ${(props) =>
       props.isScrolled ? "0 4px 12px rgba(0, 0, 0, 0.1)" : "none"};
     height: 90px;
-    padding: ${(props) => (props.isScrolled ? "0 20px" : "0px 20px")};
+    padding: ${(props) => (props.isScrolled ? "0 20px" : "0px")};
     border-radius: ${(props) => (props.isScrolled ? "5px" : "0px")};
     position: fixed;
     top: 0;
@@ -31,18 +33,8 @@ const CustomHeader = styled(Header)<{ isScrolled: boolean }>`
 `;
 
 const LayoutHeader: FC<PropsWithChildren> = ({ ...props }) => {
-  const [isScrolled, setIsScrolled] = useState(false);
+  const isScrolled = useScrollPosition();
   const isMobile = useScreenSize();
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const scrollTop = window.scrollY;
-      setIsScrolled(scrollTop > 5);
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
 
   return (
     <CustomHeader isScrolled={isScrolled} {...props}>
@@ -61,10 +53,16 @@ const LayoutHeader: FC<PropsWithChildren> = ({ ...props }) => {
           )}
         </Flex>
         <Flex gap={10} style={{ paddingBlock: "20px" }}>
-          <Avatar size="large" icon={<GoScreenFull />} />
-          <Avatar size="large" icon={<CiDark />} />
-          <Avatar size="large" icon={<MdLightMode />} />
-          <Avatar size="large" icon={<UserOutlined />} />
+          <CustomAvatar size="large" shape="square" icon={<IoIosAdd />} />
+          <CustomAvatar
+            size="large"
+            shape="square"
+            icon={<GoScreenFull />}
+            onClick={toggleFullscreen}
+          />
+          {/* <CustomAvatar size="large" shape="square" icon={<CiDark />} /> */}
+          <CustomAvatar size="large" shape="square" icon={<MdLightMode />} />
+          <CustomAvatar size="large" shape="square" icon={<UserOutlined />} />
         </Flex>
       </Flex>
     </CustomHeader>
