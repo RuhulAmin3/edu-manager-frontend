@@ -79,6 +79,7 @@ const CustomLayout = styled(Layout)<{
     margin-left: ${(props) => props.contentMarginleft}px !important;
     transition: all 0.4s ease;
     width: calc(100% - ${(props) => props.contentMarginleft}px);
+    padding-right: 20px;
   }
   .ant-layout-content {
     margin-top: 80px !important;

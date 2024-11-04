@@ -49,7 +49,7 @@ const Sidebar: FC<PropsWithChildren<CustomSiderProps>> = ({
   const triggerPosition = collapsed ? 70 : 255;
   const isMobile = useScreenSize();
   useEffect(() => {
-    collapsed ? setDynamicMargin(100) : setDynamicMargin(300);
+    collapsed ? setDynamicMargin(100) : setDynamicMargin(290);
   }, [collapsed, setDynamicMargin]);
   return (
     <CustomSider
