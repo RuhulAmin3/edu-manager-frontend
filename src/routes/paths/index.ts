@@ -1,20 +1,20 @@
 import App from "../../App";
-import { ROLE } from "../../common/constants";
 import AdminSummaryPage from "../../pages/admin";
-import AddGuardianPage from "../../pages/admin/guardian/add-guardian";
+import AddGuardianPage from "../../pages/guardian/add-guardian";
 import ChangePasswordPage from "../../pages/auth/change-password";
 import ForgotPasswordPage from "../../pages/auth/forgot-password";
 import GuardianRegisterPage from "../../pages/auth/guardian-register";
 import LoginPage from "../../pages/auth/login";
 import GuardianSummaryPage from "../../pages/guardian";
 import NotFoundPage from "../../pages/not-found";
+import ProfilePage from "../../pages/profile";
 import StudentSummaryPage from "../../pages/student";
 import TeacherSummaryPage from "../../pages/teacher";
 
 export const commonRoutes = [
   {
-    path: "/",
-    element: App,
+    path: "/", // Home page route
+    element: App, // Home page
   },
   {
     path: "login",
@@ -42,22 +42,22 @@ export const commonRoutes = [
 ];
 
 export const adminRoutes = [
-  { index: true, element: AdminSummaryPage, roles: [ROLE.ADMIN] },
-  {
-    path: "add-guardian",
-    element: AddGuardianPage,
-    roles: [ROLE.ADMIN, ROLE.TEACHER, ROLE.GUARDIAN],
-  },
+  { index: true, element: AdminSummaryPage },
+  { path: "add-guardian", element: AddGuardianPage },
+  { path: "profile", element: ProfilePage },
 ];
 
 export const teacherRoutes = [
-  { index: true, element: TeacherSummaryPage, roles: [ROLE.TEACHER] },
+  { index: true, element: TeacherSummaryPage },
+  { path: "profile", element: ProfilePage },
 ];
 
 export const studentRoutes = [
-  { index: true, element: StudentSummaryPage, roles: [ROLE.STUDENT] },
+  { index: true, element: StudentSummaryPage },
+  { path: "profile", element: ProfilePage },
 ];
 
 export const guardianRoutes = [
-  { index: true, element: GuardianSummaryPage, roles: [ROLE.GUARDIAN] },
+  { index: true, element: GuardianSummaryPage },
+  { path: "profile", element: ProfilePage },
 ];

@@ -25,7 +25,7 @@ function useShowToastMessage(
         );
       } else {
         notification.error({
-          message: data,
+          message: data || "Something is wrong!!",
           pauseOnHover: true,
           duration: 2,
           type: "error",

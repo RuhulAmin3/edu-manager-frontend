@@ -1,14 +1,6 @@
-import {
-  DesktopOutlined,
-  FileOutlined,
-  PieChartOutlined,
-  TeamOutlined,
-  UserOutlined,
-} from "@ant-design/icons";
 import type { MenuProps } from "antd";
 import { Breadcrumb, Layout } from "antd";
 import { Outlet } from "react-router-dom";
-// import Sidebar from "./components/sidebar";
 import SidebarBrand from "./components/sidebar-brand";
 import CustomMenu from "./components/menu";
 import LayoutHeader from "./components/header";
@@ -16,7 +8,13 @@ import { EDU_MANAGER_TOKENS } from "../styles/token";
 import styled from "styled-components";
 import { useState } from "react";
 import Sidebar from "./components/sidebar";
+import { FaPeopleArrows } from "react-icons/fa";
+import { FaPeopleRoof } from "react-icons/fa6";
+import { IoMdPeople } from "react-icons/io";
+import { GoDot } from "react-icons/go";
+import { SiGoogleclassroom } from "react-icons/si";
 
+import { IoBook } from "react-icons/io5";
 const { Content, Footer } = Layout;
 
 type MenuItem = Required<MenuProps>["items"][number];
@@ -36,18 +34,30 @@ function getItem(
 }
 
 const items: MenuItem[] = [
-  getItem("Option 1", "1", <PieChartOutlined />),
-  getItem("Option 2", "2", <DesktopOutlined />),
-  getItem("User", "sub1", <UserOutlined />, [
-    getItem("Tom", "3"),
-    getItem("Bill", "4"),
-    getItem("Alex", "5"),
+  getItem("Students", "students", <FaPeopleArrows />, [
+    getItem("All Student", "all_student", <GoDot />),
+    getItem("Student Details", "student_details", <GoDot />),
+    getItem("Add New Student", "add_new_student", <GoDot />),
+    getItem("Student Promotion", "student_promotion", <GoDot />),
   ]),
-  getItem("Team", "sub2", <TeamOutlined />, [
-    getItem("Team 1", "6"),
-    getItem("Team 2", "8"),
+  getItem("Teachers", "teachers", <FaPeopleRoof />, [
+    getItem("All Teacher", "all_teacher", <GoDot />),
+    getItem("Teacher Details", "teacher_details", <GoDot />),
+    getItem("Add New Teacher", "add_new_teacher", <GoDot />),
+    getItem("payment", "payment", <GoDot />),
   ]),
-  getItem("Files", "9", <FileOutlined />),
+  getItem("Guardians", "guardians", <IoMdPeople />, [
+    getItem("All Guardian", "all_guardians", <GoDot />),
+    getItem("Guardian Details", "guardian_details", <GoDot />),
+    getItem("Add New Guardian", "add_new_guardian", <GoDot />),
+  ]),
+  getItem("Subjects", "subjects", <IoBook />),
+  getItem("Classes", "classes", <SiGoogleclassroom />),
+  getItem("Examination", "examination", <IoMdPeople />, [
+    getItem("All Exams", "all_exams", <GoDot />),
+    getItem("Exam Details", "exam_details", <GoDot />),
+    getItem("Add New Exam", "add_new_exam", <GoDot />),
+  ]),
 ];
 
 const CustomLayout = styled(Layout)<{
@@ -90,18 +100,13 @@ const RootLayout: React.FC = () => {
         trigger={null}
       >
         <SidebarBrand />
-        <CustomMenu
-          defaultSelectedKeys={["1"]}
-          mode="inline"
-          items={items}
-          theme="light"
-        />
+        <CustomMenu defaultSelectedKeys={["1"]} mode="inline" items={items} />
       </Sidebar>
       <Layout>
         <LayoutHeader />
-        <Content style={{ margin: "0 16px" }}>
+        <Content>
           <Breadcrumb
-            style={{ margin: "16px 0" }}
+            style={{ margin: "15px 0" }}
             items={[{ title: "layout" }]}
           />
           <div>{<Outlet />}</div>
