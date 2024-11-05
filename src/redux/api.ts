@@ -31,6 +31,7 @@ const baseQueryWithReauth: BaseQueryFn<
 > = async (args, api, extraOptions) => {
   let result = await baseQuery(args, api, extraOptions);
 
+  // transform response Error
   if (result.error) {
     const errorData: ResponseErrorType = result.error.data as ResponseErrorType;
     result.error = {
@@ -60,7 +61,6 @@ const baseQueryWithReauth: BaseQueryFn<
       console.error("Refresh token failed, redirecting to login");
     }
   }
-
   return result;
 };
 
