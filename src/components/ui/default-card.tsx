@@ -7,10 +7,6 @@ const Card = styled.div<{ $padding?: string }>`
   box-shadow: ${EDU_MANAGER_TOKENS.shadow["edu-card-shadow"]};
   background: ${EDU_MANAGER_TOKENS.colors["edu-white"]};
   border-radius: ${EDU_MANAGER_TOKENS.borderRadius["edu-border-radius-sm"]};
-  // &:hover {
-  //   transform: translateY(-5px);
-  //   transition: all 0.3s ease-in-out;
-  // }
 `;
 
 type CardProps = {

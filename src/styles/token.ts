@@ -57,6 +57,7 @@ export const EDU_MANAGER_TOKENS = {
   },
   shadow: {
     "edu-card-shadow": "var(--edu-card-shadow)",
+    "edu-filter-box-shadow": "var(--edu-filter-box-shadow)",
   },
   borderRadius: {
     /* border radius */

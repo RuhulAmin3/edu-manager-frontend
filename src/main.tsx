@@ -42,6 +42,10 @@ createRoot(document.getElementById("root")!).render(
               contentFontSizeLG: 16,
               borderRadiusLG: 8,
             },
+            Popover: {
+              boxShadowSecondary:
+                EDU_MANAGER_TOKENS.shadow["edu-filter-box-shadow"],
+            },
           },
         }}
       >
