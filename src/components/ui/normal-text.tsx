@@ -21,6 +21,7 @@ const LargeText = styled(Typography.Title)<{
   $textColor?: string;
   $fontSize?: string;
 }>`
+  margin: 10px 0px !important;
   color: ${(props) =>
     props.$textColor ||
     EDU_MANAGER_TOKENS.colors["edu-text-primary-color"]} !important;

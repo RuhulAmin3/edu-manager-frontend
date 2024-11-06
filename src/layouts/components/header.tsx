@@ -1,18 +1,26 @@
-import { Header } from "antd/es/layout/layout";
-import styled from "styled-components";
-import { FC, PropsWithChildren } from "react";
-import { Flex } from "antd";
-import NormalText from "../../components/ui/normal-text";
-import { EDU_MANAGER_TOKENS } from "../../styles/token";
+/**
+ *  External Dependency
+ */
 import { RxHamburgerMenu } from "react-icons/rx";
-import { GoScreenFull } from "react-icons/go";
-import { MdLightMode } from "react-icons/md";
 import { UserOutlined } from "@ant-design/icons";
+import { Header } from "antd/es/layout/layout";
+import { GoScreenFull } from "react-icons/go";
+import { FC, PropsWithChildren } from "react";
+import { MdLightMode } from "react-icons/md";
+import { IoIosAdd } from "react-icons/io";
+import styled from "styled-components";
+import { Flex } from "antd";
+
+/**
+ * Internal Dependency
+ */
+
+import useScrollPosition from "../../common/hooks/use-scroll-position";
 import { getGreeting, toggleFullscreen } from "../../common/utils";
 import useScreenSize from "../../common/hooks/use-screen-size";
+import NormalText from "../../components/ui/normal-text";
+import { EDU_MANAGER_TOKENS } from "../../styles/token";
 import CustomAvatar from "../../components/ui/avatar";
-import useScrollPosition from "../../common/hooks/use-scroll-position";
-import { IoIosAdd } from "react-icons/io";
 
 // Styled component for the header
 const CustomHeader = styled(Header)<{ isScrolled: boolean }>`

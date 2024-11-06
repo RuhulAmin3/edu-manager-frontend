@@ -1,24 +1,27 @@
-// external Import
-import { Form, Image } from "antd";
-import { PiSignInBold } from "react-icons/pi";
+/**
+ *  External Dependency
+ */
 import { Link, useNavigate } from "react-router-dom";
-
-// Internal Import
-import logo from "../../assets/edu-manger-logo.png";
-import { WholeResponseType } from "../../features/auth/login/login.type";
-import { useLoginUserMutation } from "../../features/auth/login/login.api";
-import { useAppDispatch } from "../../common/hooks/redux.hooks";
+import { PiSignInBold } from "react-icons/pi";
+import { Form, Image } from "antd";
+/**
+ *  Internal Dependency
+ */
 import useShowToastMessage from "../../common/hooks/use-show-toast-message";
-import { decodeToken } from "../../common/utils";
+import { useLoginUserMutation } from "../../features/auth/login/login.api";
+import { WholeResponseType } from "../../features/auth/login/login.type";
 import { setCredentials } from "../../features/auth/login/login.slice";
+import CustomFormItem from "../../components/form/custom-form-item";
 import { LoginStyle } from "../../features/auth/login/login.style";
+import { useAppDispatch } from "../../common/hooks/redux.hooks";
+import PrimaryButton from "../../components/ui/primary-button";
+import CustomInput from "../../components/form/custom-input";
+import LoadingSpin from "../../components/ui/loading-spin";
+import CustomForm from "../../components/form/custom-form";
 import NormalText from "../../components/ui/normal-text";
 import { EDU_MANAGER_TOKENS } from "../../styles/token";
-import CustomForm from "../../components/form/custom-form";
-import CustomFormItem from "../../components/form/custom-form-item";
-import CustomInput from "../../components/form/custom-input";
-import PrimaryButton from "../../components/ui/primary-button";
-import LoadingSpin from "../../components/ui/loading-spin";
+import logo from "../../assets/edu-manger-logo.png";
+import { decodeToken } from "../../common/utils";
 
 const LoginPage = () => {
   const [form] = Form.useForm();
@@ -33,7 +36,7 @@ const LoginPage = () => {
     loginUser(values);
   };
 
-  useShowToastMessage(isError, isSuccess, error, "Login Successful", () => {
+  const afterHandleSubmit = () => {
     const token: string = data.accessToken;
     const decodedToken: Record<string, string> = decodeToken(token);
     const payload = {
@@ -47,7 +50,15 @@ const LoginPage = () => {
     dispatch(setCredentials(payload));
     form.resetFields();
     navigate(`/${decodedToken?.role.toLowerCase()}`, { replace: true });
-  });
+  };
+
+  useShowToastMessage(
+    isError,
+    isSuccess,
+    error,
+    "Login Successful",
+    afterHandleSubmit
+  );
 
   return (
     <LoginStyle.Wrapper>
