@@ -17,15 +17,6 @@ const data = [
   { month: "January", value: 2, color: "#1890FF" },
   { month: "February", value: 1, color: "#73C9E8" },
   { month: "March", value: 4, color: "#FF7875" },
-  //   { month: "April", value: 110, color: "#FFC069" },
-  //   { month: "May", value: 130, color: "#95DE64" },
-  //   { month: "June", value: 100, color: "#5CDBD3" },
-  //   { month: "July", value: 150, color: "#FF85C0" },
-  //   { month: "August", value: 125, color: "#FF9C6E" },
-  //   { month: "September", value: 115, color: "#D3F261" },
-  //   { month: "October", value: 135, color: "#A0D911" },
-  //   { month: "November", value: 95, color: "#FFD666" },
-  //   { month: "December", value: 105, color: "#FF4D4F" },
 ];
 
 // Calculate the total value for width percentage calculation
