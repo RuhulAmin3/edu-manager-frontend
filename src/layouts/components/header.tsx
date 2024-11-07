@@ -23,17 +23,17 @@ import { EDU_MANAGER_TOKENS } from "../../styles/token";
 import CustomAvatar from "../../components/ui/avatar";
 
 // Styled component for the header
-const CustomHeader = styled(Header)<{ isScrolled: boolean }>`
+const CustomHeader = styled(Header)<{ isscrolled: boolean }>`
   &.ant-layout-header {
     background: ${(props) =>
-      props.isScrolled
+      props.isscrolled
         ? `${EDU_MANAGER_TOKENS.colors["edu-body-bg"]}`
         : "transparent"};
     box-shadow: ${(props) =>
-      props.isScrolled ? "0 4px 12px rgba(0, 0, 0, 0.1)" : "none"};
+      props.isscrolled ? "0 4px 12px rgba(0, 0, 0, 0.1)" : "none"};
     height: 90px;
-    padding: ${(props) => (props.isScrolled ? "0 20px" : "0px")};
-    border-radius: ${(props) => (props.isScrolled ? "5px" : "0px")};
+    padding: ${(props) => (props.isscrolled ? "0 20px" : "0px")};
+    border-radius: ${(props) => (props.isscrolled ? "5px" : "0px")};
     position: fixed;
     top: 0;
     z-index: 1000;
@@ -41,11 +41,11 @@ const CustomHeader = styled(Header)<{ isScrolled: boolean }>`
 `;
 
 const LayoutHeader: FC<PropsWithChildren> = ({ ...props }) => {
-  const isScrolled = useScrollPosition();
+  const isscrolled = useScrollPosition();
   const isMobile = useScreenSize();
 
   return (
-    <CustomHeader isScrolled={isScrolled} {...props}>
+    <CustomHeader isscrolled={isscrolled} {...props}>
       <Flex align="center" justify="space-between">
         <Flex align="center" gap={5}>
           {isMobile ? (

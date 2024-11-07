@@ -2,8 +2,8 @@
  * External Dependency
  */
 
-import { Divider, Flex, Popover, Space, Tooltip } from "antd";
-import { useCallback, useMemo, useState } from "react";
+import { Divider, Flex, Popover, Skeleton, Space, Tooltip } from "antd";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { FaRegCircleDot } from "react-icons/fa6";
 import { DownOutlined } from "@ant-design/icons";
 import { CiFilter } from "react-icons/ci";
@@ -14,6 +14,7 @@ import { Link } from "react-router-dom";
  */
 
 import DefaultFilterBox from "../../../components/ui/default-filter-box";
+import SelectClassField from "../../class/components/select-class-field";
 import CustomFormItem from "../../../components/form/custom-form-item";
 import SecondaryButton from "../../../components/ui/secondary-button";
 import PrimaryButton from "../../../components/ui/primary-button";
@@ -21,6 +22,9 @@ import CustomSelect from "../../../components/form/custom-select";
 import { useLazyGetAllExamQuery } from "../../exam/exam.api";
 import NormalText from "../../../components/ui/normal-text";
 import { EDU_MANAGER_TOKENS } from "../../../styles/token";
+import { useGetAllClassQuery } from "../../class/class.api";
+import { yearOptions } from "../admin.constant";
+import { groupByMonth } from "../admin.utils";
 
 const data = [
   { month: "January", value: 2, color: "#1890FF" },
@@ -33,33 +37,42 @@ const totalValue = data.reduce((acc, item) => acc + item.value, 0);
 
 const ExamQuantityChart = () => {
   const [open, setOpen] = useState(false);
-
-  const [triggerGetAllExam] = useLazyGetAllExamQuery();
+  const { data: classData } = useGetAllClassQuery({});
+  const [defaultQuery, setDefaultQuery] = useState<Record<string, string>>({});
+  const [triggerGetAllExam, { data: examData, isLoading }] =
+    useLazyGetAllExamQuery();
 
   const handleSubmit = useCallback(
     (value: Record<string, string>) => {
       triggerGetAllExam(value);
+      setDefaultQuery(value);
       setOpen(false);
     },
     [triggerGetAllExam, setOpen]
   );
 
-  // Memoized options
-  const yearOptions = useMemo(
-    () => [
-      { label: "2023", value: "2023" },
-      { label: "2024", value: "2024" },
-    ],
-    []
-  );
+  // retrieved class data and set into default query;
+  useEffect(() => {
+    if (classData && yearOptions.length > 0) {
+      setDefaultQuery({
+        year: yearOptions[0].value,
+        classId: classData.data[0]?.id,
+      });
+    }
+  }, [classData]);
 
-  const classOptions = useMemo(
-    () => [
-      { label: "Ten", value: "671b21f14217b0cc8d5c0151" },
-      { label: "Seven", value: "671b22414217b0cc8d5c0153" },
-    ],
-    []
-  );
+  // retrieved data initially with default query;
+  useEffect(() => {
+    if (Object.keys(defaultQuery).length > 0) {
+      triggerGetAllExam(defaultQuery);
+    }
+  }, [defaultQuery, triggerGetAllExam]);
+
+  // group data based on months
+  let groupData;
+  if (examData?.data) {
+    groupData = groupByMonth(examData?.data);
+  }
 
   const content = useMemo(
     () => (
@@ -73,27 +86,28 @@ const ExamQuantityChart = () => {
           >
             <CustomSelect
               size="large"
-              defaultValue="Select"
+              placeholder="Select"
               options={yearOptions}
             />
           </CustomFormItem>
+
           <CustomFormItem
             style={{ width: "100%", marginBottom: 0 }}
             layout="vertical"
             label="Class"
             name="classId"
           >
-            <CustomSelect
-              size="large"
-              defaultValue="Select"
-              options={classOptions}
-            />
+            {/* Use SelectClassField directly */}
+            <SelectClassField />
           </CustomFormItem>
         </Flex>
       </DefaultFilterBox>
     ),
-    [handleSubmit, yearOptions, classOptions]
+    [handleSubmit]
   );
+  if (isLoading) {
+    return <Skeleton active />;
+  }
 
   return (
     <>
@@ -101,6 +115,7 @@ const ExamQuantityChart = () => {
         <NormalText textType="large" level={5} style={{ margin: 0 }}>
           Exam Quantity
         </NormalText>
+
         {/* Fiter box content with popover  */}
         <Popover
           open={open}
@@ -130,7 +145,7 @@ const ExamQuantityChart = () => {
             Total Exam:{" "}
           </NormalText>
           <NormalText textType="large" level={4}>
-            {totalValue}
+            {examData?.data?.length || 0}
           </NormalText>
         </Space>
         <Space>
@@ -142,13 +157,13 @@ const ExamQuantityChart = () => {
             Year:{" "}
           </NormalText>
           <NormalText textType="large" level={4}>
-            2024
+            {defaultQuery?.year || 2024}
           </NormalText>
         </Space>
       </Flex>
       {/* Monthly number of exams showing separately in Line graph*/}
       <Flex>
-        {data.map((item, index) => {
+        {data?.map((item, index) => {
           const widthPercentage = ((item.value / totalValue) * 100).toFixed(2);
 
           return (
@@ -183,9 +198,11 @@ const ExamQuantityChart = () => {
           <NormalText textType="middle">No of Exams</NormalText>
           <NormalText textType="middle"> Class</NormalText>
         </Flex>
-        {data?.map((dt) => {
+        {groupData?.map((dt, idx) => {
+          const monthKey = Object.keys(dt)[0];
+          const monthData = dt[monthKey];
           return (
-            <Flex justify="space-between">
+            <Flex justify="space-between" key={idx}>
               <Flex gap={8} align="center" style={{ width: "50%" }}>
                 <FaRegCircleDot color={dt.color} />{" "}
                 <NormalText
@@ -194,7 +211,7 @@ const ExamQuantityChart = () => {
                     EDU_MANAGER_TOKENS.colors["edu-text-secondary-color"]
                   }
                 >
-                  {dt.month}
+                  {monthKey}
                 </NormalText>
               </Flex>
               <NormalText
@@ -203,7 +220,7 @@ const ExamQuantityChart = () => {
                   EDU_MANAGER_TOKENS.colors["edu-text-secondary-color"]
                 }
               >
-                {dt.value}
+                {monthData?.length}
               </NormalText>
               <NormalText
                 textType="middle"
@@ -211,7 +228,7 @@ const ExamQuantityChart = () => {
                   EDU_MANAGER_TOKENS.colors["edu-text-secondary-color"]
                 }
               >
-                Seven
+                {monthData[0]?.class?.className}
               </NormalText>
             </Flex>
           );

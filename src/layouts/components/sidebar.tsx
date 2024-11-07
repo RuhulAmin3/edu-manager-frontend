@@ -5,11 +5,9 @@ import { LuArrowLeftToLine, LuArrowRightToLine } from "react-icons/lu";
 import styled from "styled-components";
 import { EDU_MANAGER_TOKENS } from "../../styles/token";
 import { Dispatch, SetStateAction } from "react";
-import useScreenSize from "../../common/hooks/use-screen-size";
 
 const CustomSider = styled(Sider)<{
   triggerposition: number;
-  isMobile: boolean;
 }>`
   .ant-layout-sider-trigger {
     width: 30px !important;
@@ -47,7 +45,7 @@ const Sidebar: FC<PropsWithChildren<CustomSiderProps>> = ({
   ...props
 }) => {
   const triggerPosition = collapsed ? 70 : 255;
-  const isMobile = useScreenSize();
+  // const isMobile = useScreenSize();
   useEffect(() => {
     collapsed ? setDynamicMargin(100) : setDynamicMargin(290);
   }, [collapsed, setDynamicMargin]);
@@ -57,7 +55,6 @@ const Sidebar: FC<PropsWithChildren<CustomSiderProps>> = ({
       {...props}
       triggerposition={triggerPosition}
       collapsed={collapsed}
-      isMobile={isMobile}
     >
       <div
         className="ant-layout-sider-trigger"
