@@ -16,7 +16,7 @@ const DefaultFilterBox: FC<PropsWithChildren<ExtendFromProps>> = ({
   ...props
 }) => {
   const [form] = useForm();
-  const handleFinish = (query: { year: string; classId: string }) => {
+  const handleFinish = (query: Record<string, string>) => {
     cb(query);
     form.resetFields();
   };

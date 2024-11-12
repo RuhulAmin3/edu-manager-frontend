@@ -1,6 +1,14 @@
+/**
+ * External Dependency
+ */
+
 import { Col, Row } from "antd";
-import AdminRowCards from "../../features/admin/components/admin-row-cards";
+
+/**
+ * Internal Dependency
+ */
 import ExamQuantityChart from "../../features/admin/components/exam-quantity-chart";
+// import AdminRowCards from "../../features/admin/components/admin-row-cards";
 import DefaultCard from "../../components/ui/default-card";
 
 const AdminSummaryPage = () => {

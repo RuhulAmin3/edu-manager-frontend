@@ -1,15 +1,16 @@
-import App from "../../App";
-import AdminSummaryPage from "../../pages/admin";
-import AddGuardianPage from "../../pages/guardian/add-guardian";
+import GuardianRegisterPage from "../../pages/auth/guardian-register";
 import ChangePasswordPage from "../../pages/auth/change-password";
 import ForgotPasswordPage from "../../pages/auth/forgot-password";
-import GuardianRegisterPage from "../../pages/auth/guardian-register";
-import LoginPage from "../../pages/auth/login";
+import AddGuardianPage from "../../pages/guardian/add-guardian";
 import GuardianSummaryPage from "../../pages/guardian";
-import NotFoundPage from "../../pages/not-found";
-import ProfilePage from "../../pages/profile";
 import StudentSummaryPage from "../../pages/student";
 import TeacherSummaryPage from "../../pages/teacher";
+import NotFoundPage from "../../pages/not-found";
+import AdminSummaryPage from "../../pages/admin";
+import LoginPage from "../../pages/auth/login";
+import ProfilePage from "../../pages/profile";
+import ExamListPage from "../../pages/exam";
+import App from "../../App";
 
 export const commonRoutes = [
   {
@@ -45,6 +46,7 @@ export const adminRoutes = [
   { index: true, element: AdminSummaryPage },
   { path: "add-guardian", element: AddGuardianPage },
   { path: "profile", element: ProfilePage },
+  { path: "exams", element: ExamListPage },
 ];
 
 export const teacherRoutes = [
