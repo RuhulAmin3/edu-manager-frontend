@@ -1,14 +1,21 @@
-import { StrictMode } from "react";
-import { createRoot } from "react-dom/client";
-import { RouterProvider } from "react-router-dom";
-import { App as AntdApp } from "antd";
+/**
+ * External Dependency
+ */
 
-import { ConfigProvider } from "antd";
+import { App as AntdApp, ConfigProvider } from "antd";
+import { RouterProvider } from "react-router-dom";
+import { createRoot } from "react-dom/client";
 import { Provider } from "react-redux";
-import { store } from "./redux/store.ts";
+import { StrictMode } from "react";
+
+/**
+ * Internal Dependency
+ */
+
 import { EDU_MANAGER_TOKENS } from "./styles/token.ts";
-import "./styles/globals.css";
 import { router } from "./routes/index.tsx";
+import { store } from "./redux/store.ts";
+import "./styles/globals.css";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
@@ -41,6 +48,10 @@ createRoot(document.getElementById("root")!).render(
               // large button customization
               contentFontSizeLG: 16,
               borderRadiusLG: 8,
+            },
+            Popover: {
+              boxShadowSecondary:
+                EDU_MANAGER_TOKENS.shadow["edu-filter-box-shadow"],
             },
           },
         }}

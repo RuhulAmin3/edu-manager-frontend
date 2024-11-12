@@ -1,3 +1,6 @@
+/**
+ * External Dependency
+ */
 import {
   BaseQueryFn,
   createApi,
@@ -5,12 +8,18 @@ import {
   fetchBaseQuery,
   FetchBaseQueryError,
 } from "@reduxjs/toolkit/query/react";
+
+/**
+ * Internal Dependency
+ */
+
+import { ACCESS_TOKEN_KEY } from "../common/constants/local-storage.constant";
+import { ResponseErrorType } from "../common/types/response.type";
+import { logout } from "../features/auth/login/login.slice";
 import {
   getFromLocalStorage,
   saveToLocalStorage,
 } from "../common/utils/local-storage.utils";
-import { ACCESS_TOKEN_KEY } from "../common/constants/local-storage.constant";
-import { ResponseErrorType } from "../common/types/response.type";
 
 const baseQuery = fetchBaseQuery({
   baseUrl: "http://localhost:4000/api/v1/",
@@ -19,9 +28,9 @@ const baseQuery = fetchBaseQuery({
     if (token) {
       headers.set("authorization", `Bearer ${token}`);
     }
-
     return headers;
   },
+  credentials: "include",
 });
 
 const baseQueryWithReauth: BaseQueryFn<
@@ -35,10 +44,9 @@ const baseQueryWithReauth: BaseQueryFn<
   if (result.error) {
     const errorData: ResponseErrorType = result.error.data as ResponseErrorType;
     result.error = {
-      status: errorData.statusCode || 500,
-      data: errorData.message || "something was wrong",
+      status: errorData?.statusCode || 500,
+      data: errorData?.message || "something was wrong",
     };
-    // console.log("error from api bottom", result.error);
   }
 
   if (result.error && result.error.status == 401) {
@@ -57,8 +65,7 @@ const baseQueryWithReauth: BaseQueryFn<
       // Retry the initial request with the new token
       result = await baseQuery(args, api, extraOptions);
     } else {
-      // If refresh failed, you might want to log out or handle re-authentication
-      console.error("Refresh token failed, redirecting to login");
+      api.dispatch(logout());
     }
   }
   return result;

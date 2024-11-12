@@ -61,7 +61,7 @@ const items: MenuItem[] = [
 ];
 
 const CustomLayout = styled(Layout)<{
-  contentMarginleft?: number;
+  contentmarginleft?: number;
   collapsed?: boolean;
 }>`
   .ant-layout {
@@ -76,9 +76,9 @@ const CustomLayout = styled(Layout)<{
   .ant-layout-content,
   .ant-layout-footer,
   .ant-layout-header {
-    margin-left: ${(props) => props.contentMarginleft}px !important;
+    margin-left: ${(props) => props.contentmarginleft}px !important;
     transition: all 0.4s ease;
-    width: calc(100% - ${(props) => props.contentMarginleft}px);
+    width: calc(100% - ${(props) => props.contentmarginleft}px);
     padding-right: 20px;
   }
   .ant-layout-content {
@@ -91,7 +91,7 @@ const RootLayout: React.FC = () => {
   const [dynamicMargin, setDynamicMargin] = useState<number>(220);
 
   return (
-    <CustomLayout contentMarginleft={dynamicMargin}>
+    <CustomLayout contentmarginleft={dynamicMargin}>
       <Sidebar
         collapsible
         theme="light"
