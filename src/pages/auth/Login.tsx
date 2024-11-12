@@ -7,6 +7,7 @@ import { Form, Image } from "antd";
 /**
  *  Internal Dependency
  */
+
 import useShowToastMessage from "../../common/hooks/use-show-toast-message";
 import { useLoginUserMutation } from "../../features/auth/login/login.api";
 import { WholeResponseType } from "../../features/auth/login/login.type";
@@ -46,6 +47,7 @@ const LoginPage = () => {
       },
       token,
     };
+
     // set userId, role and token into redux and local storage;
     dispatch(setCredentials(payload));
     form.resetFields();

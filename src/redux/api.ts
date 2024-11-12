@@ -1,3 +1,6 @@
+/**
+ * External Dependency
+ */
 import {
   BaseQueryFn,
   createApi,
@@ -5,14 +8,18 @@ import {
   fetchBaseQuery,
   FetchBaseQueryError,
 } from "@reduxjs/toolkit/query/react";
+
+/**
+ * Internal Dependency
+ */
+
+import { ACCESS_TOKEN_KEY } from "../common/constants/local-storage.constant";
+import { ResponseErrorType } from "../common/types/response.type";
+import { logout } from "../features/auth/login/login.slice";
 import {
   getFromLocalStorage,
   saveToLocalStorage,
 } from "../common/utils/local-storage.utils";
-import { ACCESS_TOKEN_KEY } from "../common/constants/local-storage.constant";
-import { ResponseErrorType } from "../common/types/response.type";
-import { store } from "./store";
-import { logout } from "../features/auth/login/login.slice";
 
 const baseQuery = fetchBaseQuery({
   baseUrl: "http://localhost:4000/api/v1/",
@@ -58,7 +65,7 @@ const baseQueryWithReauth: BaseQueryFn<
       // Retry the initial request with the new token
       result = await baseQuery(args, api, extraOptions);
     } else {
-      store.dispatch(logout());
+      api.dispatch(logout());
     }
   }
   return result;
