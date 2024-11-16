@@ -161,6 +161,7 @@ const ExamQuantityChart = () => {
           </NormalText>
         </Space>
       </Flex>
+
       {/* Monthly number of exams showing separately in Line graph*/}
       <Flex>
         {data?.map((item, index) => {
@@ -196,7 +197,7 @@ const ExamQuantityChart = () => {
             Month
           </NormalText>
           <NormalText textType="middle">No of Exams</NormalText>
-          <NormalText textType="middle"> Class</NormalText>
+          <NormalText textType="middle">Class</NormalText>
         </Flex>
         {groupData?.map((dt, idx) => {
           const monthKey = Object.keys(dt)[0];

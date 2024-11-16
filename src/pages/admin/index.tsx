@@ -10,6 +10,7 @@ import { Col, Row } from "antd";
 import ExamQuantityChart from "../../features/admin/components/exam-quantity-chart";
 // import AdminRowCards from "../../features/admin/components/admin-row-cards";
 import DefaultCard from "../../components/ui/default-card";
+import StudentAnalyticsChart from "../../features/admin/components/student-analytics-chart";
 
 const AdminSummaryPage = () => {
   return (
@@ -24,7 +25,11 @@ const AdminSummaryPage = () => {
             <ExamQuantityChart />
           </DefaultCard>
         </Col>
-        <Col xs={24} lg={12}></Col>
+        <Col xs={24} lg={12}>
+          <DefaultCard>
+            <StudentAnalyticsChart />
+          </DefaultCard>
+        </Col>
       </Row>
     </>
   );
