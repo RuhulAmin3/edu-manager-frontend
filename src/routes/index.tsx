@@ -1,15 +1,15 @@
+/**
+ * External Dependency
+ */ 
 import { createBrowserRouter } from "react-router-dom";
-import {
-  adminRoutes,
-  commonRoutes,
-  guardianRoutes,
-  studentRoutes,
-  teacherRoutes,
-} from "./paths";
-import RootLayout from "../layouts";
-import PublicRouteGuard from "./public-route-guard";
+/**
+ * Internal Dependency
+ */ 
+import {adminRoutes, commonRoutes, guardianRoutes, studentRoutes, teacherRoutes} from "./paths";
 import PrivateRouteGuard from "./private-route-guard";
-import { ROLE } from "../common/constants";
+import PublicRouteGuard from "./public-route-guard";
+import { ROLE } from "~/common/constants"; 
+import RootLayout from "~/layouts";
 
 const routes = [
   ...commonRoutes.map((route) => {

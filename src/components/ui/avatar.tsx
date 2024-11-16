@@ -10,7 +10,7 @@ const ModifiedAvatar = styled(Avatar)<{ isscrolled: boolean }>`
   border: 1px solid ${EDU_MANAGER_TOKENS.colors["edu-border-color"]};
   padding: 10px !important;
   cursor: pointer;
-  shadow: ${(props) =>
+  box-shadow: ${(props) =>
     props.isscrolled && EDU_MANAGER_TOKENS.shadow["edu-card-shadow"]};
   &:hover {
     background: ${EDU_MANAGER_TOKENS.colors["edu-secondary"]};

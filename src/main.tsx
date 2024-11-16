@@ -11,52 +11,19 @@ import { StrictMode } from "react";
 /**
  * Internal Dependency
  */
-
-import { EDU_MANAGER_TOKENS } from "./styles/token.ts";
-import { router } from "./routes/index.tsx";
-import { store } from "./redux/store.ts";
-import "./styles/globals.css";
+  
+import { store } from "~/redux/store";
+import { router } from "~/routes";
+import "./styles/globals.css"; 
+import { antTheme } from "./common/constants/theme";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <AntdApp>
       <ConfigProvider
         // wave={{ disabled: true }}
-        theme={{
-          token: {
-            colorPrimary: EDU_MANAGER_TOKENS.colors["edu-primary"],
-            colorBorder: EDU_MANAGER_TOKENS.colors["edu-border-color"],
-            colorSuccess: EDU_MANAGER_TOKENS.colors["edu-success"],
-            colorInfo: EDU_MANAGER_TOKENS.colors["edu-info"],
-            colorWarning: EDU_MANAGER_TOKENS.colors["edu-warning"],
-            colorError: EDU_MANAGER_TOKENS.colors["edu-danger"],
-            fontFamily: "Be Vietnam Pro, sans-serif",
-          },
-          components: {
-            Button: {
-              // default or secondary button customization
-              contentFontSizeSM: 12,
-              borderRadiusSM: 4,
-              paddingBlockSM: 4.8,
-              paddingInlineSM: 12,
-              controlHeightSM: 28,
-
-              // middle button customization
-              contentFontSize: 14,
-              borderRadius: 6,
-
-              // large button customization
-              contentFontSizeLG: 16,
-              borderRadiusLG: 8,
-            },
-            Popover: {
-              boxShadowSecondary:
-                EDU_MANAGER_TOKENS.shadow["edu-filter-box-shadow"],
-            },
-          },
-        }}
-      >
-        {" "}
+        theme={antTheme}
+      > 
         <Provider store={store}>
           <RouterProvider router={router} />
         </Provider>
