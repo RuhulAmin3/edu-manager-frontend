@@ -14,7 +14,7 @@ const PrivateRouteGuard: FC<PrivateRouteGuardProps> = ({
   requiredRoles = [],
 }) => {
   const location = useLocation();
-  const user: Record<string, string> | null = getFromLocalStorage(USER);
+  const user: Record<string, string> | null = getFromLocalStorage(USER); 
   if (!user) {
     // Redirect to login if not authenticated
     return <Navigate to="/login" state={{ from: location }} replace />;

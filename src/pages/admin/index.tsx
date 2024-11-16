@@ -1,22 +1,22 @@
 /**
  * External Dependency
- */
-
+ */ 
 import { Col, Row } from "antd";
 
 /**
  * Internal Dependency
- */
-import ExamQuantityChart from "../../features/admin/components/exam-quantity-chart";
-// import AdminRowCards from "../../features/admin/components/admin-row-cards";
-import DefaultCard from "../../components/ui/default-card";
+ */  
+import ExamQuantityChart from "~/features/admin/components/exam-quantity-chart";
+import AdminRowCards from "~/features/admin/components/admin-row-cards";
+import DefaultCard from "~/components/ui/default-card";
+
 
 const AdminSummaryPage = () => {
   return (
     <>
-      {/* <Row gutter={[16, 16]} style={{ paddingBottom: "20px" }}>
+      <Row gutter={[16, 16]} style={{ paddingBottom: "20px" }}>
         <AdminRowCards />
-      </Row> */}
+      </Row>
 
       <Row gutter={[16, 16]}>
         <Col xs={24} lg={12}>
@@ -24,7 +24,8 @@ const AdminSummaryPage = () => {
             <ExamQuantityChart />
           </DefaultCard>
         </Col>
-        <Col xs={24} lg={12}></Col>
+        <Col xs={24} lg={12}> 
+        </Col>
       </Row>
     </>
   );

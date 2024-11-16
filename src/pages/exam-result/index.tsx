@@ -1,5 +1,9 @@
-const ExamResultPage = () => {
-  return <div>ExamResultPage</div>;
-};
+import React from 'react'
 
-export default ExamResultPage;
+const ExamResultListPage = () => {
+  return (
+    <div>ExamResultListPage</div>
+  )
+}
+
+export default ExamResultListPage
