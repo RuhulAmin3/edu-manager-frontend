@@ -34,6 +34,12 @@ export const antTheme:ThemeConfig ={
       },
       Breadcrumb:{
         linkHoverColor:EDU_MANAGER_TOKENS.colors["edu-primary"]
+      },
+      Table:{  
+        headerBg:EDU_MANAGER_TOKENS.colors["edu-secondary"],
+        headerBorderRadius:0,
+        headerSortHoverBg:EDU_MANAGER_TOKENS.colors["edu-secondary"],
+        headerSortActiveBg:EDU_MANAGER_TOKENS.colors["edu-secondary"],
       }
     },
   }

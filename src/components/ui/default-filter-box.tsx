@@ -20,6 +20,7 @@ const DefaultFilterBox: FC<PropsWithChildren<ExtendFromProps>> = ({
     cb(query);
     form.resetFields();
   };
+  
   return (
     <CustomForm form={form} onFinish={handleFinish} {...props}>
       <NormalText textType="middle">Filter</NormalText>
