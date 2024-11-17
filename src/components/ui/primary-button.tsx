@@ -17,7 +17,7 @@ const CustomButton = styled(Button)`
 `;
 
 const PrimaryButton: FC<PropsWithChildren<AntButtonProps>> = (props) => {
-  return <CustomButton {...props} />;
+  return <CustomButton type="primary" {...props} />;
 };
 
 export default PrimaryButton;

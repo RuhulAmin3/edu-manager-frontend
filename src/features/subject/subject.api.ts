@@ -11,4 +11,4 @@ const subjectApi = rootApi.injectEndpoints({
   }),
 });
 
-export const { useGetAllSubjectsQuery } = subjectApi;
+export const { useGetAllSubjectsQuery, useLazyGetAllSubjectsQuery } = subjectApi;

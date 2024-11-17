@@ -6,11 +6,15 @@ import { EDU_MANAGER_TOKENS } from "../../styles/token";
 interface SecondaryButtonProps extends AntButtonProps {
   bgColor?: string;
   bgHoverColor?: string;
+  hoverColor?:string;
+  textColor?:string;
 }
 
 const CustomButton = styled(Button)<{
   bgColor?: string;
   bgHoverColor?: string;
+  hoverColor?:string;
+  textColor?:string;
 }>`
   &.ant-btn-default {
     display: flex;
@@ -19,11 +23,18 @@ const CustomButton = styled(Button)<{
     cursor: pointer;
     background: ${(props) =>
       props.bgColor || EDU_MANAGER_TOKENS.colors["edu-white"]};
+    color: ${(props) =>
+      props.textColor || EDU_MANAGER_TOKENS.colors["edu-text-primary-color"]};
     &:hover {
+      border-color: transparent !important;
+
       background: ${(props) =>
         props.bgHoverColor ||
         EDU_MANAGER_TOKENS.colors["edu-secondary-bg-opacity"]} !important;
-      border-color: transparent !important;
+
+      color: ${(props) =>
+        props.hoverColor ||
+        EDU_MANAGER_TOKENS.colors["edu-text-primary-color"]} !important;
     }
   }
 `;

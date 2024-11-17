@@ -6,17 +6,19 @@ import { FC } from "react";
 
 interface CustomInputProps extends AntInputProps {
   isPassword?: boolean;
+  padding?:string
 }
 
-const StyledInput = styled(Input)`
+const StyledInput = styled(Input)<CustomInputProps>`
   &.ant-input-outlined {
     border: 1px solid ${EDU_MANAGER_TOKENS.colors["edu-border-color"]};
-    padding: 8px 15px;
+    padding: ${(props)=>props.padding ? props.padding: "8px 15px"};
     &:focus {
       box-shadow: none;
       border: 1px solid ${EDU_MANAGER_TOKENS.colors["edu-primary"]};
     }
   }
+
   &.ant-input-status-error {
     border: 1px solid
       ${EDU_MANAGER_TOKENS.colors["edu-form-invalid-border-color"]} !important;
