@@ -13,6 +13,13 @@ import { FaPeopleArrows, FaPeopleRoof } from "react-icons/fa6";
 import { GoDot } from "react-icons/go";
 import { IoMdPeople } from "react-icons/io"; 
 import { FaFileAlt } from "react-icons/fa";
+import { BsCollectionFill } from "react-icons/bs";
+import { BsFillCalendar2CheckFill } from "react-icons/bs";
+import { MdAnnouncement } from "react-icons/md";
+import { MdLeaderboard } from "react-icons/md";
+import { IoIosListBox } from "react-icons/io";
+import { FaRectangleList } from "react-icons/fa6";
+
 
 export const sidebarItems = (role:string) => { 
   const lowerCase_role = role?.toLowerCase(); 
@@ -138,14 +145,14 @@ export const sidebarItems = (role:string) => {
     {
       label: <Link to={`/${lowerCase_role}/classes`}>Class List</Link>,
       key: `/${lowerCase_role}/classes`,
-      icon:<GoDot />,
+      icon:<IoIosListBox />,
     },
 
     // Subject Route
     {
       label: <Link to={`/${lowerCase_role}/subjects`}>Subject List</Link>,
       key: `/${lowerCase_role}/subjects`,
-      icon:<GoDot />,
+      icon:<FaRectangleList />,
     }, 
 
     // examination routes 
@@ -165,6 +172,58 @@ export const sidebarItems = (role:string) => {
             icon:<GoDot />,
           }, 
         ],
+    },
+
+     // Account management routes 
+     {
+      label: "Account Management",
+      key:"account-management",
+      icon: <BsCollectionFill /> , 
+      children: [
+        {
+          label: <Link to={`/${lowerCase_role}/fees`}>All Fees</Link>,
+          key: `/${lowerCase_role}/fees`,
+          icon:<GoDot />,
+        },
+        {
+          label: <Link to={`/${lowerCase_role}/expenses`}>All Expenses</Link>,
+          key: `/${lowerCase_role}/expenses`,
+          icon:<GoDot />,
+        }, 
+      ],
+     },
+
+     // Attendence management routes 
+     {
+      label: "Attendence Management",
+      key:"attendence-management",
+      icon: <BsFillCalendar2CheckFill /> , 
+      children: [
+        {
+          label: <Link to={`/${lowerCase_role}/attendences`}>All Attendence</Link>,
+          key: `/${lowerCase_role}/attendences`,
+          icon:<GoDot />,
+        },
+        {
+          label: <Link to={`/${lowerCase_role}/add-attendence`}>Add Attendence</Link>,
+          key: `/${lowerCase_role}/add-attendence`,
+          icon:<GoDot />,
+        }, 
+      ],
+     },
+
+    // Notice route
+    {
+      label: <Link to={`/${lowerCase_role}/notices`}>Notices</Link>,
+      key: `/${lowerCase_role}/notices`,
+      icon:<MdAnnouncement />,
+    },
+    
+    // leaderboard route
+    {
+      label: <Link to={`/${lowerCase_role}/leaderboard`}>Leaderboard</Link>,
+      key: `/${lowerCase_role}/leaderboard`,
+      icon:<MdLeaderboard />,
     },
   ];
 
