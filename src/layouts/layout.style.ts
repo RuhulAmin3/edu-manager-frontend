@@ -29,7 +29,6 @@ export const CustomLayout = styled(Layout)<{
       margin-top: 80px !important;
     }
   `;
-  
 
   export const CustomSider = styled(Sider)<{
     triggerposition: number;
@@ -37,7 +36,7 @@ export const CustomLayout = styled(Layout)<{
     .ant-layout-sider-trigger {
       width: 30px !important;
       height: 30px;
-      position: absolute;
+      /* position: absolute; */
       top: 25px;
       left: ${(props) => props.triggerposition}px;
       display: flex;
@@ -45,8 +44,9 @@ export const CustomLayout = styled(Layout)<{
       justify-content: center;
       background: white;
       color: ${EDU_MANAGER_TOKENS.colors["edu-text-secondary-color"]};
-      border: 2px solid ${EDU_MANAGER_TOKENS.colors["edu-border-color"]};
+      border: 1px solid ${EDU_MANAGER_TOKENS.colors["edu-border-color"]};
       border-radius: 7px;
+      z-index:9999;
   
       // Smooth color and border transition for the trigger button
       transition: all 0.6s ease;
@@ -55,7 +55,6 @@ export const CustomLayout = styled(Layout)<{
       }
     }
   `;
-  
 
   // Styled component for the header
 export const CustomHeader = styled(Header)<{ isscrolled: boolean }>`

@@ -28,6 +28,12 @@ import App from "~/App";
 import ClassListPage from "~/pages/class";
 import SubjectListPage from "~/pages/subject"; 
 import ExamResultListPage from "~/pages/exam-result";
+import FeeListPage from "~/pages/fee";
+import ExpenseListPage from "~/pages/expense";
+import AttendenceListPage from "~/pages/attendence";
+import AddAttendencePage from "~/pages/attendence/add-attendence";
+import NoticeListPage from "~/pages/notice";
+import LeaderboardPage from "~/pages/leaderboard";
 
 
 export const commonRoutes = [
@@ -83,13 +89,27 @@ export const adminRoutes = [
   {path: "add-guardian", element:AddGuardianPage}, 
   {path: "guardians/:id", element:GuardianDetailsPage},
 
-  // class route
+  // class and subject route
   {path: "classes", element:ClassListPage},
   {path: "subjects", element:SubjectListPage},
 
   // examination routes
   {path:"exams", element:ExamListPage},
   {path:"exam-result", element:ExamResultListPage},
+
+  // acount management routes
+  {path:"fees", element:FeeListPage},
+  {path:"expenses", element:ExpenseListPage},
+
+  // attendence management routes
+  {path:"attendences", element:AttendenceListPage},
+  {path:"add-attendence", element:AddAttendencePage},
+
+  // notice route
+  {path: "notices", element:NoticeListPage},
+
+  // leaderboard route
+  {path: "leaderboard", element:LeaderboardPage},
 ];
 
 export const teacherRoutes = [

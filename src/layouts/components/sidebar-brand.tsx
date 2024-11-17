@@ -1,6 +1,6 @@
 import { Image } from "antd";
 import styled from "styled-components";
-import logo from "../../assets/edu-manger-logo.png";
+import logo from "../../assets/edu-manger-logo.png"; 
 
 const Brand = styled.div`
   margin-block: 10px;
@@ -12,7 +12,7 @@ const Brand = styled.div`
   }
 `;
 
-const SidebarBrand = () => {
+const SidebarBrand = () => { 
   return (
     <Brand>
       <Image src={logo} preview={false} />

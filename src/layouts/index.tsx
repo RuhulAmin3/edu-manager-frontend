@@ -31,6 +31,10 @@ const RootLayout: React.FC = () => {
       <Sidebar
         collapsible
         theme="light"
+        style={{
+          overflow:"auto", 
+          scrollbarWidth: 'none', 
+        }}
         collapsed={collapsed}
         setCollapsed={setCollapsed}
         setDynamicMargin={setDynamicMargin}

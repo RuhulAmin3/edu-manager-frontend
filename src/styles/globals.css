@@ -93,6 +93,7 @@ h6 {
   min-width: 350px;
   max-width: 100%;
 }
+
 .ant-popover-inner {
   border: 1px solid var(--edu-border-color);
 }
