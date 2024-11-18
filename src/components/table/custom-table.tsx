@@ -1,11 +1,16 @@
-import { Table, TableProps } from "antd";
+import { Table, TablePaginationConfig, TableProps } from "antd";
+import { PiArrowLeftFill, PiArrowRightFill } from "react-icons/pi";
+import { EDU_MANAGER_TOKENS } from "~/styles/token";
 
 type CustomTableProps<T> = {
   loading?: boolean;
   columns: TableProps<T>["columns"];
   dataSource: TableProps<T>["dataSource"];
   pageSize?: number;
+  prevPage?: number;
+  nextPage?: number;
   totalPages?: number;
+  totalDoc?: number;
   showSizeChanger?: boolean;
   onPaginationChange?: (page: number, pageSize: number) => void;
   onTableChange?: TableProps<T>["onChange"];
@@ -17,30 +22,51 @@ const CustomTable = <T extends object>({
   columns,
   dataSource,
   pageSize,
-  totalPages,
+  prevPage,
+  nextPage,
+  totalDoc,
   showSizeChanger = true,
   onPaginationChange,
   onTableChange,
   showPagination = true,
   ...props
 }: CustomTableProps<T>) => {
-  const paginationConfig = showPagination
-    ? {
-        pageSize: pageSize,
-        total: totalPages,
-        pageSizeOptions: ["5", "10", "20"],
-        showSizeChanger: showSizeChanger,
-        onChange: onPaginationChange,
-      }
-    : false; 
+  const paginationConfig: TablePaginationConfig = {
+    pageSize: pageSize,
+    total: totalDoc,
+    showLessItems: true,
+    showTotal: (total, range) => `${range[0]}-${range[1]} of ${total} items`,
+    pageSizeOptions: ["5", "10", "20"],
+    showSizeChanger: showSizeChanger,
+    onChange: onPaginationChange,
+    prevIcon: (
+      <PiArrowLeftFill
+        color={
+          prevPage
+            ? EDU_MANAGER_TOKENS.colors["edu-text-primary-color"]
+            : EDU_MANAGER_TOKENS.colors["edu-text-secondary-color"]
+        }
+      />
+    ),
+    nextIcon: (
+      <PiArrowRightFill
+        color={
+          nextPage
+            ? EDU_MANAGER_TOKENS.colors["edu-text-primary-color"]
+            : EDU_MANAGER_TOKENS.colors["edu-text-secondary-color"]
+        }
+      />
+    ),
+    style: { margin: "16px" },
+  };
+
   return (
     <Table<T>
       bordered
       loading={loading}
       columns={columns}
       dataSource={dataSource}
-      
-      pagination={paginationConfig}
+      pagination={showPagination ? paginationConfig : false}
       onChange={onTableChange}
       {...props}
     />

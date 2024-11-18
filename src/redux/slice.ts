@@ -19,7 +19,7 @@ const initialSlice = createSlice({
       state,
       action: PayloadAction<Record<string, unknown>>
     ) => {
-      state.query = action.payload;
+      state.query = { ...state.query,  ...action.payload};
     },
     resetQuery: (state) => {
       state.query = {};

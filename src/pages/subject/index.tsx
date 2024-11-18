@@ -15,6 +15,9 @@ import { Flex } from "antd";
  */
 
 import { subjectsBreadCrumbItems } from "~/features/subject/subject.constant"; 
+import { resetQuery, setModalName, setQuery } from "~/redux/slice";
+import AddSubjectModal from "~/features/subject/add-subject-modal";
+import { MODEL_CONSTANT } from "~/common/constants/modal.constant";
 import SecondaryButton from "~/components/ui/secondary-button";
 import CustomDropdown from "~/components/ui/custom-dropdown";
 import { useAppDispatch } from "~/common/hooks/redux.hooks";
@@ -26,16 +29,13 @@ import CustomInput from "~/components/form/custom-input";
 import DefaultCard from "~/components/ui/default-card";
 import useDebounce from "~/common/hooks/use-debounce";
 import NormalText from "~/components/ui/normal-text";
-import { resetQuery, setQuery } from "~/redux/slice";
 import CustomAvatar from "~/components/ui/avatar"; 
-import AddSubjectModal from "~/features/subject/add-subject-modal";
 
 
 const SubjectListPage = () => {
   const dispatch = useAppDispatch();
   const [searchTerm, setSearchTerm] = useState<string>(""); 
   const debouncedSearchTerm = useDebounce(searchTerm, 500); 
-  const [open, setOpen] = useState(false);
 
   useEffect(() => {
     if (debouncedSearchTerm.trim()) {
@@ -91,7 +91,7 @@ const SubjectListPage = () => {
               <DownOutlined size={2} />
             </SecondaryButton>
           </CustomDropdown>
-          <PrimaryButton style={{ padding: "18px 10px" }} onClick={()=>setOpen(true)}>
+          <PrimaryButton style={{ padding: "18px 10px" }} onClick={()=>dispatch(setModalName(MODEL_CONSTANT.ADD_SUBJECT))}>
             {" "}
             <FaPlusSquare /> Add Subject
           </PrimaryButton>
@@ -124,7 +124,7 @@ const SubjectListPage = () => {
         <SubjectList />
 
         {/* add new subject modal */}
-        <AddSubjectModal open={open} setOpen={setOpen}/>
+        <AddSubjectModal/>
       </DefaultCard>
     </>
   );
