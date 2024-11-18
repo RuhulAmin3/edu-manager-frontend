@@ -4,7 +4,7 @@ import { FC, PropsWithChildren } from "react";
 import { EDU_MANAGER_TOKENS } from "../../styles/token";
 
 const CustomButton = styled(Button)`
-  &.ant-btn-primary {
+  &.ant-btn-primary { 
     background: ${EDU_MANAGER_TOKENS.colors["edu-primary"]};
     box-shadow: 0 1px 2px 0 rgba(34, 197, 94, 0.35) !important;
     &:hover {
