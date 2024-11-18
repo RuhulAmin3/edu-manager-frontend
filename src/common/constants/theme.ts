@@ -28,6 +28,7 @@ export const antTheme:ThemeConfig ={
         contentFontSizeLG: 16,
         borderRadiusLG: 8,
       },
+
       Popover: {
         boxShadowSecondary:
           EDU_MANAGER_TOKENS.shadow["edu-filter-box-shadow"],
@@ -40,6 +41,10 @@ export const antTheme:ThemeConfig ={
         headerBorderRadius:0,
         headerSortHoverBg:EDU_MANAGER_TOKENS.colors["edu-secondary"],
         headerSortActiveBg:EDU_MANAGER_TOKENS.colors["edu-secondary"],
+      }, 
+      Form:{
+        labelRequiredMarkColor:EDU_MANAGER_TOKENS.colors["edu-danger"],
+        
       }
     },
   }

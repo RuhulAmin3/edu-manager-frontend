@@ -7,8 +7,18 @@ const subjectApi = rootApi.injectEndpoints({
         url: "/subject",
         params: data,
       }),
+       providesTags:["subject"],
     }),
+
+    addSubject:builder.mutation({
+      query:(data)=>({
+        url:"/subject", 
+        method:"POST", 
+        body:data,
+      }),
+      invalidatesTags:["subject"],
+    })
   }),
 });
 
-export const { useGetAllSubjectsQuery, useLazyGetAllSubjectsQuery } = subjectApi;
+export const { useGetAllSubjectsQuery, useLazyGetAllSubjectsQuery, useAddSubjectMutation } = subjectApi;

@@ -11,7 +11,7 @@ import { Layout } from "antd";
 
 import { getFromLocalStorage } from "~/common/utils/local-storage.utils";
 import { USER } from "~/common/constants/local-storage.constant";
-import { sidebarItems } from "~/common/constants/sidebarItems"; 
+import { sidebarItems } from "~/common/constants/sidebar-items"; 
 import SidebarBrand from "./components/sidebar-brand";
 import LayoutFooter from "./components/footer";
 import LayoutHeader from "./components/header";

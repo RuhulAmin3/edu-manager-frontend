@@ -1,6 +1,7 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect } from "react";
 import { ModifiedErrorType } from "../types/response.type";
-import { App } from "antd";
+import { App } from "antd"; 
 
 function useShowToastMessage(
   isError: boolean,
@@ -44,7 +45,7 @@ function useShowToastMessage(
       });
       if (cb != undefined) cb();
     }
-  }, [cb, error, isError, isSuccess, notification, successMessage]);
+  }, [error, isError, isSuccess, notification, successMessage]);
 }
 
 export default useShowToastMessage;

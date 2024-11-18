@@ -27,13 +27,15 @@ import DefaultCard from "~/components/ui/default-card";
 import useDebounce from "~/common/hooks/use-debounce";
 import NormalText from "~/components/ui/normal-text";
 import { resetQuery, setQuery } from "~/redux/slice";
-import CustomAvatar from "~/components/ui/avatar";
+import CustomAvatar from "~/components/ui/avatar"; 
+import AddSubjectModal from "~/features/subject/add-subject-modal";
 
 
 const SubjectListPage = () => {
   const dispatch = useAppDispatch();
   const [searchTerm, setSearchTerm] = useState<string>(""); 
-  const debouncedSearchTerm = useDebounce(searchTerm, 500);
+  const debouncedSearchTerm = useDebounce(searchTerm, 500); 
+  const [open, setOpen] = useState(false);
 
   useEffect(() => {
     if (debouncedSearchTerm.trim()) {
@@ -89,7 +91,7 @@ const SubjectListPage = () => {
               <DownOutlined size={2} />
             </SecondaryButton>
           </CustomDropdown>
-          <PrimaryButton style={{ padding: "18px 10px" }}>
+          <PrimaryButton style={{ padding: "18px 10px" }} onClick={()=>setOpen(true)}>
             {" "}
             <FaPlusSquare /> Add Subject
           </PrimaryButton>
@@ -107,6 +109,7 @@ const SubjectListPage = () => {
           <NormalText textType="large" level={4}>
             Class Subjects
           </NormalText>
+
           {/* search bar */}
           <CustomInput
             placeholder="Search by title"
@@ -115,11 +118,13 @@ const SubjectListPage = () => {
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
           />
-          
         </Flex>
 
         {/* subject list table */}
         <SubjectList />
+
+        {/* add new subject modal */}
+        <AddSubjectModal open={open} setOpen={setOpen}/>
       </DefaultCard>
     </>
   );
