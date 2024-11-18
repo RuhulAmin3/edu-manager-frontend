@@ -15,6 +15,9 @@ import { Flex } from "antd";
  */
 
 import { subjectsBreadCrumbItems } from "~/features/subject/subject.constant"; 
+import { resetQuery, setModalName, setQuery } from "~/redux/slice";
+import AddSubjectModal from "~/features/subject/add-subject-modal";
+import { MODEL_CONSTANT } from "~/common/constants/modal.constant";
 import SecondaryButton from "~/components/ui/secondary-button";
 import CustomDropdown from "~/components/ui/custom-dropdown";
 import { useAppDispatch } from "~/common/hooks/redux.hooks";
@@ -26,14 +29,13 @@ import CustomInput from "~/components/form/custom-input";
 import DefaultCard from "~/components/ui/default-card";
 import useDebounce from "~/common/hooks/use-debounce";
 import NormalText from "~/components/ui/normal-text";
-import { resetQuery, setQuery } from "~/redux/slice";
-import CustomAvatar from "~/components/ui/avatar";
+import CustomAvatar from "~/components/ui/avatar"; 
 
 
 const SubjectListPage = () => {
   const dispatch = useAppDispatch();
   const [searchTerm, setSearchTerm] = useState<string>(""); 
-  const debouncedSearchTerm = useDebounce(searchTerm, 500);
+  const debouncedSearchTerm = useDebounce(searchTerm, 500); 
 
   useEffect(() => {
     if (debouncedSearchTerm.trim()) {
@@ -89,7 +91,7 @@ const SubjectListPage = () => {
               <DownOutlined size={2} />
             </SecondaryButton>
           </CustomDropdown>
-          <PrimaryButton style={{ padding: "18px 10px" }}>
+          <PrimaryButton style={{ padding: "18px 10px" }} onClick={()=>dispatch(setModalName(MODEL_CONSTANT.ADD_SUBJECT))}>
             {" "}
             <FaPlusSquare /> Add Subject
           </PrimaryButton>
@@ -107,6 +109,7 @@ const SubjectListPage = () => {
           <NormalText textType="large" level={4}>
             Class Subjects
           </NormalText>
+
           {/* search bar */}
           <CustomInput
             placeholder="Search by title"
@@ -115,11 +118,13 @@ const SubjectListPage = () => {
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
           />
-          
         </Flex>
 
         {/* subject list table */}
         <SubjectList />
+
+        {/* add new subject modal */}
+        <AddSubjectModal/>
       </DefaultCard>
     </>
   );

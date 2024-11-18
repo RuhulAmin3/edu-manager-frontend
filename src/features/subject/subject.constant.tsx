@@ -33,8 +33,6 @@ export const columns: TableProps<SubjectDataType>['columns'] = [
         }
     },
 ];
- 
-
 
 export const subjectsBreadCrumbItems = [
     {
