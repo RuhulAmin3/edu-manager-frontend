@@ -5,7 +5,7 @@ import { Avatar, Flex, Menu, notification } from "antd";
 import { Link, useNavigate } from "react-router-dom";
 import { FaRegUserCircle } from "react-icons/fa";
 import { BiLogOut } from "react-icons/bi";
-import React from "react";
+import React, { FC } from "react";
 /**
  * Internal Dependencies
  */
@@ -16,13 +16,14 @@ import NormalText from "~/components/ui/normal-text";
 import { EDU_MANAGER_TOKENS } from "~/styles/token";
 import { logout } from "../auth/login/login.slice";
 
-const ProfilePopoverContent = () => {
+const ProfilePopoverContent:FC<{setOpen:(x:boolean)=>void}> = ({setOpen}) => {
   const { role }: Record<string, string> = getFromLocalStorage(USER) || {};
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   
   const handleLogout = () => {
     dispatch(logout());
+    setOpen(false);
     navigate("/login");
     notification.success({
       message: "logout successfully",
@@ -52,7 +53,7 @@ const ProfilePopoverContent = () => {
           {
             key: "profile",
             label: (
-              <Flex>
+              <Flex onClick={()=>setOpen(false)}>
                 {/* profile link */}
                 <Link
                   to={`/${role.toLowerCase()}/profile`}
