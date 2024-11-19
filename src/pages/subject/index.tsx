@@ -14,10 +14,11 @@ import { Flex } from "antd";
  * Internal Dependencies
  */
 
+import EditSubjectModal from "~/features/subject/components/edit-subject-modal";
+import AddSubjectModal from "~/features/subject/components/add-subject-modal";
 import { subjectsBreadCrumbItems } from "~/features/subject/subject.constant"; 
-import { resetQuery, setModalName, setQuery } from "~/redux/slice";
-import AddSubjectModal from "~/features/subject/add-subject-modal";
 import { MODEL_CONSTANT } from "~/common/constants/modal.constant";
+import { resetQuery, setModalName, setQuery } from "~/redux/slice";
 import SecondaryButton from "~/components/ui/secondary-button";
 import CustomDropdown from "~/components/ui/custom-dropdown";
 import { useAppDispatch } from "~/common/hooks/redux.hooks";
@@ -126,6 +127,9 @@ const SubjectListPage = () => {
 
         {/* add new subject modal */}
         <AddSubjectModal/>
+
+        {/* Edit subject modal */}
+        <EditSubjectModal/>
       </DefaultCard>
     </>
   );

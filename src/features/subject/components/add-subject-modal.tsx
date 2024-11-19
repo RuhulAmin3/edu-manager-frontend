@@ -2,7 +2,7 @@ import React from "react";
 import CustomFormItem from "~/components/form/custom-form-item";
 import CustomInput from "~/components/form/custom-input";
 import CustomModal from "~/components/ui/custom-modal";
-import { useAddSubjectMutation } from "./subject.api";
+import { useAddSubjectMutation } from "../subject.api";
 import { useForm } from "antd/es/form/Form";
 import { ModifiedErrorType } from "~/common/types/response.type";
 import useShowToastMessage from "~/common/hooks/use-show-toast-message";

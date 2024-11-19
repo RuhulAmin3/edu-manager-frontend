@@ -41,13 +41,10 @@ export const antTheme:ThemeConfig ={
         headerBorderRadius:0,
         headerSortHoverBg:EDU_MANAGER_TOKENS.colors["edu-secondary"],
         headerSortActiveBg:EDU_MANAGER_TOKENS.colors["edu-secondary"],
+        
       }, 
       Form:{
         labelRequiredMarkColor:EDU_MANAGER_TOKENS.colors["edu-danger"], 
-      },
-
-      Pagination:{
-        // itemActiveBg:EDU_MANAGER_TOKENS.colors["edu-primary"]
-      }
+      }, 
     },
   }

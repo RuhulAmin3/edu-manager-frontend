@@ -64,7 +64,7 @@ const LayoutHeader: FC<PropsWithChildren> = ({ ...props }) => {
             arrow={false} 
           >
             {/* popover button */}
-            <CustomAvatar size="large" shape="square" icon={<UserOutlined />} onClick={()=>setOpen(true)}/>
+            <CustomAvatar size="large" shape="square" icon={<UserOutlined />} onClick={()=>setOpen(!open)}/>
           </Popover>
         </Flex>
       </Flex>

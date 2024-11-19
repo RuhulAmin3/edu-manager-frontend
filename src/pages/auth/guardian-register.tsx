@@ -1,5 +1,7 @@
+import ComingSoon from "~/components/ui/comming-soon";
+
 const GuardianRegisterPage = () => {
-  return <div>GuardianRegisterPage</div>;
+  return <ComingSoon/>
 };
 
 export default GuardianRegisterPage;
