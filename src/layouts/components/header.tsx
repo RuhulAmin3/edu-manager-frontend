@@ -4,7 +4,7 @@
 import { RxHamburgerMenu } from "react-icons/rx";
 import { UserOutlined } from "@ant-design/icons";
 import { GoScreenFull } from "react-icons/go";
-import { FC, PropsWithChildren } from "react";
+import { FC, PropsWithChildren, useState } from "react";
 import { MdLightMode } from "react-icons/md";
 import { IoIosAdd } from "react-icons/io";
 
@@ -26,7 +26,7 @@ import ProfilePopoverContent from "~/features/profile/profile-popover-content";
 const LayoutHeader: FC<PropsWithChildren> = ({ ...props }) => {
   const isscrolled = useScrollPosition();
   const isMobile = useScreenSize();
-
+  const [open, setOpen] = useState(false);
   return (
     <CustomHeader isscrolled={isscrolled} {...props}>
       <Flex align="center" justify="space-between">
@@ -55,13 +55,16 @@ const LayoutHeader: FC<PropsWithChildren> = ({ ...props }) => {
           <CustomAvatar size="large" shape="square" icon={<MdLightMode />} />
 
           <Popover 
+            open={open}
+            onOpenChange={(val) => setOpen(val)}
+            destroyTooltipOnHide
             overlayClassName="profile-popover"
-            content={<ProfilePopoverContent />}
+            content={<ProfilePopoverContent setOpen={setOpen} />}
             trigger="click"
-            arrow={false}
+            arrow={false} 
           >
             {/* popover button */}
-            <CustomAvatar size="large" shape="square" icon={<UserOutlined />} />
+            <CustomAvatar size="large" shape="square" icon={<UserOutlined />} onClick={()=>setOpen(true)}/>
           </Popover>
         </Flex>
       </Flex>
