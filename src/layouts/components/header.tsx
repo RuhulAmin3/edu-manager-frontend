@@ -2,12 +2,13 @@
  *  External Dependency
  */
 import { RxHamburgerMenu } from "react-icons/rx";
-import { UserOutlined } from "@ant-design/icons"; 
+import { UserOutlined } from "@ant-design/icons";
 import { GoScreenFull } from "react-icons/go";
 import { FC, PropsWithChildren } from "react";
 import { MdLightMode } from "react-icons/md";
 import { IoIosAdd } from "react-icons/io";
-import { Flex } from "antd";
+
+import { Flex, Popover } from "antd";
 
 /**
  * Internal Dependency
@@ -20,7 +21,7 @@ import NormalText from "../../components/ui/normal-text";
 import { EDU_MANAGER_TOKENS } from "../../styles/token";
 import CustomAvatar from "../../components/ui/avatar";
 import { CustomHeader } from "../layout.style";
-
+import ProfilePopoverContent from "~/features/profile/profile-popover-content";
 
 const LayoutHeader: FC<PropsWithChildren> = ({ ...props }) => {
   const isscrolled = useScrollPosition();
@@ -52,7 +53,16 @@ const LayoutHeader: FC<PropsWithChildren> = ({ ...props }) => {
           />
           {/* <CustomAvatar size="large" shape="square" icon={<CiDark />} /> */}
           <CustomAvatar size="large" shape="square" icon={<MdLightMode />} />
-          <CustomAvatar size="large" shape="square" icon={<UserOutlined />} />
+
+          <Popover 
+            overlayClassName="profile-popover"
+            content={<ProfilePopoverContent />}
+            trigger="click"
+            arrow={false}
+          >
+            {/* popover button */}
+            <CustomAvatar size="large" shape="square" icon={<UserOutlined />} />
+          </Popover>
         </Flex>
       </Flex>
     </CustomHeader>

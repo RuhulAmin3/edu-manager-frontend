@@ -15,8 +15,9 @@ const AddSubjectModal = () => {
   const modalName = useAppSelector(
     (state: RootState) => state.defaultState.modalName
   );
+  
   const dispatch = useAppDispatch();
-  const [addSubject, result] = useAddSubjectMutation();
+  const [addSubject, {isError, isSuccess, error, isLoading}] = useAddSubjectMutation();
   const [form] = useForm();
   const handleSubmit = (values: Record<string, string>) => {
     addSubject(values);
@@ -27,19 +28,19 @@ const AddSubjectModal = () => {
     form.resetFields();
   };
 
-  useShowToastMessage(
-    result.isError,
-    result.isSuccess,
-    result.error as ModifiedErrorType,
-    "Subject Added successfully",
-    afterSubmit
-  );
+  useShowToastMessage({
+    isError: isError,
+    isSuccess:isSuccess,
+    error:error as ModifiedErrorType,
+    successMessage: "Subject Added successfully",
+   cb: afterSubmit
+  })
 
   return (
     <CustomModal
       visible={MODEL_CONSTANT.ADD_SUBJECT == modalName}
       onSubmit={handleSubmit}
-      loading={result.isLoading}
+      loading={isLoading}
       title="Add Subject"
       okText="Add Subject"
       onCancel={() => dispatch(resetModalName())}

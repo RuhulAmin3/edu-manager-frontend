@@ -1,4 +1,4 @@
-import { Layout } from "antd";
+import { Layout} from "antd";
 import styled from "styled-components";
 import { EDU_MANAGER_TOKENS } from "~/styles/token";
 
@@ -73,3 +73,4 @@ export const CustomHeader = styled(Header)<{ isscrolled: boolean }>`
   z-index: 1000;
 }
 `;
+

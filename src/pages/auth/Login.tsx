@@ -54,13 +54,13 @@ const LoginPage = () => {
     navigate(`/${decodedToken?.role.toLowerCase()}`, { replace: true });
   };
 
-  useShowToastMessage(
-    isError,
-    isSuccess,
-    error,
-    "Login Successful",
-    afterHandleSubmit
-  );
+useShowToastMessage({
+    isError: isError,
+    isSuccess: isSuccess,
+    error: error,
+    successMessage: "Login Successful",
+    cb: afterHandleSubmit,
+  });
 
   return (
     <LoginStyle.Wrapper>

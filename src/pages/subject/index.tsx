@@ -91,6 +91,7 @@ const SubjectListPage = () => {
               <DownOutlined size={2} />
             </SecondaryButton>
           </CustomDropdown>
+          
           <PrimaryButton style={{ padding: "18px 10px" }} onClick={()=>dispatch(setModalName(MODEL_CONSTANT.ADD_SUBJECT))}>
             {" "}
             <FaPlusSquare /> Add Subject

@@ -117,7 +117,7 @@ const ExamQuantityChart = () => {
         </NormalText>
 
         {/* Fiter box content with popover  */}
-        <Popover
+        <Popover 
           open={open}
           onOpenChange={(val) => setOpen(val)}
           placement="bottomRight"

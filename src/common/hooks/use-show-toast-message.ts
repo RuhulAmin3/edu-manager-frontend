@@ -1,23 +1,39 @@
 /* eslint-disable react-hooks/exhaustive-deps */
+/**
+ * External Dependencies
+ */
 import { useEffect } from "react";
-import { ModifiedErrorType } from "../types/response.type";
-import { App } from "antd"; 
+import { App } from "antd";
 
-function useShowToastMessage(
-  isError: boolean,
-  isSuccess: boolean,
-  error: ModifiedErrorType | undefined,
-  successMessage: string,
-  cb?: () => void
-) {
+/**
+ * Internal Dependencies
+ */
+import { ModifiedErrorType } from "../types/response.type";
+
+type ShowToastProps = {
+  isError?: boolean;
+  isSuccess?: boolean;
+  error?: ModifiedErrorType | undefined;
+  successMessage?: string;
+  cb?: () => void;
+};
+
+const useShowToastMessage = ({
+  isError,
+  isSuccess,
+  error,
+  successMessage,
+  cb,
+}: ShowToastProps): void => {
   const { notification } = App.useApp();
+
   useEffect(() => {
-    if (isError && error != undefined) {
+    if (isError && error !== undefined) {
       const { data } = error;
       if (Array.isArray(data)) {
         data.forEach((msg) =>
           notification.error({
-            message: msg,
+            message: msg || "Something is wrong!!",
             pauseOnHover: true,
             duration: 2,
             type: "error",
@@ -37,15 +53,15 @@ function useShowToastMessage(
 
     if (isSuccess) {
       notification.success({
-        message: successMessage,
+        message: successMessage || "Operation Successful",
         pauseOnHover: true,
         duration: 2,
         type: "success",
         showProgress: true,
       });
-      if (cb != undefined) cb();
+      if (cb) cb();
     }
-  }, [error, isError, isSuccess, notification, successMessage]);
-}
+  }, [error, isError, isSuccess, successMessage, notification]);
+};
 
 export default useShowToastMessage;

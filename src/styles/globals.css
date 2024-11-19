@@ -101,3 +101,8 @@ h6 {
 .ant-form-item-explain-error {
   color:var(--edu-form-invalid-border-color) !important;
 }
+
+.profile-popover{
+  min-width:250px !important;
+  left:1250px !important;
+}
