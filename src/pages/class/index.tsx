@@ -1,26 +1,33 @@
-import { Flex } from "antd";
+/**
+ * External Dependencies
+*/
 import { BsFiletypeXlsx, BsPrinter } from "react-icons/bs";
-import { FaPlusSquare } from "react-icons/fa";
-import { useAppDispatch } from "~/common/hooks/redux.hooks";
-import CustomInput from "~/components/form/custom-input";
-import CustomAvatar from "~/components/ui/avatar";
-import CustomBreadCrumb from "~/components/ui/bread-crumb";
-import DefaultCard from "~/components/ui/default-card";
-import NormalText from "~/components/ui/normal-text";
-import PrimaryButton from "~/components/ui/primary-button";
-import RefreshButton from "~/components/ui/refresh-button";
-import { classBreadCrumbItems } from "~/features/class/class.constant";
-import { MODEL_CONSTANT } from "~/common/constants/modal.constant";
-import { useState, useEffect } from "react";
-import { setModalName, setQuery, resetQuery } from "~/redux/slice";
-import useDebounce from "~/common/hooks/use-debounce";
-import ClassList from "~/features/class/class-list";
-import AddClassModal from "~/features/class/components/add-class-modal";
-import CustomDropdown from "~/components/ui/custom-dropdown";
-import { GrDocumentPdf } from "react-icons/gr";
-import SecondaryButton from "~/components/ui/secondary-button";
 import { BiSolidFileExport } from "react-icons/bi";
 import { DownOutlined } from "@ant-design/icons";
+import { GrDocumentPdf } from "react-icons/gr";
+import { FaPlusSquare } from "react-icons/fa";
+import { useState, useEffect } from "react";
+import { Flex } from "antd";
+
+/**
+ * Internal Dependencies
+*/
+import { classBreadCrumbItems } from "~/features/class/class.constant";
+import AddClassModal from "~/features/class/components/add-class-modal";
+import { MODEL_CONSTANT } from "~/common/constants/modal.constant";
+import { setModalName, setQuery, resetQuery } from "~/redux/slice";
+import SecondaryButton from "~/components/ui/secondary-button";
+import CustomDropdown from "~/components/ui/custom-dropdown";
+import { useAppDispatch } from "~/common/hooks/redux.hooks";
+import CustomBreadCrumb from "~/components/ui/bread-crumb";
+import PrimaryButton from "~/components/ui/primary-button";
+import RefreshButton from "~/components/ui/refresh-button";
+import CustomInput from "~/components/form/custom-input";
+import DefaultCard from "~/components/ui/default-card";
+import useDebounce from "~/common/hooks/use-debounce";
+import NormalText from "~/components/ui/normal-text";
+import ClassList from "~/features/class/class-list";
+import CustomAvatar from "~/components/ui/avatar";
 
 const ClassListPage = () => {
   const dispatch = useAppDispatch();

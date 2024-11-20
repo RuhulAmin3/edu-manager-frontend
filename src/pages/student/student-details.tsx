@@ -1,17 +1,24 @@
-import { DownOutlined } from "@ant-design/icons";
-import { Flex } from "antd";
-import { BiSolidFileExport } from "react-icons/bi";
+/**
+ * External Dependencies
+*/
 import { BsFiletypeXlsx, BsPrinter } from "react-icons/bs";
-import { FaPlusSquare } from "react-icons/fa";
+import { BiSolidFileExport } from "react-icons/bi";
+import { DownOutlined } from "@ant-design/icons";
 import { GrDocumentPdf } from "react-icons/gr";
-import { USER } from "~/common/constants/local-storage.constant";
+import { FaPlusSquare } from "react-icons/fa";
+import { Flex } from "antd";
+/*
+ * Internal Dependencies
+*/
 import { getFromLocalStorage } from "~/common/utils/local-storage.utils";
-import CustomAvatar from "~/components/ui/avatar";
-import CustomBreadCrumb from "~/components/ui/bread-crumb";
+import { USER } from "~/common/constants/local-storage.constant";
+import SecondaryButton from "~/components/ui/secondary-button";
 import CustomDropdown from "~/components/ui/custom-dropdown";
+import CustomBreadCrumb from "~/components/ui/bread-crumb";
 import PrimaryButton from "~/components/ui/primary-button";
 import RefreshButton from "~/components/ui/refresh-button";
-import SecondaryButton from "~/components/ui/secondary-button";
+import CustomAvatar from "~/components/ui/avatar";
+
 
 const StudentDetailsPage = () => {
   const { role }: Record<string, string> = getFromLocalStorage(USER) || {};
