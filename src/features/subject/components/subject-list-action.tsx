@@ -36,17 +36,17 @@ const SubjectListAction: FC<{ id: string }> = ({ id }) => {
     if (!skip) refetch();
   };
 
-  const handleOpenEditModal = (id: string) => {
-    dispatch(setEditId(id));
-    dispatch(setModalName(MODEL_CONSTANT.EDIT_SUBJECT));
-  };
-
   // set into redux store 
   useEffect(() => {
     if (isSuccess && !isFetching) {
       dispatch(setFormInitialValues(data?.data));
     }
   }, [isSuccess, isFetching, dispatch, data]);
+
+  const handleOpenEditModal = (id: string) => {
+    dispatch(setEditId(id));
+    if(isSuccess) dispatch(setModalName(MODEL_CONSTANT.EDIT_SUBJECT));
+  };
 
   // delete functinality
   const handleDelete = (id: string) => {
