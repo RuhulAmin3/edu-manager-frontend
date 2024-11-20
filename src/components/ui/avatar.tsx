@@ -1,17 +1,14 @@
 import { Avatar, AvatarProps } from "antd";
 import { FC } from "react";
 import styled from "styled-components";
-import { EDU_MANAGER_TOKENS } from "../../styles/token";
-import useScrollPosition from "../../common/hooks/use-scroll-position";
+import { EDU_MANAGER_TOKENS } from "../../styles/token"; 
 
-const ModifiedAvatar = styled(Avatar)<{ isscrolled: boolean }>`
+const ModifiedAvatar = styled(Avatar)`
   background: ${EDU_MANAGER_TOKENS.colors["edu-white"]};
   color: ${EDU_MANAGER_TOKENS.colors["edu-secondary"]};
   border: 1px solid ${EDU_MANAGER_TOKENS.colors["edu-border-color"]};
   padding: 10px !important;
   cursor: pointer;
-  box-shadow: ${(props) =>
-    props.isscrolled && EDU_MANAGER_TOKENS.shadow["edu-card-shadow"]};
   &:hover {
     background: ${EDU_MANAGER_TOKENS.colors["edu-secondary"]};
     color: ${EDU_MANAGER_TOKENS.colors["edu-white"]};
@@ -19,9 +16,8 @@ const ModifiedAvatar = styled(Avatar)<{ isscrolled: boolean }>`
   }
 `;
 
-const CustomAvatar: FC<AvatarProps> = (props) => {
-  const isScrolled = useScrollPosition();
-  return <ModifiedAvatar isscrolled={isScrolled} {...props} />;
+const CustomAvatar: FC<AvatarProps> = (props) => { 
+  return <ModifiedAvatar {...props} />;
 };
 
 export default CustomAvatar;
