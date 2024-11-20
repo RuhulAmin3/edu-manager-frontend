@@ -1,64 +1,58 @@
+/**
+ * External Dependencies
+*/
+import { useAppDispatch, useAppSelector } from "~/common/hooks/redux.hooks";
+import useShowToastMessage from "~/common/hooks/use-show-toast-message";
+import { resetFormInitialValues, resetModalName } from "~/redux/slice";
+import { MODEL_CONSTANT } from "~/common/constants/modal.constant";
+import { ModifiedErrorType } from "~/common/types/response.type";
 import CustomFormItem from "~/components/form/custom-form-item";
 import CustomInput from "~/components/form/custom-input";
-import CustomModal from "~/components/ui/custom-modal";
-import { useForm } from "antd/es/form/Form";
-import { ModifiedErrorType } from "~/common/types/response.type";
-import useShowToastMessage from "~/common/hooks/use-show-toast-message";
-import { MODEL_CONSTANT } from "~/common/constants/modal.constant";
-import { useAppDispatch, useAppSelector } from "~/common/hooks/redux.hooks";
+import { useEditSubjectMutation } from "../subject.api"; 
+import CustomModal from "~/components/ui/custom-modal"; 
 import { RootState } from "~/redux/store";
-import { resetEditId, resetModalName } from "~/redux/slice";
-import { useEditSubjectMutation, useGetSubjectQuery } from "../subject.api";
-import { useEffect, useState } from "react";
+
 
 const EditSubjectModal = () => {
-  const dispatch = useAppDispatch();
-  const [form] = useForm();
-  const { editId: id, modalName } = useAppSelector(
-    (state: RootState) => state.defaultState
-  );
-  const subjectData = useGetSubjectQuery(id, {
-    skip: !id,
-  });
+  const dispatch = useAppDispatch(); 
 
-  const [initialValues, setInitialValues] = useState({});
+  const { editId:id, formInitialValues, modalName } = useAppSelector(
+  (state: RootState) => state.defaultState
+  );
+
   const [editSubject, { isError, isSuccess, error, isLoading }] =
     useEditSubjectMutation();
 
   const handleSubmit = (values: Record<string, string>) => {
-    editSubject({ id, values });
+    editSubject({ id, data:values });
   };
 
-  const handleCancel = () => {
-    dispatch(resetEditId());
+  const handleCancel = () => { 
     dispatch(resetModalName());
   };
 
   const afterSubmit = () => {
-    dispatch(resetModalName());
-    dispatch(resetEditId());
-    form.resetFields();
+    dispatch(resetModalName());  
+    dispatch(resetFormInitialValues());
   };
+  
+  const afterOpenChange = ()=>{ 
+    dispatch(resetFormInitialValues())
+  }
 
-  useEffect(() => {
-    if (subjectData.isSuccess) {
-      setInitialValues(subjectData?.data?.data);
-    }
-  }, [subjectData.data, subjectData.isSuccess, subjectData.isFetching]);
-
-  console.log("data", subjectData?.data?.data);
-  console.log("initialValues", initialValues);
   useShowToastMessage({
     isError: isError,
     isSuccess: isSuccess,
     error: error as ModifiedErrorType,
-    successMessage: "Subject Edited successfully",
+    successMessage: "Subject updated successfully",
     cb: afterSubmit,
   });
 
   return (
     <CustomModal 
-      initialValues={initialValues}
+      initialValues={formInitialValues} 
+      destroyOnClose
+      afterOpenChange={afterOpenChange}
       visible={MODEL_CONSTANT.EDIT_SUBJECT == modalName}
       onSubmit={handleSubmit}
       loading={isLoading}

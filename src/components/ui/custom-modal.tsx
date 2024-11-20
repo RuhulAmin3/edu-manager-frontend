@@ -36,10 +36,10 @@ const CustomModal: FC<PropsWithChildren<CustomModalProps>> = ({
       console.error("Validation Failed:", error);
     }
   };
+  
   return (
     <Modal
-      {...props}
-      loading={loading}
+      {...props} 
       open={visible}
       title={
         <>
@@ -55,7 +55,7 @@ const CustomModal: FC<PropsWithChildren<CustomModalProps>> = ({
         <Button key="cancel" onClick={onCancel}>
           {cancelText}
         </Button>,
-        <PrimaryButton key="submit" onClick={handleOk} disabled={loading}>
+        <PrimaryButton key="submit" onClick={handleOk} disabled={loading} htmlType="submit">
           {loading && <LoadingSpin fontSize={12} color="white" size="small" />}{" "}
           {okText}
         </PrimaryButton>,

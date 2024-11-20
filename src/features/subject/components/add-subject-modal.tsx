@@ -1,15 +1,22 @@
+/**
+ * Internal Dependencies
+*/
+import { useForm } from "antd/es/form/Form";
 import React from "react";
+
+/**
+ * Internal Dependencies
+*/
+import { useAppDispatch, useAppSelector } from "~/common/hooks/redux.hooks";
+import useShowToastMessage from "~/common/hooks/use-show-toast-message";
+import { MODEL_CONSTANT } from "~/common/constants/modal.constant";
+import { ModifiedErrorType } from "~/common/types/response.type";
 import CustomFormItem from "~/components/form/custom-form-item";
 import CustomInput from "~/components/form/custom-input";
 import CustomModal from "~/components/ui/custom-modal";
 import { useAddSubjectMutation } from "../subject.api";
-import { useForm } from "antd/es/form/Form";
-import { ModifiedErrorType } from "~/common/types/response.type";
-import useShowToastMessage from "~/common/hooks/use-show-toast-message";
-import { MODEL_CONSTANT } from "~/common/constants/modal.constant";
-import { useAppDispatch, useAppSelector } from "~/common/hooks/redux.hooks";
-import { RootState } from "~/redux/store";
 import { resetModalName } from "~/redux/slice";
+import { RootState } from "~/redux/store";
 
 const AddSubjectModal = () => {
   const modalName = useAppSelector(

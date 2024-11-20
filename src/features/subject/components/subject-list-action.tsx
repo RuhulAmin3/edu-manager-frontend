@@ -1,25 +1,39 @@
-import { DeleteOutlined } from "@ant-design/icons";
-import React, { FC } from "react";
+/**
+ * External Dependencies
+*/
+import React, { FC, useEffect, useState } from "react";
 import { BsThreeDotsVertical } from "react-icons/bs";
+import { DeleteOutlined } from "@ant-design/icons";
 import { TbEditCircle } from "react-icons/tb";
-import { styles } from "~/common/styles";
-import CustomDropdown from "~/components/ui/custom-dropdown";
-import SecondaryButton from "~/components/ui/secondary-button";
-import { EDU_MANAGER_TOKENS } from "~/styles/token";
-import { useDeleteSubjectMutation } from "../subject.api";
+
+/**
+ * Internal Dependencies
+*/
+import { setEditId, setFormInitialValues, setModalName } from "~/redux/slice";
+import { useDeleteSubjectMutation, useGetSubjectQuery } from "../subject.api";
 import useShowToastMessage from "~/common/hooks/use-show-toast-message";
+import { MODEL_CONSTANT } from "~/common/constants/modal.constant";
 import { ModifiedErrorType } from "~/common/types/response.type";
+import SecondaryButton from "~/components/ui/secondary-button";
+import CustomDropdown from "~/components/ui/custom-dropdown";
 import { useAppDispatch } from "~/common/hooks/redux.hooks";
-import { setEditId, setModalName } from "~/redux/slice";
-import { MODEL_CONSTANT } from "~/common/constants/modal.constant"; 
+import { EDU_MANAGER_TOKENS } from "~/styles/token";
+import { styles } from "~/common/styles";
 
-const SubjectListAction: FC<{ id:string }> = ({ id }) => {
+const SubjectListAction: FC<{ id: string }> = ({ id }) => {
   const dispatch = useAppDispatch();
-  const [deleteSubject, { isError, isSuccess, error }] =
-    useDeleteSubjectMutation();
+  const [skip, setSkip] = useState(true);
 
-  const handleDelete = (id: string) => {
-    deleteSubject(id);
+  const [deleteSubject, res] = useDeleteSubjectMutation();
+  const { data, isSuccess, isFetching, refetch } = useGetSubjectQuery(id, {
+    skip: skip,
+  });
+
+  // Edit functinality
+  const handleGetData = () => {
+    dispatch(setEditId(id));
+    setSkip(false);
+    if (!skip) refetch();
   };
 
   const handleOpenEditModal = (id: string) => {
@@ -27,10 +41,22 @@ const SubjectListAction: FC<{ id:string }> = ({ id }) => {
     dispatch(setModalName(MODEL_CONSTANT.EDIT_SUBJECT));
   };
 
+  // set into redux store 
+  useEffect(() => {
+    if (isSuccess && !isFetching) {
+      dispatch(setFormInitialValues(data?.data));
+    }
+  }, [isSuccess, isFetching, dispatch, data]);
+
+  // delete functinality
+  const handleDelete = (id: string) => {
+    deleteSubject(id);
+  };
+
   useShowToastMessage({
-    isError,
-    isSuccess,
-    error: error as ModifiedErrorType,
+    isError: res.isError,
+    isSuccess: res.isSuccess,
+    error: res.error as ModifiedErrorType,
     successMessage: "Subject deleted successfully",
   });
 
@@ -64,10 +90,10 @@ const SubjectListAction: FC<{ id:string }> = ({ id }) => {
           },
         ]}
       >
-        <SecondaryButton>
+        <SecondaryButton onClick={handleGetData}>
           <BsThreeDotsVertical />
         </SecondaryButton>
-    </CustomDropdown> 
+      </CustomDropdown>
     </>
   );
 };

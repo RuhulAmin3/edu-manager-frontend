@@ -1,4 +1,5 @@
-export function groupByMonth(data) {
+/* eslint-disable @typescript-eslint/no-explicit-any */
+export function groupByMonth(data: any[]) {
   const grouped = data?.reduce((acc, current) => {
     const month = current?.month;
 

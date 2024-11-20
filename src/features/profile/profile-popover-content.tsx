@@ -1,7 +1,7 @@
 /**
  * External Dependencies
  */
-import { Avatar, Flex, Menu, notification } from "antd";
+import { Avatar, Flex, notification } from "antd";
 import { Link, useNavigate } from "react-router-dom";
 import { FaRegUserCircle } from "react-icons/fa";
 import { BiLogOut } from "react-icons/bi";
@@ -15,6 +15,7 @@ import { useAppDispatch } from "~/common/hooks/redux.hooks";
 import NormalText from "~/components/ui/normal-text";
 import { EDU_MANAGER_TOKENS } from "~/styles/token";
 import { logout } from "../auth/login/login.slice";
+import CustomMenu from "~/layouts/components/menu";
 
 const ProfilePopoverContent:FC<{setOpen:(x:boolean)=>void}> = ({setOpen}) => {
   const { role }: Record<string, string> = getFromLocalStorage(USER) || {};
@@ -48,7 +49,7 @@ const ProfilePopoverContent:FC<{setOpen:(x:boolean)=>void}> = ({setOpen}) => {
           </NormalText>
         </div>
       </Flex>{" "}
-      <Menu
+      <CustomMenu
         items={[
           {
             key: "profile",
