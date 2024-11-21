@@ -8,8 +8,7 @@ import { DownOutlined } from "@ant-design/icons";
 import { GrDocumentPdf } from "react-icons/gr";
 import { FaPlusSquare } from "react-icons/fa";
 import { useState, useEffect } from "react";
-import { CiFilter } from "react-icons/ci";
-import { Link } from "react-router-dom";
+import { CiFilter } from "react-icons/ci"; 
 import { Flex, Popover } from "antd";
 
 /**
@@ -17,11 +16,9 @@ import { Flex, Popover } from "antd";
  */
   
 import GuardianFilterPopoverContent from "~/features/guardian/components/guardian-filter-popover-content";
-import { GuardianListBreadCrumbItems } from "~/features/guardian/guardian.constant";
-import { getFromLocalStorage } from "~/common/utils/local-storage.utils";
+import { GuardianListBreadCrumbItems } from "~/features/guardian/guardian.constant"; 
 import MultipleViewButtons from "~/components/ui/multiple-view-buttons";  
-import AdminGuardianList from "~/features/guardian/admin-guardian-list";
-import { USER } from "~/common/constants/local-storage.constant";
+import AdminGuardianList from "~/features/guardian/admin-guardian-list"; 
 import SecondaryButton from "~/components/ui/secondary-button";
 import CustomDropdown from "~/components/ui/custom-dropdown";
 import { useAppDispatch } from "~/common/hooks/redux.hooks";
@@ -37,8 +34,7 @@ import CustomAvatar from "~/components/ui/avatar";
 
  
 
-const GuardianListPage = () => {
-  const {role }:Record<string, string> = getFromLocalStorage(USER) || {};
+const GuardianListPage = () => { 
   const dispatch = useAppDispatch();
   const [cardView, setCardView] = useState(false);
   const [popoverOpen, setPopoverOpen] = useState(false);

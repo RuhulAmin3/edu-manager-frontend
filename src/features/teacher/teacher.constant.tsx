@@ -25,7 +25,6 @@ export const columns: TableProps["columns"] = [
             name: { firstName: string; middleName?: string; lastName: string };
             image: string;
           }) || {};
-  
         return (
           <Flex gap={4} align="center" >
             <Avatar src={image} /> 
