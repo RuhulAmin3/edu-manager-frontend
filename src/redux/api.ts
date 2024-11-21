@@ -20,6 +20,7 @@ import {
   getFromLocalStorage,
   saveToLocalStorage,
 } from "../common/utils/local-storage.utils";
+import { tagTypes } from "./tag-types";
 
 const baseQuery = fetchBaseQuery({
   // baseUrl: "https://edu-manager-server.vercel.app/api/v1/",
@@ -76,5 +77,5 @@ export const rootApi = createApi({
   reducerPath: "api",
   baseQuery: baseQueryWithReauth,
   endpoints: () => ({}),
-  tagTypes:["subject", "class", 'student', "teacher", "guardian", "exam", "exam-result", "expense", "fee"]
+  tagTypes:tagTypes
 });

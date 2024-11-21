@@ -12,7 +12,7 @@ import AdminTopCard from "./admin-top-card";
 import { EDU_MANAGER_TOKENS } from "../../../styles/token";
 import { useGetAllStudentsQuery } from "../../student/student.api";
 import { useGetAllTeachersQuery } from "../../teacher/teacher.api";
-import { useGetAllGuardianQuery } from "../../guardian/guardian.api";
+import { useGetAllGuardiansQuery } from "../../guardian/guardian.api";
 import { useGetAllSubjectsQuery } from "../../subject/subject.api";
 
 const AdminRowCards = () => {
@@ -21,7 +21,7 @@ const AdminRowCards = () => {
   const { data: teacherData, isLoading: isLoadingTeachers } =
     useGetAllTeachersQuery({});
   const { data: guardianData, isLoading: isLoadingGuardians } =
-    useGetAllGuardianQuery({});
+  useGetAllGuardiansQuery({});
   const { data: subjectsData, isLoading: isLoadingSubjects } =
     useGetAllSubjectsQuery({});
 

@@ -10,7 +10,7 @@ import { setQuery } from "~/redux/slice";
 const AdminStudentList = () => {
   const query = useAppSelector((state: RootState) => state.defaultState.query);
   const dispatch = useAppDispatch();
-  const { data: classData, isLoading } = useGetAllStudentsQuery(query);
+  const { data: classData, isFetching } = useGetAllStudentsQuery(query);
   const { data, meta } = classData || {};
 
   const dataSource = data?.map((sub: Record<string, string | number>) => ({
@@ -41,7 +41,7 @@ const AdminStudentList = () => {
       onTableChange={onTableChange}
       dataSource={dataSource}
       columns={columns}
-      loading={isLoading} 
+      loading={isFetching} 
     />
   );
 };

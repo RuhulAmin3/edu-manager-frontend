@@ -15,7 +15,7 @@ import CustomSelect from "~/components/form/custom-select";
 import { bloodGroupSelectList } from "~/common/constants";
 import { setQuery } from "~/redux/slice";
 
-const TeacherFilterPopoverContent: FC<{
+const GuardianFilterPopoverContent: FC<{
   setPopoverOpen: (x: boolean) => void;
 }> = ({ setPopoverOpen }) => {
   const dispatch = useAppDispatch();
@@ -43,16 +43,16 @@ const TeacherFilterPopoverContent: FC<{
         <CustomFormItem
           style={{ width: "100%", marginBottom: 0 }}
           layout="vertical"
-          label="Type"
-          name="type"
+          label="Account Status"
+          name="accountStatus"
         >
           <CustomSelect
             size="large"
             placeholder="Select"
             options={[
-              { label: "Monthly", value: "Monthly" },
-              { label: "Contractual", value: "Contractual" },
-              { label: "Daily", value: "Daily" },
+              { label: "Pending", value: "Pending" },
+              { label: "Approved", value: "Approved" },
+              { label: "Block", value: "Block" },
             ]}
           />
         </CustomFormItem>
@@ -81,4 +81,4 @@ const TeacherFilterPopoverContent: FC<{
   );
 };
 
-export default TeacherFilterPopoverContent;
+export default GuardianFilterPopoverContent;

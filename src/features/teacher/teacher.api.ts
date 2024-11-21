@@ -22,7 +22,7 @@ const teacherApi = rootApi.injectEndpoints({
     // Add a teacher
     addTeacher: builder.mutation({
       query: (data) => ({
-        url: "/teacher",
+        url: "/user/teacher",
         method: "POST",
         body: data,
       }),

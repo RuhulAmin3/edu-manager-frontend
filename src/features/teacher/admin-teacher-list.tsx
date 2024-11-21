@@ -1,16 +1,15 @@
-
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useAppDispatch, useAppSelector } from "~/common/hooks/redux.hooks";
 import CustomTable from "~/components/table/custom-table"; 
-import { RootState } from "~/redux/store";  
-import { setQuery } from "~/redux/slice"; 
 import { useGetAllTeachersQuery } from "./teacher.api";
 import { columns } from "./teacher.constant";
+import { RootState } from "~/redux/store";  
+import { setQuery } from "~/redux/slice"; 
 
 const AdminTeacherList = () => {
   const query = useAppSelector((state: RootState) => state.defaultState.query);
   const dispatch = useAppDispatch();
-  const { data: TeacherData, isLoading } = useGetAllTeachersQuery(query);
+  const { data: TeacherData, isFetching } = useGetAllTeachersQuery(query);
   const { data, meta } = TeacherData || {};
 
   const dataSource = data?.map((sub: Record<string, string | number>) => ({
@@ -42,7 +41,7 @@ const AdminTeacherList = () => {
       onTableChange={onTableChange}
       dataSource={dataSource}
       columns={columns}
-      loading={isLoading} 
+      loading={isFetching} 
     />
   );
 };
