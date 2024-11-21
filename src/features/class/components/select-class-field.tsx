@@ -16,11 +16,11 @@ interface SelectClassFieldProps {
 }
 
 const SelectClassField: FC<SelectClassFieldProps> = (props) => {
-  const { data: classOptions } = useGetAllClassQuery({});
+  const { data: classOptions } = useGetAllClassQuery({}); 
   const classListItems = classOptions?.data?.map(
     (cls: Record<string, string>) => ({
       label: cls?.className,
-      value: cls?.id,
+      value: props?.filterMode ? cls?.className : cls?.id,
     })
   );
 

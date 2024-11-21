@@ -1,22 +1,23 @@
+
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import CustomTable from "~/components/table/custom-table";
-import { useGetAllSubjectsQuery } from "./subject.api";
-import { columns } from "./subject.constant";
+import CustomTable from "~/components/table/custom-table";  
 import { useAppDispatch, useAppSelector } from "~/common/hooks/redux.hooks";
 import { RootState } from "~/redux/store";  
-import { setQuery } from "~/redux/slice";
+import { setQuery } from "~/redux/slice"; 
+import { useGetAllExamsQuery } from "./exam.api";
+import { columns } from "./exam.constant";
 
-const SubjectList = () => {
+const ExamList = () => {
   const query = useAppSelector((state: RootState) => state.defaultState.query);
   const dispatch = useAppDispatch();
-  const { data: subjectData, isFetching } = useGetAllSubjectsQuery(query);
-  const { data, meta } = subjectData || {};
+  const { data: classData, isFetching } = useGetAllExamsQuery(query);
+  const { data, meta } = classData || {};
 
   const dataSource = data?.map((sub: Record<string, string | number>) => ({
     key: sub.id,
     ...sub
-  }));
-
+  })); 
+  
   const onPaginationChange = (page:number, limit:number)=>{
       dispatch(setQuery({page, limit}));
   }
@@ -30,6 +31,7 @@ const SubjectList = () => {
     dispatch(setQuery(query));
    } 
 
+   
   return (
     <CustomTable 
       totalDoc={meta?.totalDoc}
@@ -45,4 +47,4 @@ const SubjectList = () => {
   );
 };
 
-export default SubjectList;
+export default ExamList;

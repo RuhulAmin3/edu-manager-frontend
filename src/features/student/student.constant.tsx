@@ -86,6 +86,7 @@ export const columns: TableProps["columns"] = [
     title: "Admission Year",
     dataIndex: "admissionYear",
     key: "admissionYear",
+    sorter:true,
   },
   {
     title: "Blood Group",

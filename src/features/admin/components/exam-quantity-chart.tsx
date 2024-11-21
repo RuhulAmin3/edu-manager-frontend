@@ -19,7 +19,7 @@ import CustomFormItem from "../../../components/form/custom-form-item";
 import SecondaryButton from "../../../components/ui/secondary-button";
 import PrimaryButton from "../../../components/ui/primary-button";
 import CustomSelect from "../../../components/form/custom-select";
-import { useLazyGetAllExamQuery } from "../../exam/exam.api";
+import { useLazyGetAllExamsQuery } from "../../exam/exam.api";
 import NormalText from "../../../components/ui/normal-text";
 import { EDU_MANAGER_TOKENS } from "../../../styles/token";
 import { useGetAllClassQuery } from "../../class/class.api";
@@ -40,7 +40,7 @@ const ExamQuantityChart = () => {
   const { data: classData } = useGetAllClassQuery({});
   const [defaultQuery, setDefaultQuery] = useState<Record<string, string>>({});
   const [triggerGetAllExam, { data: examData, isLoading }] =
-    useLazyGetAllExamQuery();
+    useLazyGetAllExamsQuery();
 
   const handleSubmit = useCallback(
     (value: Record<string, string>) => {
@@ -117,7 +117,7 @@ const ExamQuantityChart = () => {
         </NormalText>
 
         {/* Fiter box content with popover  */}
-        <Popover 
+        <Popover
           open={open}
           onOpenChange={(val) => setOpen(val)}
           placement="bottomRight"

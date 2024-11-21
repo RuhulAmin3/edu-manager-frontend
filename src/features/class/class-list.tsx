@@ -10,7 +10,7 @@ import { columns } from "./class.constant";
 const ClassList = () => {
   const query = useAppSelector((state: RootState) => state.defaultState.query);
   const dispatch = useAppDispatch();
-  const { data: classData, isLoading } = useGetAllClassQuery(query);
+  const { data: classData, isFetching } = useGetAllClassQuery(query);
   const { data, meta } = classData || {};
 
   const dataSource = data?.map((sub: Record<string, string | number>) => ({
@@ -42,7 +42,7 @@ const ClassList = () => {
       onTableChange={onTableChange}
       dataSource={dataSource}
       columns={columns}
-      loading={isLoading} 
+      loading={isFetching} 
     />
   );
 };

@@ -31,8 +31,12 @@ import useDebounce from "~/common/hooks/use-debounce";
 import NormalText from "~/components/ui/normal-text";
 import { setQuery, resetQuery } from "~/redux/slice";
 import CustomAvatar from "~/components/ui/avatar";
+import { Link } from "react-router-dom";
+import { getFromLocalStorage } from "~/common/utils/local-storage.utils";
+import { USER } from "~/common/constants/local-storage.constant";
 
 const StudentListPage = () => {
+  const {role }:Record<string, string> = getFromLocalStorage(USER) || {};
   const dispatch = useAppDispatch();
   const [cardView, setCardView] = useState(false);
   const [popoverOpen, setPopoverOpen] = useState(false);
@@ -90,10 +94,12 @@ const StudentListPage = () => {
               <DownOutlined size={2} />
             </SecondaryButton>
           </CustomDropdown>
-          <PrimaryButton style={{ padding: "18px 10px" }}>
-            {" "}
-            <FaPlusSquare /> Add Student
-          </PrimaryButton>
+          <Link to={`/${role?.toLocaleLowerCase()}/add-student`}>
+            <PrimaryButton style={{ padding: "18px 10px" }}>
+              {" "}
+              <FaPlusSquare /> Add Student
+            </PrimaryButton>
+          </Link>
         </Flex>
       </Flex>
 
@@ -125,7 +131,9 @@ const StudentListPage = () => {
               placement="bottomRight"
               trigger="click"
               arrow={false}
-              content={<StudentFilterPopoverContent setPopoverOpen={setPopoverOpen} />}
+              content={
+                <StudentFilterPopoverContent setPopoverOpen={setPopoverOpen} />
+              }
             >
               <SecondaryButton>
                 <CiFilter />
