@@ -75,11 +75,6 @@ export const sidebarItems = (role:string) => {
           key: `/${lowerCase_role}/add-student`,
           icon:<GoDot />,
         },
-        // {
-        //   label: <Link to={`/${lowerCase_role}/students/1`}>Student Details</Link>, // 1 will be replace by unique student Id
-        //   key: `/${lowerCase_role}/students/1`,
-        //   icon:<GoDot />,
-        // },
         {
           label: <Link to={`/${lowerCase_role}/student-promotion/1`}>Student Promotion</Link>, // 1 will be replace by unique student Id
           key: `/${lowerCase_role}/student-promotion/1`,
@@ -102,11 +97,6 @@ export const sidebarItems = (role:string) => {
         {
           label: <Link to={`/${lowerCase_role}/add-teacher`}>Add New Teacher</Link>,
           key: `/${lowerCase_role}/add-teacher`,
-          icon:<GoDot />,
-        },
-        {
-          label: <Link to={`/${lowerCase_role}/teachers/1`}>Teacher Details</Link>, // 1 will be replace by unique student Id
-          key: `/${lowerCase_role}/teachers/1`,
           icon:<GoDot />,
         }, 
         {

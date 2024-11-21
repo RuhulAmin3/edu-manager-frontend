@@ -1,17 +1,17 @@
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useAppDispatch, useAppSelector } from "~/common/hooks/redux.hooks";
-import CustomTable from "~/components/table/custom-table";  
-import { useGetAllStudentsQuery } from "./student.api"; 
-import { columns } from "./student.constant";
+import CustomTable from "~/components/table/custom-table"; 
 import { RootState } from "~/redux/store";  
 import { setQuery } from "~/redux/slice"; 
+import { useGetAllTeachersQuery } from "./teacher.api";
+import { columns } from "./teacher.constant";
 
-const AdminStudentList = () => {
+const AdminTeacherList = () => {
   const query = useAppSelector((state: RootState) => state.defaultState.query);
   const dispatch = useAppDispatch();
-  const { data: classData, isLoading } = useGetAllStudentsQuery(query);
-  const { data, meta } = classData || {};
+  const { data: TeacherData, isLoading } = useGetAllTeachersQuery(query);
+  const { data, meta } = TeacherData || {};
 
   const dataSource = data?.map((sub: Record<string, string | number>) => ({
     key: sub.id,
@@ -19,7 +19,7 @@ const AdminStudentList = () => {
   })); 
   
   const onPaginationChange = (page:number, limit:number)=>{
-      dispatch(setQuery({page, limit}));
+        dispatch(setQuery({page, limit}));
   }
 
   const onTableChange = (pagination:any, filter:any, sorter:any) => {  
@@ -29,7 +29,8 @@ const AdminStudentList = () => {
       sortOrder:order === "ascend" ? "asc" : "desc",
     } 
     dispatch(setQuery(query));
-   } 
+   }  
+
   return (
     <CustomTable 
       scroll={{x:"max-content"}}
@@ -46,4 +47,4 @@ const AdminStudentList = () => {
   );
 };
 
-export default AdminStudentList;
+export default AdminTeacherList;
