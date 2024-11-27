@@ -1,7 +1,7 @@
 import { ThemeConfig } from "antd";
 import { EDU_MANAGER_TOKENS } from "~/styles/token";
 
-export const antTheme:ThemeConfig ={    
+export const antTheme:ThemeConfig = {    
     token: {
       colorPrimary: EDU_MANAGER_TOKENS.colors["edu-primary"],
       colorBorder: EDU_MANAGER_TOKENS.colors["edu-border-color"],

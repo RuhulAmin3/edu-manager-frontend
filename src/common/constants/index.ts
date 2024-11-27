@@ -65,3 +65,16 @@ export const monthSelectList = [
   { label: "November", value: "November" },
   { label: "December", value: "December" },
 ];
+
+
+export const genderSelectList = [
+  { label: "Male", value: "Male" },
+  { label: "Female", value: "Female" }
+]
+
+export const studentStatusSelectList = [
+  { label: "Active", value: "Active" },
+  { label: "Inactive", value: "Inactive" },
+  { label: "Block", value: "Block" }
+]
+
