@@ -34,6 +34,7 @@ import AttendenceListPage from "~/pages/attendence";
 import AddAttendencePage from "~/pages/attendence/add-attendence";
 import NoticeListPage from "~/pages/notice";
 import LeaderboardPage from "~/pages/leaderboard";
+import EditStudentPage from "~/pages/student/edit-student";
 
 
 export const commonRoutes = [
@@ -75,8 +76,9 @@ export const adminRoutes = [
   // admin student route
   {path: "students", element:StudentListPage},
   {path: "add-student", element:AddStudentPage}, 
-  {path: "students/:id", element:StudentDetailsPage}, 
-  {path: "student-promotion/:id", element:StudentPromotionPage}, 
+  {path: "students/:id", element:StudentDetailsPage},
+  {path: "update-student/:id", element:EditStudentPage},
+  {path: "student-promotion/:id", element:StudentPromotionPage},
 
   // admin teacher route
   {path: "teachers", element:TeacherListPage},

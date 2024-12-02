@@ -20,16 +20,6 @@ const studentApi = rootApi.injectEndpoints({
       providesTags: (result, error, id) => [{ type: "student", id }],
     }),
 
-    // Add a student
-    addStudent: builder.mutation({
-      query: (data) => ({
-        url: "/user/student",
-        method: "POST",
-        body: data,
-      }),
-      invalidatesTags: ["student"], // Pessimistic update
-    }),
-
     // Update a student
     updateStudent: builder.mutation({
       query: ({ id, data }) => ({
@@ -38,7 +28,7 @@ const studentApi = rootApi.injectEndpoints({
         body: data,
       }),
       
-      invalidatesTags: (result, error, { id }) => [{ type: "student", id }], // Pessimistic update
+      invalidatesTags: (result, error, { id }) => [{ type: "student", id }, "student"], // Pessimistic update
       async onQueryStarted({ id, data }, { dispatch, queryFulfilled }) {
 
         // Optimistic Update
@@ -87,7 +77,6 @@ const studentApi = rootApi.injectEndpoints({
 export const {
   useGetAllStudentsQuery,
   useGetStudentQuery,
-  useAddStudentMutation,
   useUpdateStudentMutation,
   useDeleteStudentMutation,
 } = studentApi;

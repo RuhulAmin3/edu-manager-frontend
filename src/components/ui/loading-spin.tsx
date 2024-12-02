@@ -23,7 +23,10 @@ const CustomSpin = styled(Spin)<LoadingSpinProps>`
   }
 `;
 
-const LoadingSpin: React.FC<LoadingSpinProps> = ({ fontSize = 20, color }) => {
+const LoadingSpin: React.FC<LoadingSpinProps> = ({
+  fontSize = 20,
+  color 
+}) => {
   return (
     <CustomSpin
       indicator={

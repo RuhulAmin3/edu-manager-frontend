@@ -38,8 +38,7 @@ export const columns: TableProps["columns"] = [
     dataIndex: "subjects",
     key: "subjects",
     align: "center",
-    render: (data: string[]) => {
-      console.log("subjects", data);
+    render: (data: string[]) => { 
       return data?.length || 0;
     },
   },
