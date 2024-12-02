@@ -15,7 +15,6 @@ const StyledTextarea = styled(Input.TextArea)<CustomTextareaProps>`
   &.ant-input {
     border: 1px solid ${EDU_MANAGER_TOKENS.colors["edu-border-color"]};
     padding: ${(props) => (props.padding ? props.padding : "8px 15px")};
-    /* resize: ${(props) => (props.resize ? props.resize : "none")}; */
     transition: border-color 0.3s ease;
 
     &:focus {

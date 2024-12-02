@@ -33,9 +33,11 @@ const StyledDatePicker = styled(DatePicker)`
     }
   }
 `;
-
-const CustomDatePicker: FC<ComponentProps<typeof DatePicker>> = (props) => {
-  return <StyledDatePicker {...props} />;
+const CustomDatePicker: FC<ComponentProps<typeof DatePicker>> = ({
+  ...props
+}) => {
+  // Explicitly type props to fix type error with ref
+  return <StyledDatePicker {...(props as ComponentProps<typeof StyledDatePicker>)} />;
 };
 
 export default CustomDatePicker;
