@@ -1,22 +1,39 @@
-import { Col, Row } from "antd";
-import React from "react";
+/**
+ * External Dependencies
+ * */
+import { Col, Row, UploadFile as UploadFileProps } from "antd";
 import { CiSquareInfo } from "react-icons/ci";
+import React, { FC } from "react";
+/**
+ * Internal Dependencies
+ * */
 
+import SelectClassField from "~/features/class/components/select-class-field";
+import CustomDatePicker from "~/components/form/custom-date-picker";
+import FormSectionTopbar from "~/components/ui/form-section-topbar";
+import CustomFormItem from "~/components/form/custom-form-item";
+import CustomSelect from "~/components/form/custom-select";
+import CustomInput from "~/components/form/custom-input";
+import UploadFile from "~/components/form/upload-file";
+import DefaultCard from "~/components/ui/default-card";
 import {
   bloodGroupSelectList,
   genderSelectList,
   studentStatusSelectList,
 } from "~/common/constants";
-import CustomDatePicker from "~/components/form/custom-date-picker";
-import CustomFormItem from "~/components/form/custom-form-item";
-import CustomInput from "~/components/form/custom-input";
-import CustomSelect from "~/components/form/custom-select";
-import UploadFile from "~/components/form/upload-file";
-import DefaultCard from "~/components/ui/default-card";
-import FormSectionTopbar from "~/components/ui/form-section-topbar";
-import SelectClassField from "~/features/class/components/select-class-field";
 
-const PersonalInformation = () => {
+const PersonalInformation: FC<{
+  initialFileList?: UploadFileProps[];
+  form?: unknown; 
+}> = ({ initialFileList, form }) => {
+  const onRemoveFile = () => {
+    if (form && typeof form === "object" && "setFieldValue" in form) {
+      (
+        form as { setFieldValue: (field: string, value: unknown) => void }
+      ).setFieldValue("image", undefined);
+    }
+  };
+
   return (
     <>
       <FormSectionTopbar title="Personal Information" icon={<CiSquareInfo />} />
@@ -25,12 +42,23 @@ const PersonalInformation = () => {
         <Row gutter={[16, 16]}>
           <Col xs={24} sm={24} md={12} lg={8} xl={6}>
             <CustomFormItem
-              name="file"
+              name="image"
               valuePropName="fileList"
-              getValueFromEvent={(e) => e.fileList}
-              rules={[{ required: true }]}
+              getValueFromEvent={(e) => {
+                if (Array.isArray(e)) {
+                  return e;
+                }
+                return e?.fileList || [];
+              }}
+              rules={[{ required: true, message: "please upload an image" }]}
             >
-              <UploadFile name="file" listType="picture" maxCount={1} />
+              <UploadFile
+                name="image"
+                listType="picture"
+                maxCount={1}
+                initialFileList={initialFileList ?? undefined}
+                onRemoveFile={onRemoveFile}
+              />
             </CustomFormItem>
           </Col>
         </Row>
