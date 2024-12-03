@@ -1,6 +1,7 @@
 /**
  * External Dependencies
 */
+import { TiLocationArrowOutline } from "react-icons/ti";
 import { MdOutlineRemoveRedEye } from "react-icons/md";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import { DeleteOutlined } from "@ant-design/icons";
@@ -11,7 +12,6 @@ import React, { FC } from "react";
 /**
  * Internal Dependencies
 */
-
 import { getFromLocalStorage } from "~/common/utils/local-storage.utils";
 import useShowToastMessage from "~/common/hooks/use-show-toast-message";
 import { ModifiedErrorType } from "~/common/types/response.type";
@@ -74,6 +74,17 @@ const AdminStudentListAction: FC<{ id: string }> = ({ id }) => {
                 <div style={styles.item}>
                   <MdOutlineRemoveRedEye style={styles.icon} />
                   <span>View Details</span>
+                </div>
+              </Link>
+            ),
+          },
+          {
+            key: "Student Promotion",
+            label: (
+              <Link to={`/${role?.toLocaleLowerCase()}/student-promotion/${id}`}>
+                <div style={styles.item}>
+                  <TiLocationArrowOutline style={styles.icon} />
+                  <span>Student Promotion</span>
                 </div>
               </Link>
             ),

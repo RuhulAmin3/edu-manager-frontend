@@ -94,6 +94,7 @@ const StudentListPage = () => {
               <DownOutlined size={2} />
             </SecondaryButton>
           </CustomDropdown>
+          
           <Link to={`/${role?.toLocaleLowerCase()}/add-student`}>
             <PrimaryButton style={{ padding: "18px 10px" }}>
               {" "}

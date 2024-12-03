@@ -75,11 +75,6 @@ export const sidebarItems = (role:string) => {
           key: `/${lowerCase_role}/add-student`,
           icon:<GoDot />,
         },
-        {
-          label: <Link to={`/${lowerCase_role}/student-promotion/1`}>Student Promotion</Link>, // 1 will be replace by unique student Id
-          key: `/${lowerCase_role}/student-promotion/1`,
-          icon:<GoDot />,
-        },
       ],
     },
 
