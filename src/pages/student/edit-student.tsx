@@ -40,8 +40,7 @@ const EditStudentPage = () => {
   const { data, isLoading } = useGetStudentQuery(id);
   const [updatedValues, setUpdatedValues] = useState<Record<string, string>>(
     {}
-  );
-
+  ); 
   const navigate = useNavigate();
 
   const handleValueChanges = (values: Record<string, unknown>) => {
@@ -71,6 +70,8 @@ const EditStudentPage = () => {
       }));
     }
   };
+
+  console.log("updatedValues", updatedValues);
 
   const handleSubmit = () => {
     updateStudent({ id, data: updatedValues });

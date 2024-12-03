@@ -5,7 +5,7 @@ import NormalText from "./normal-text";
 
 type FormSectionTopbarProps = {
   title: string;
-  icon: ReactNode;
+  icon?: ReactNode;
 };
 
 const FormSectionTopbar: FC<FormSectionTopbarProps> = ({ title, icon }) => {
