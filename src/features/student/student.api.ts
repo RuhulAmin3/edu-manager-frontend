@@ -1,19 +1,25 @@
 import { rootApi } from "../../redux/api";
+import type { 
+  StudentListApiResponse, 
+  StudentApiResponse, 
+  StudentQueryParams,
+  UpdateStudentData 
+} from "./student.types";
 
 const studentApi = rootApi.injectEndpoints({
   endpoints: (builder) => ({
 
     // Get all students
-    getAllStudents: builder.query({
-      query: (data) => ({
+    getAllStudents: builder.query<StudentListApiResponse, StudentQueryParams>({
+      query: (params) => ({
         url: "/student",
-        params: data,
+        params,
       }),
       providesTags: ["student"],
     }),
 
     // Get a single student
-    getStudent: builder.query({
+    getStudent: builder.query<StudentApiResponse, string>({
       query: (id) => ({
         url: `/student/${id}`,
       }),
@@ -21,7 +27,7 @@ const studentApi = rootApi.injectEndpoints({
     }),
 
     // Update a student
-    updateStudent: builder.mutation({
+    updateStudent: builder.mutation<StudentApiResponse, { id: string; data: UpdateStudentData }>({
       query: ({ id, data }) => ({
         url: `/student/${id}`,
         method: "PATCH",
