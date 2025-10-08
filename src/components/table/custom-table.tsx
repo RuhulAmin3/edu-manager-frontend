@@ -7,9 +7,9 @@ type CustomTableProps<T> = {
   columns: TableProps<T>["columns"];
   dataSource: TableProps<T>["dataSource"];
   pageSize?: number;
-  prevPage?: number;
-  nextPage?: number;
-  totalPages?: number;
+  prevPage?: number  | null;
+  nextPage?: number  | null;
+  totalPages?: number ;
   totalDoc?: number;
   showSizeChanger?: boolean;
   onPaginationChange?: (page: number, pageSize: number) => void;

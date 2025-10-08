@@ -71,9 +71,34 @@ const EditStudentPage = () => {
   };
 
   const handleSubmit = () => {
-    console.log("updatedValues", updatedValues);
-    updateStudent({ id: id as string, data: updatedValues });
+    // Destructure the name fields
+    const { firstName, middleName, lastName, fatherName, fatherOccupation, fatherContactNo, motherName, motherOccupation, motherContactNo, ...rest } = updatedValues;
+
+    // Build the nested `name` and `guardian` object only with existing fields
+    const name: Record<string, string> = {};
+    const guardian: Record<string, string> = {};
+
+    if (updatedValues.hasOwnProperty("fatherName")) guardian.fatherName = fatherName;
+    if (updatedValues.hasOwnProperty("fatherOccupation")) guardian.fatherOccupation = fatherOccupation;
+    if (updatedValues.hasOwnProperty("fatherContactNo")) guardian.fatherContactNo = fatherContactNo;
+    if (updatedValues.hasOwnProperty("motherName")) guardian.motherName = motherName;
+    if (updatedValues.hasOwnProperty("motherOccupation")) guardian.motherOccupation = motherOccupation;
+    if (updatedValues.hasOwnProperty("motherContactNo")) guardian.motherContactNo = motherContactNo;
+
+    if (updatedValues.hasOwnProperty("firstName")) name.firstName = firstName;
+    if (updatedValues.hasOwnProperty("middleName")) name.middleName = middleName;
+    if (updatedValues.hasOwnProperty("lastName")) name.lastName = lastName;
+
+    // Final payload
+    const payload: Record<string, any> = {
+      ...rest,
+      ...(Object.keys(name).length > 0 ? { name } : {}), // only include if not empty
+      ...(Object.keys(guardian).length > 0 ? { guardian } : {}), // only include if not empty
+    };
+
+    updateStudent({ id: id as string, data: payload });
   };
+
 
   const afterHandleSubmit = () => {
     navigate(`/${role?.toLowerCase()}/students`);
@@ -81,7 +106,7 @@ const EditStudentPage = () => {
 
   useEffect(() => {
     if (data?.data) {
-      const initialValues = getFormObj(data?.data);
+      const initialValues = getFormObj(data?.data as unknown as Record<string, unknown>);
       setUpdatedValues((prev) => ({
         ...prev,
         studentId: initialValues.studentId as string,
