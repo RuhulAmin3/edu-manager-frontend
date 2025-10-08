@@ -37,10 +37,10 @@ const EditStudentPage = () => {
   const [prviewImg, setPreviewImg] = useState<UploadFile[]>();
   const [updateStudent, res] = useUpdateStudentMutation();
   const [uploadFile, fileRes] = useUploadFileMutation();
-  const { data, isLoading } = useGetStudentQuery(id);
+  const { data, isLoading } = useGetStudentQuery(id as string);
   const [updatedValues, setUpdatedValues] = useState<Record<string, string>>(
     {}
-  ); 
+  );
   const navigate = useNavigate();
 
   const handleValueChanges = (values: Record<string, unknown>) => {
@@ -62,7 +62,6 @@ const EditStudentPage = () => {
         ...prev,
         dateOfBirth: (values["dateOfBirth"] as Date).toISOString(),
       }));
-
     } else {
       setUpdatedValues((prev) => ({
         ...prev,
@@ -71,10 +70,9 @@ const EditStudentPage = () => {
     }
   };
 
-  console.log("updatedValues", updatedValues);
-
   const handleSubmit = () => {
-    updateStudent({ id, data: updatedValues });
+    console.log("updatedValues", updatedValues);
+    updateStudent({ id: id as string, data: updatedValues });
   };
 
   const afterHandleSubmit = () => {
@@ -185,6 +183,5 @@ const EditStudentPage = () => {
       </CustomForm>
     </>
   );
-};
-
+}
 export default EditStudentPage;

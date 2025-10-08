@@ -1,18 +1,24 @@
 import { rootApi } from "../../redux/api";
+import type {
+  TeacherListApiResponse,
+  TeacherApiResponse,
+  TeacherQueryParams,
+  UpdateTeacherData
+} from "./teacher.types";
 
 const teacherApi = rootApi.injectEndpoints({
   endpoints: (builder) => ({
     // Get all teachers
-    getAllTeachers: builder.query({
-      query: (data) => ({
+    getAllTeachers: builder.query<TeacherListApiResponse, TeacherQueryParams>({
+      query: (params) => ({
         url: "/teacher",
-        params: data,
+        params,
       }),
       providesTags: ["teacher"],
     }),
 
     // Get a single teacher
-    getTeacher: builder.query({
+    getTeacher: builder.query<TeacherApiResponse, string>({
       query: (id) => ({
         url: `/teacher/${id}`,
       }),
@@ -30,7 +36,7 @@ const teacherApi = rootApi.injectEndpoints({
     }),
 
     // Update a teacher
-    updateTeacher: builder.mutation({
+    updateTeacher: builder.mutation<TeacherApiResponse, { id: string; data: UpdateTeacherData }>({
       query: ({ id, data }) => ({
         url: `/teacher/${id}`,
         method: "PATCH",
@@ -40,7 +46,7 @@ const teacherApi = rootApi.injectEndpoints({
       async onQueryStarted({ id, data }, { dispatch, queryFulfilled }) {
         // Optimistic Update
         const patchResult = dispatch(
-          teacherApi.util.updateQueryData("getAllTeachers", undefined, (draft) => {
+          teacherApi.util.updateQueryData("getAllTeachers", {}, (draft) => {
             const teacher = draft?.find((item:Record<string, unknown>) => item.id === id);
             if (teacher) {
               Object.assign(teacher, data);
@@ -66,7 +72,7 @@ const teacherApi = rootApi.injectEndpoints({
       async onQueryStarted(id, { dispatch, queryFulfilled }) {
         // Optimistic Update
         const patchResult = dispatch(
-          teacherApi.util.updateQueryData("getAllTeachers", undefined, (draft) => {
+          teacherApi.util.updateQueryData("getAllTeachers", {}, (draft) => {
             return draft?.filter((teacher:Record<string, unknown>) => teacher.id !== id);
           })
         );

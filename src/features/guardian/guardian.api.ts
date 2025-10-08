@@ -1,18 +1,24 @@
 import { rootApi } from "../../redux/api";
+import type {
+  GuardianListApiResponse,
+  GuardianApiResponse,
+  GuardianQueryParams,
+  UpdateGuardianData
+} from "./guardian.types";
 
 const guardianApi = rootApi.injectEndpoints({
   endpoints: (builder) => ({
     // Get all guardians
-    getAllGuardians: builder.query({
-      query: (data) => ({
+    getAllGuardians: builder.query<GuardianListApiResponse, GuardianQueryParams>({
+      query: (params) => ({
         url: "/guardian",
-        params: data,
+        params,
       }),
       providesTags: ["guardian"],
     }),
 
     // Get a single guardian
-    getGuardian: builder.query({
+    getGuardian: builder.query<GuardianApiResponse, string>({
       query: (id) => ({
         url: `/guardian/${id}`,
       }),
@@ -30,7 +36,7 @@ const guardianApi = rootApi.injectEndpoints({
     }),
 
     // Update a guardian
-    updateGuardian: builder.mutation({
+    updateGuardian: builder.mutation<GuardianApiResponse, { id: string; data: UpdateGuardianData }>({
       query: ({ id, data }) => ({
         url: `/guardian/${id}`,
         method: "PATCH",

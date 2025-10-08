@@ -1,14 +1,13 @@
 import { rootApi } from "../../redux/api";
-import type { 
-  StudentListApiResponse, 
-  StudentApiResponse, 
+import type {
+  StudentListApiResponse,
+  StudentApiResponse,
   StudentQueryParams,
-  UpdateStudentData 
+  UpdateStudentData,
 } from "./student.types";
 
 const studentApi = rootApi.injectEndpoints({
   endpoints: (builder) => ({
-
     // Get all students
     getAllStudents: builder.query<StudentListApiResponse, StudentQueryParams>({
       query: (params) => ({
@@ -27,24 +26,36 @@ const studentApi = rootApi.injectEndpoints({
     }),
 
     // Update a student
-    updateStudent: builder.mutation<StudentApiResponse, { id: string; data: UpdateStudentData }>({
+    updateStudent: builder.mutation<
+      StudentApiResponse,
+      { id: string; data: UpdateStudentData }
+    >({
       query: ({ id, data }) => ({
         url: `/student/${id}`,
         method: "PATCH",
         body: data,
       }),
-      
-      invalidatesTags: (result, error, { id }) => [{ type: "student", id }, "student"], // Pessimistic update
-      async onQueryStarted({ id, data }, { dispatch, queryFulfilled }) {
 
+      invalidatesTags: (result, error, { id }) => [
+        { type: "student", id },
+        "student",
+      ], // Pessimistic update
+      async onQueryStarted({ id, data }, { dispatch, queryFulfilled }) {
         // Optimistic Update
         const patchResult = dispatch(
-          studentApi.util.updateQueryData("getAllStudents", undefined, (draft) => {
-            const student = draft?.find((item: Record<string, unknown>) => item.id === id);
-            if (student) {
-              Object.assign(student, data);
+          studentApi.util.updateQueryData(
+            "getAllStudents",
+            undefined,
+            (draft) => {
+              console.log("student draft", draft);
+              const student = draft?.find(
+                (item: Record<string, unknown>) => item.id === id
+              );
+              if (student) {
+                Object.assign(student, data);
+              }
             }
-          })
+          )
         );
 
         try {
@@ -65,9 +76,15 @@ const studentApi = rootApi.injectEndpoints({
       async onQueryStarted(id, { dispatch, queryFulfilled }) {
         // Optimistic Update
         const patchResult = dispatch(
-          studentApi.util.updateQueryData("getAllStudents", undefined, (draft) => {
-            return draft?.filter((student:Record<string, unknown>) => student.id !== id);
-          })
+          studentApi.util.updateQueryData(
+            "getAllStudents",
+            undefined,
+            (draft) => {
+              return draft?.filter(
+                (student: Record<string, unknown>) => student.id !== id
+              );
+            }
+          )
         );
 
         try {
