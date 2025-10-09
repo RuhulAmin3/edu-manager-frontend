@@ -7,7 +7,6 @@ import React, { FC } from "react";
 /**
  * Internal Dependencies
  * */
-
 import SelectClassField from "~/features/class/components/select-class-field";
 import CustomDatePicker from "~/components/form/custom-date-picker";
 import FormSectionTopbar from "~/components/ui/form-section-topbar";

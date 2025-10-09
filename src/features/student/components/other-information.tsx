@@ -13,7 +13,6 @@ const OtherInformation = () => {
      <div style={{marginBlock:"20px"}}>
         <FormSectionTopbar title="Others Information" icon={<HiOutlineBuildingLibrary/>}/>
         <DefaultCard> 
-
         {/* first row */}
         <Row gutter={[16, 16]}>
           <Col xs={24} md={12}  >

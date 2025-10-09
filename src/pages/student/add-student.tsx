@@ -25,6 +25,7 @@ import CustomForm from "~/components/form/custom-form";
 import LoadingSpin from "~/components/ui/loading-spin";
 import { EDU_MANAGER_TOKENS } from "~/styles/token";
 import { useCreateStudentMutation } from "~/features/user/user.api";
+import { ModifiedErrorType } from "~/common/types/response.type";
 
 const AddStudentPage = () => {
   const { role }: Record<string, string> = getFromLocalStorage(USER) || {};
@@ -57,9 +58,11 @@ const AddStudentPage = () => {
     navigate(`/${role.toLowerCase()}/students`, { replace: true });
   };
 
+ 
   useShowToastMessage({
     isError: res.isError,
     isSuccess: res.isSuccess,
+    error:res?.error as ModifiedErrorType,
     successMessage: "Student added successfully",
     cb: afterSubmit,
   });
