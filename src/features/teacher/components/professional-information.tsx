@@ -21,7 +21,7 @@ const ProfessionalInformation: FC = () => {
       <DefaultCard>
         <Row gutter={[16, 16]}>
           {/* Designation */}
-          <Col xs={24} md={8}>
+          <Col xs={24} md={8} lg={6}>
             <CustomFormItem
               name="designation"
               label="Designation"
@@ -32,7 +32,7 @@ const ProfessionalInformation: FC = () => {
           </Col>
 
           {/* Subject */}
-          <Col xs={24} md={8}>
+          <Col xs={24} md={8} lg={6}>
             <CustomFormItem
               name="subject"
               label="Subject"
@@ -43,13 +43,16 @@ const ProfessionalInformation: FC = () => {
           </Col>
 
           {/* Employment Type */}
-          <Col xs={24} md={8}>
+          <Col xs={24} md={8} lg={6}>
             <CustomFormItem
               name="type"
               label="Employment Type"
+              layout="vertical"
               rules={[{ required: true }]}
             >
               <CustomSelect
+                placeholder="select"
+                size="large"
                 options={[
                   { label: "Monthly", value: "Monthly" },
                   { label: "Contractual", value: "Contractual" },
@@ -60,23 +63,13 @@ const ProfessionalInformation: FC = () => {
           </Col>
 
           {/* Salary */}
-          <Col xs={24} md={8}>
+          <Col xs={24} md={8} lg={6}>
             <CustomFormItem
               name="salary"
               label="Monthly Salary"
               rules={[{ required: true }]}
             >
               <CustomInput type="number" />
-            </CustomFormItem>
-          </Col>
-
-          {/* Password */}
-          <Col xs={24} md={8}>
-            <CustomFormItem
-              name="password"
-              label="Password"
-            >
-              <CustomInput type="password" />
             </CustomFormItem>
           </Col>
         </Row>

@@ -6,6 +6,8 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useForm } from "antd/es/form/Form";
 import { useEffect, useState } from "react";
 import { Col, Flex, Skeleton } from "antd";
+import merge from "lodash.merge";
+
 
 /**
  * Internal dependencies
@@ -38,11 +40,10 @@ const EditStudentPage = () => {
   const [updateStudent, res] = useUpdateStudentMutation();
   const [uploadFile, fileRes] = useUploadFileMutation();
   const { data, isLoading } = useGetStudentQuery(id as string);
-  const [updatedValues, setUpdatedValues] = useState<Record<string, string>>(
+  const [updatedValues, setUpdatedValues] = useState<Record<string, unknown>>(
     {}
   );
   const navigate = useNavigate();
-
   const handleValueChanges = (values: Record<string, unknown>) => {
     if (
       "image" in values &&
@@ -63,47 +64,17 @@ const EditStudentPage = () => {
         dateOfBirth: (values["dateOfBirth"] as Date).toISOString(),
       }));
     } else {
-      setUpdatedValues((prev) => ({
-        ...prev,
-        ...(values as Record<string, string>),
-      }));
+      setUpdatedValues((prev) => merge({}, prev, values));
     }
   };
-
+  
   const handleSubmit = () => {
-    // Destructure the name fields
-    const { firstName, middleName, lastName, fatherName, fatherOccupation, fatherContactNo, motherName, motherOccupation, motherContactNo, ...rest } = updatedValues;
-
-    // Build the nested `name` and `guardian` object only with existing fields
-    const name: Record<string, string> = {};
-    const guardian: Record<string, string> = {};
-
-    if (updatedValues.hasOwnProperty("fatherName")) guardian.fatherName = fatherName;
-    if (updatedValues.hasOwnProperty("fatherOccupation")) guardian.fatherOccupation = fatherOccupation;
-    if (updatedValues.hasOwnProperty("fatherContactNo")) guardian.fatherContactNo = fatherContactNo;
-    if (updatedValues.hasOwnProperty("motherName")) guardian.motherName = motherName;
-    if (updatedValues.hasOwnProperty("motherOccupation")) guardian.motherOccupation = motherOccupation;
-    if (updatedValues.hasOwnProperty("motherContactNo")) guardian.motherContactNo = motherContactNo;
-
-    if (updatedValues.hasOwnProperty("firstName")) name.firstName = firstName;
-    if (updatedValues.hasOwnProperty("middleName")) name.middleName = middleName;
-    if (updatedValues.hasOwnProperty("lastName")) name.lastName = lastName;
-
-    // Final payload
-    const payload: Record<string, any> = {
-      ...rest,
-      ...(Object.keys(name).length > 0 ? { name } : {}), // only include if not empty
-      ...(Object.keys(guardian).length > 0 ? { guardian } : {}), // only include if not empty
-    };
-
-    updateStudent({ id: id as string, data: payload });
+    updateStudent({ id: id as string, data: updatedValues });
   };
-
 
   const afterHandleSubmit = () => {
     navigate(`/${role?.toLowerCase()}/students`);
   };
-
   useEffect(() => {
     if (data?.data) {
       const initialValues = getFormObj(data?.data as unknown as Record<string, unknown>);

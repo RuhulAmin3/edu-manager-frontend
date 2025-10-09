@@ -2,7 +2,7 @@
 
 /**
  * External dependencies
- * */ 
+ * */
 
 import { useNavigate } from "react-router-dom";
 import { useForm } from "antd/es/form/Form";
@@ -10,13 +10,12 @@ import { Flex } from "antd";
 
 /**
  * Internal dependencies
- * */ 
+ * */
 import GuardianInformation from "~/features/student/components/guardian-information";
 import PersonalInformation from "~/features/student/components/personal-information";
 import OtherInformation from "~/features/student/components/other-information";
 import { getFromLocalStorage } from "~/common/utils/local-storage.utils";
-import useShowToastMessage from "~/common/hooks/use-show-toast-message"; 
-import { getStudentObj } from "~/features/student/student.utils";
+import useShowToastMessage from "~/common/hooks/use-show-toast-message";
 import { USER } from "~/common/constants/local-storage.constant";
 import SecondaryButton from "~/components/ui/secondary-button";
 import CustomBreadCrumb from "~/components/ui/bread-crumb";
@@ -34,18 +33,15 @@ const AddStudentPage = () => {
   const navigate = useNavigate();
 
   const handleSubmit = (values: Record<string, unknown>) => {
-    const studentObj = getStudentObj(values);
     const formData = new FormData();
-    formData.append("student", JSON.stringify(studentObj));
-    
-    if (values?.password)
-      formData.append("password", JSON.stringify(values?.password));
     if (
       (values.image as Array<any>)?.length > 0 &&
       (values.image as any)[0].originFileObj
     ) {
-     formData.append("image", (values.image as any)[0].originFileObj as File);
+      formData.append("image", (values.image as any)[0].originFileObj as File);
     }
+    delete values.image;
+    formData.append("student", JSON.stringify(values));
     createStudent(formData);
   };
 
@@ -58,11 +54,10 @@ const AddStudentPage = () => {
     navigate(`/${role.toLowerCase()}/students`, { replace: true });
   };
 
- 
   useShowToastMessage({
     isError: res.isError,
     isSuccess: res.isSuccess,
-    error:res?.error as ModifiedErrorType,
+    error: res?.error as ModifiedErrorType,
     successMessage: "Student added successfully",
     cb: afterSubmit,
   });

@@ -34,9 +34,6 @@ const AddTeacherPage = () => {
 
   const handleSubmit = (values: Record<string, unknown>) => {
     const formData = new FormData();
-
-    if (values?.password)
-      formData.append("password", JSON.stringify(values?.password));
     if (
       (values.image as Array<any>)?.length > 0 &&
       (values.image as any)[0].originFileObj
@@ -44,9 +41,7 @@ const AddTeacherPage = () => {
       formData.append("image", (values.image as any)[0].originFileObj as File);
     }
     delete values.image;
-    delete values.password;
-    formData.append("teacher", JSON.stringify(values)); 
-  
+    formData.append("teacher", JSON.stringify(values));
     addTeacher(formData);
   };
 

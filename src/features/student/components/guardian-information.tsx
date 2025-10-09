@@ -16,7 +16,7 @@ const GuardianInformation = () => {
           <Col xs={24} sm={12} md={12} lg={8}>
             <CustomFormItem
               label="Father Name"
-              name="fatherName"
+              name={["guardian", "fatherName"]}
               layout="vertical"
               rules={[{ required: true }]}
             >
@@ -27,7 +27,7 @@ const GuardianInformation = () => {
             <CustomFormItem
               label="Father Occupation"
               layout="vertical"
-              name="fatherOccupation"
+              name={["guardian", "fatherOccupation"]}
               rules={[{ required: true }]}
             >
               <CustomInput />
@@ -36,7 +36,7 @@ const GuardianInformation = () => {
           <Col xs={24} sm={12} md={12} lg={8}>
             <CustomFormItem
               label="Father Contact No"
-              name="fatherContactNo"
+              name={["guardian", "fatherContactNo"]}
               layout="vertical"
               rules={[{ required: true }]}
             >
@@ -49,7 +49,7 @@ const GuardianInformation = () => {
           <Col xs={24} sm={12} md={12} lg={8}>
             <CustomFormItem
               label="Mother Name"
-              name="motherName"
+              name={["guardian", "motherName"]}
               layout="vertical"
               rules={[{ required: true }]}
             >
@@ -60,7 +60,7 @@ const GuardianInformation = () => {
             <CustomFormItem
               label="Mother Occupation"
               layout="vertical"
-              name="motherOccupation"
+              name={["guardian", "motherOccupation"]}
               rules={[{ required: true }]}
             >
               <CustomInput />
@@ -69,7 +69,7 @@ const GuardianInformation = () => {
           <Col xs={24} sm={12} md={12} lg={8}>
             <CustomFormItem
               label="Mother Contact No"
-              name="motherContactNo"
+              name={["guardian", "motherContactNo"]}
               layout="vertical"
               rules={[{ required: true }]}
             >
