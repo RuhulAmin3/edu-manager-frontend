@@ -5,6 +5,7 @@ import { useGetAllTeachersQuery } from "./teacher.api";
 import { columns } from "./teacher.constant";
 import { RootState } from "~/redux/store";  
 import { setQuery } from "~/redux/slice"; 
+import { Teacher } from "./teacher.types";
 
 const AdminTeacherList = () => {
   const query = useAppSelector((state: RootState) => state.defaultState.query);
@@ -12,7 +13,7 @@ const AdminTeacherList = () => {
   const { data: TeacherData, isFetching } = useGetAllTeachersQuery(query);
   const { data, meta } = TeacherData || {};
 
-  const dataSource = data?.map((sub: Record<string, string | number>) => ({
+  const dataSource = data?.map((sub: Teacher) => ({
     key: sub.id,
     ...sub
   })); 

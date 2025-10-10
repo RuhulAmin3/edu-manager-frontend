@@ -8,18 +8,17 @@ import { useEffect, useState } from "react";
 import { Col, Flex, Skeleton } from "antd";
 import merge from "lodash.merge";
 
+
 /**
  * Internal dependencies
  * */
-import GuardianInformation from "~/features/student/components/guardian-information";
-import PersonalInformation from "~/features/student/components/personal-information";
-import OtherInformation from "~/features/student/components/other-information";
+import PersonalInformation from "~/features/guardian/components/personal-information";
 import { getFromLocalStorage } from "~/common/utils/local-storage.utils";
 import useShowToastMessage from "~/common/hooks/use-show-toast-message";
 import { USER } from "~/common/constants/local-storage.constant";
 import { useUploadFileMutation } from "~/features/user/user.api";
 import { ModifiedErrorType } from "~/common/types/response.type";
-import { getFormObj } from "~/features/student/student.utils";
+import { getGuardianFormObj } from "~/features/guardian/guardian.utils";
 import RefreshButton from "~/components/ui/refresh-button";
 import CustomBreadCrumb from "~/components/ui/bread-crumb";
 import PrimaryButton from "~/components/ui/primary-button";
@@ -27,22 +26,23 @@ import CustomForm from "~/components/form/custom-form";
 import LoadingSpin from "~/components/ui/loading-spin";
 import { EDU_MANAGER_TOKENS } from "~/styles/token";
 import {
-  useGetStudentQuery,
-  useUpdateStudentMutation,
-} from "~/features/student/student.api";
+  useGetGuardianQuery,
+  useUpdateGuardianMutation,
+} from "~/features/guardian/guardian.api";
 
-const EditStudentPage = () => {
+const EditGuardianPage = () => {
   const { role }: Record<string, string> = getFromLocalStorage(USER) || {};
   const { id } = useParams();
   const [form] = useForm();
-  const [prviewImg, setPreviewImg] = useState<UploadFile[]>();
-  const [updateStudent, res] = useUpdateStudentMutation();
+  const [previewImg, setPreviewImg] = useState<UploadFile[]>();
+  const [updateGuardian, res] = useUpdateGuardianMutation();
   const [uploadFile, fileRes] = useUploadFileMutation();
-  const { data, isLoading } = useGetStudentQuery(id as string);
+  const { data, isLoading } = useGetGuardianQuery(id as string);
   const [updatedValues, setUpdatedValues] = useState<Record<string, unknown>>(
     {}
   );
   const navigate = useNavigate();
+  
   const handleValueChanges = (values: Record<string, unknown>) => {
     if (
       "image" in values &&
@@ -57,30 +57,24 @@ const EditStudentPage = () => {
       }
     }
 
-    if ("dateOfBirth" in values) {
-      setUpdatedValues((prev) => ({
-        ...prev,
-        dateOfBirth: (values["dateOfBirth"] as Date).toISOString(),
-      }));
-    } else {
-      setUpdatedValues((prev) => merge({}, prev, values));
-    }
+    setUpdatedValues((prev) => merge({}, prev, values));
   };
   
   const handleSubmit = () => {
-    updateStudent({ id: id as string, data: updatedValues });
+    updateGuardian({ id: id as string, data: updatedValues });
   };
 
   const afterHandleSubmit = () => {
-    navigate(`/${role?.toLowerCase()}/students`);
+    navigate(`/${role?.toLowerCase()}/guardians`);
   };
+
   useEffect(() => {
     if (data?.data) {
-      const initialValues = getFormObj(data?.data as unknown as Record<string, unknown>);
+      const initialValues = getGuardianFormObj(data?.data as unknown as Record<string, unknown>);
       setUpdatedValues((prev) => ({
         ...prev,
-        studentId: initialValues.studentId as string,
-        className: initialValues.className as string,
+        guardianId: initialValues.guardianId as string,
+        contactNo: initialValues.contactNo as string,
       }));
       form.setFieldsValue(initialValues);
       setPreviewImg(initialValues.image as UploadFile[]);
@@ -102,7 +96,7 @@ const EditStudentPage = () => {
     isError: res?.isError,
     isSuccess: res?.isSuccess,
     error: res?.error as ModifiedErrorType,
-    successMessage: "student information update successfully",
+    successMessage: "Guardian information updated successfully",
     cb: afterHandleSubmit,
   });
 
@@ -110,7 +104,7 @@ const EditStudentPage = () => {
     isError: fileRes?.isError,
     isSuccess: fileRes?.isSuccess,
     error: fileRes?.error as ModifiedErrorType,
-    successMessage: "file uploaded successfully",
+    successMessage: "File uploaded successfully",
   });
 
   if (isLoading) {
@@ -131,11 +125,11 @@ const EditStudentPage = () => {
         <CustomBreadCrumb
           items={[
             {
-              label: "Student List",
-              link: `/${role ? role?.toLocaleLowerCase() : "admin"}/students`,
+              label: "Guardian List",
+              link: `/${role ? role?.toLocaleLowerCase() : "admin"}/guardians`,
             },
             {
-              label: "update Student",
+              label: "Update Guardian",
             },
           ]}
         />
@@ -153,15 +147,10 @@ const EditStudentPage = () => {
       >
         <PersonalInformation
           form={form}
-          initialFileList={prviewImg ? prviewImg : undefined}
+          initialFileList={previewImg ? previewImg : undefined}
         />
 
-        <GuardianInformation />
-
-        <OtherInformation />
-
         <Flex gap={10} justify="flex-end" style={{ marginBlock: "20px" }}>
-          {/* <SecondaryButton htmlType="reset">Reset</SecondaryButton> */}
           <PrimaryButton
             htmlType="submit"
             disabled={res.isLoading || fileRes?.isLoading}
@@ -178,5 +167,6 @@ const EditStudentPage = () => {
       </CustomForm>
     </>
   );
-}
-export default EditStudentPage;
+};
+
+export default EditGuardianPage;

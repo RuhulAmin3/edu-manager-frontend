@@ -8,41 +8,43 @@ import { useEffect, useState } from "react";
 import { Col, Flex, Skeleton } from "antd";
 import merge from "lodash.merge";
 
+
 /**
  * Internal dependencies
  * */
-import GuardianInformation from "~/features/student/components/guardian-information";
-import PersonalInformation from "~/features/student/components/personal-information";
-import OtherInformation from "~/features/student/components/other-information";
+import PersonalInformation from "~/features/teacher/components/personal-information";
+import ProfessionalInformation from "~/features/teacher/components/professional-information";
+import EducationalInformation from "~/features/teacher/components/educational-information";
 import { getFromLocalStorage } from "~/common/utils/local-storage.utils";
 import useShowToastMessage from "~/common/hooks/use-show-toast-message";
 import { USER } from "~/common/constants/local-storage.constant";
 import { useUploadFileMutation } from "~/features/user/user.api";
 import { ModifiedErrorType } from "~/common/types/response.type";
-import { getFormObj } from "~/features/student/student.utils";
+import { getTeacherFormObj } from "~/features/teacher/teacher.utils";
 import RefreshButton from "~/components/ui/refresh-button";
 import CustomBreadCrumb from "~/components/ui/bread-crumb";
 import PrimaryButton from "~/components/ui/primary-button";
 import CustomForm from "~/components/form/custom-form";
-import LoadingSpin from "~/components/ui/loading-spin";
 import { EDU_MANAGER_TOKENS } from "~/styles/token";
 import {
-  useGetStudentQuery,
-  useUpdateStudentMutation,
-} from "~/features/student/student.api";
+  useGetTeacherQuery,
+  useUpdateTeacherMutation,
+} from "~/features/teacher/teacher.api";
+import LoadingSpin from "~/components/ui/loading-spin";
 
-const EditStudentPage = () => {
+const EditTeacherPage = () => {
   const { role }: Record<string, string> = getFromLocalStorage(USER) || {};
   const { id } = useParams();
   const [form] = useForm();
-  const [prviewImg, setPreviewImg] = useState<UploadFile[]>();
-  const [updateStudent, res] = useUpdateStudentMutation();
+  const [previewImg, setPreviewImg] = useState<UploadFile[]>();
+  const [updateTeacher, res] = useUpdateTeacherMutation();
   const [uploadFile, fileRes] = useUploadFileMutation();
-  const { data, isLoading } = useGetStudentQuery(id as string);
+  const { data, isLoading } = useGetTeacherQuery(id as string);
   const [updatedValues, setUpdatedValues] = useState<Record<string, unknown>>(
     {}
   );
   const navigate = useNavigate();
+  
   const handleValueChanges = (values: Record<string, unknown>) => {
     if (
       "image" in values &&
@@ -68,19 +70,20 @@ const EditStudentPage = () => {
   };
   
   const handleSubmit = () => {
-    updateStudent({ id: id as string, data: updatedValues });
+    updateTeacher({ id: id as string, data: updatedValues });
   };
 
   const afterHandleSubmit = () => {
-    navigate(`/${role?.toLowerCase()}/students`);
+    navigate(`/${role?.toLowerCase()}/teachers`);
   };
+
   useEffect(() => {
     if (data?.data) {
-      const initialValues = getFormObj(data?.data as unknown as Record<string, unknown>);
+      const initialValues = getTeacherFormObj(data?.data as unknown as Record<string, unknown>);
       setUpdatedValues((prev) => ({
         ...prev,
-        studentId: initialValues.studentId as string,
-        className: initialValues.className as string,
+        teacherId: initialValues.teacherId as string,
+        email: initialValues.email as string,
       }));
       form.setFieldsValue(initialValues);
       setPreviewImg(initialValues.image as UploadFile[]);
@@ -102,7 +105,7 @@ const EditStudentPage = () => {
     isError: res?.isError,
     isSuccess: res?.isSuccess,
     error: res?.error as ModifiedErrorType,
-    successMessage: "student information update successfully",
+    successMessage: "Teacher information updated successfully",
     cb: afterHandleSubmit,
   });
 
@@ -110,7 +113,7 @@ const EditStudentPage = () => {
     isError: fileRes?.isError,
     isSuccess: fileRes?.isSuccess,
     error: fileRes?.error as ModifiedErrorType,
-    successMessage: "file uploaded successfully",
+    successMessage: "File uploaded successfully",
   });
 
   if (isLoading) {
@@ -131,11 +134,11 @@ const EditStudentPage = () => {
         <CustomBreadCrumb
           items={[
             {
-              label: "Student List",
-              link: `/${role ? role?.toLocaleLowerCase() : "admin"}/students`,
+              label: "Teacher List",
+              link: `/${role ? role?.toLocaleLowerCase() : "admin"}/teachers`,
             },
             {
-              label: "update Student",
+              label: "Update Teacher",
             },
           ]}
         />
@@ -153,15 +156,14 @@ const EditStudentPage = () => {
       >
         <PersonalInformation
           form={form}
-          initialFileList={prviewImg ? prviewImg : undefined}
+          initialFileList={previewImg ? previewImg : undefined}
         />
 
-        <GuardianInformation />
+        <ProfessionalInformation />
 
-        <OtherInformation />
+        <EducationalInformation />
 
         <Flex gap={10} justify="flex-end" style={{ marginBlock: "20px" }}>
-          {/* <SecondaryButton htmlType="reset">Reset</SecondaryButton> */}
           <PrimaryButton
             htmlType="submit"
             disabled={res.isLoading || fileRes?.isLoading}
@@ -178,5 +180,6 @@ const EditStudentPage = () => {
       </CustomForm>
     </>
   );
-}
-export default EditStudentPage;
+};
+
+export default EditTeacherPage;
