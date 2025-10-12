@@ -14,6 +14,7 @@ import { Flex } from "antd";
 import PersonalInformation from "~/features/teacher/components/personal-information";
 import ProfessionalInformation from "~/features/teacher/components/professional-information";
 import EducationalInformation from "~/features/teacher/components/educational-information";
+import OtherInformation from "~/features/teacher/components/other-information";
 import { getFromLocalStorage } from "~/common/utils/local-storage.utils";
 import useShowToastMessage from "~/common/hooks/use-show-toast-message";
 import { useAddTeacherMutation } from "~/features/teacher/teacher.api";
@@ -89,6 +90,8 @@ const AddTeacherPage = () => {
         <ProfessionalInformation />
 
         <EducationalInformation />
+
+        <OtherInformation />
 
         <Flex gap={10} justify="flex-end" style={{ marginBlock: "20px" }}>
           <SecondaryButton htmlType="reset" onClick={handleReset}>

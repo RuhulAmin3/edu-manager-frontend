@@ -73,15 +73,6 @@ const EducationalInformation: FC = () => {
             </CustomFormItem>
           </Col>
 
-          {/* Short Description */}
-          <Col xs={24}>
-            <CustomFormItem
-              name="shortDescription"
-              label="Short Description"
-            >
-              <CustomTextarea rows={4} />
-            </CustomFormItem>
-          </Col>
         </Row>
       </DefaultCard>
     </div>
