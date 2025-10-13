@@ -18,6 +18,8 @@ import {
     bloodGroupSelectList,
     genderSelectList,
 } from "~/common/constants";
+import CustomTextarea from "~/components/form/custom-textarea";
+import { SelectStudentsIdField } from "./select-students";
 
 const PersonalInformation: FC<{
     initialFileList?: UploadFileProps[];
@@ -103,7 +105,6 @@ const PersonalInformation: FC<{
                             <CustomInput type="email" />
                         </CustomFormItem>
                     </Col>
-
                 </Row>
 
                 {/* Second row */}
@@ -121,7 +122,7 @@ const PersonalInformation: FC<{
                                 options={genderSelectList}
                             />
                         </CustomFormItem>
-                    </Col> 
+                    </Col>
                     <Col xs={24} sm={12} md={12} lg={8} xl={6}>
                         <CustomFormItem
                             label="Contact No"
@@ -132,7 +133,7 @@ const PersonalInformation: FC<{
                             <CustomInput />
                         </CustomFormItem>
                     </Col>
-                     <Col xs={24} sm={12} md={12} lg={8} xl={6}>
+                    <Col xs={24} sm={12} md={12} lg={8} xl={6}>
                         <CustomFormItem
                             label="Blood Group"
                             name="bloodGroup"
@@ -160,7 +161,7 @@ const PersonalInformation: FC<{
 
                 {/* third row */}
                 <Row gutter={[16, 16]}>
-                    <Col xs={24} sm={12} md={12} lg={8} xl={6}>
+                    <Col xs={24} md={12}>
                         <CustomFormItem
                             label="Address"
                             name="address"
@@ -170,13 +171,27 @@ const PersonalInformation: FC<{
                             <CustomInput />
                         </CustomFormItem>
                     </Col>
-                    <Col xs={24} sm={12} md={12} lg={8} xl={6}>
+                    <Col xs={24} md={12}>
+                        <CustomFormItem
+                            label="Students"
+                            name="students"
+                            layout="vertical"
+                            rules={[{ required: true }]}
+                        >
+                            <SelectStudentsIdField mode="multiple" size="large" />
+                        </CustomFormItem>
+                    </Col>
+                </Row>
+
+                {/* fourth row */}
+                <Row gutter={[16, 16]}>
+                    <Col xs={24}>
                         <CustomFormItem
                             label="Short Description"
                             name="shortDescription"
                             layout="vertical"
                         >
-                            <CustomInput />
+                            <CustomTextarea rows={5} />
                         </CustomFormItem>
                     </Col>
                 </Row>

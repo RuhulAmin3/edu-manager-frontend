@@ -8,7 +8,6 @@ import { useEffect, useState } from "react";
 import { Col, Flex, Skeleton } from "antd";
 import merge from "lodash.merge";
 
-
 /**
  * Internal dependencies
  * */
@@ -42,7 +41,6 @@ const EditGuardianPage = () => {
     {}
   );
   const navigate = useNavigate();
-  
   const handleValueChanges = (values: Record<string, unknown>) => {
     if (
       "image" in values &&

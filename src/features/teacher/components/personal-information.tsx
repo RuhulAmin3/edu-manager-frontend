@@ -159,21 +159,6 @@ const PersonalInformation: FC<{
                         </CustomFormItem>
                     </Col>
                 </Row>
-
-                {/* third row */}
-                <Row gutter={[16, 16]}>
-                   
-                    <Col xs={24} sm={12} md={12} lg={8} xl={6}>
-                        <CustomFormItem
-                            label="Address"
-                            name="address"
-                            layout="vertical"
-                            rules={[{ required: true }]}
-                        >
-                            <CustomInput />
-                        </CustomFormItem>
-                    </Col>
-                </Row>
             </DefaultCard>
         </>
     );

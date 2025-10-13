@@ -99,6 +99,7 @@ const studentApi = rootApi.injectEndpoints({
 
 export const {
   useGetAllStudentsQuery,
+  useLazyGetAllStudentsQuery,
   useGetStudentQuery,
   useUpdateStudentMutation,
   useDeleteStudentMutation,
