@@ -34,6 +34,7 @@ const baseQuery = fetchBaseQuery({
   },
   credentials: "include",
 });
+
 const baseQueryWithReauth: BaseQueryFn<
   string | FetchArgs,
   unknown,

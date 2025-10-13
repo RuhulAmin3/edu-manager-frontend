@@ -78,3 +78,8 @@ export const studentStatusSelectList = [
   { label: "Block", value: "Block" }
 ]
 
+export const guardianAccountStatusSelectList = [
+  { label: "Pending", value: "Pending" },
+  { label: "Approved", value: "Approved" },
+  { label: "Block", value: "Block" }
+]

@@ -17,6 +17,7 @@ import DefaultCard from "~/components/ui/default-card";
 import {
     bloodGroupSelectList,
     genderSelectList,
+    guardianAccountStatusSelectList,
 } from "~/common/constants";
 import CustomTextarea from "~/components/form/custom-textarea";
 import { SelectStudentsIdField } from "./select-students";
@@ -161,7 +162,7 @@ const PersonalInformation: FC<{
 
                 {/* third row */}
                 <Row gutter={[16, 16]}>
-                    <Col xs={24} md={12}>
+                    <Col xs={24} md={6}>
                         <CustomFormItem
                             label="Address"
                             name="address"
@@ -169,6 +170,20 @@ const PersonalInformation: FC<{
                             rules={[{ required: true }]}
                         >
                             <CustomInput />
+                        </CustomFormItem>
+                    </Col>
+                    <Col xs={24} sm={12} md={6}>
+                        <CustomFormItem
+                            label="Status"
+                            name="accountStatus"
+                            layout="vertical"
+                            rules={[{ required: true }]}
+                        >
+                            <CustomSelect
+                                placeholder="select"
+                                size="large"
+                                options={guardianAccountStatusSelectList}
+                            />
                         </CustomFormItem>
                     </Col>
                     <Col xs={24} md={12}>

@@ -113,6 +113,8 @@ const EditGuardianPage = () => {
     );
   }
 
+  console.log("data", data?.data);
+
   return (
     <>
       <Flex

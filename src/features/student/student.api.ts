@@ -45,11 +45,10 @@ const studentApi = rootApi.injectEndpoints({
         const patchResult = dispatch(
           studentApi.util.updateQueryData(
             "getAllStudents",
-            undefined,
+            {},
             (draft) => {
-              console.log("student draft", draft);
-              const student = draft?.find(
-                (item: Record<string, unknown>) => item.id === id
+              const student = draft?.data?.find(
+                (item) => item.id === id
               );
               if (student) {
                 Object.assign(student, data);
@@ -78,11 +77,14 @@ const studentApi = rootApi.injectEndpoints({
         const patchResult = dispatch(
           studentApi.util.updateQueryData(
             "getAllStudents",
-            undefined,
+            {},
             (draft) => {
-              return draft?.filter(
-                (student: Record<string, unknown>) => student.id !== id
-              );
+              return {
+                ...draft,
+                data: draft?.data?.filter(
+                  (student) => student.id !== id
+                ),
+              };
             }
           )
         );

@@ -46,8 +46,8 @@ const guardianApi = rootApi.injectEndpoints({
       async onQueryStarted({ id, data }, { dispatch, queryFulfilled }) {
         // Optimistic Update
         const patchResult = dispatch(
-          guardianApi.util.updateQueryData("getAllGuardians", undefined, (draft) => {
-            const guardian = draft?.find((item:Record<string, unknown>) => item.id === id);
+          guardianApi.util.updateQueryData("getAllGuardians", {}, (draft) => {
+            const guardian = draft?.data?.find((item) => item.id === id);
             if (guardian) {
               Object.assign(guardian, data);
             }
@@ -72,8 +72,11 @@ const guardianApi = rootApi.injectEndpoints({
       async onQueryStarted(id, { dispatch, queryFulfilled }) {
         // Optimistic Update
         const patchResult = dispatch(
-          guardianApi.util.updateQueryData("getAllGuardians", undefined, (draft) => {
-            return draft?.filter((guardian:Record<string, unknown>) => guardian.id !== id);
+          guardianApi.util.updateQueryData("getAllGuardians", {}, (draft) => {
+            return {
+              ...draft,
+              data: draft?.data?.filter((guardian) => guardian.id !== id),
+            };
           })
         );
 
