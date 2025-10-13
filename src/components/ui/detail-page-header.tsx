@@ -1,7 +1,7 @@
 /**
  * External Dependencies
  */
-import { BsFiletypeXlsx, BsPrinter } from "react-icons/bs";
+import { BsFiletypeXlsx } from "react-icons/bs";
 import { BiSolidFileExport } from "react-icons/bi";
 import { DownOutlined } from "@ant-design/icons";
 import { GrDocumentPdf } from "react-icons/gr";
@@ -17,7 +17,6 @@ import CustomDropdown from "./custom-dropdown";
 import CustomBreadCrumb, { BreadCrumbItem } from "./bread-crumb";
 import PrimaryButton from "./primary-button";
 import RefreshButton from "./refresh-button";
-import CustomAvatar from "./avatar";
 
 export type DetailPageHeaderProps = {
   breadcrumbItems: BreadCrumbItem[];
@@ -25,11 +24,9 @@ export type DetailPageHeaderProps = {
   onRefresh?: () => void;
   onExportPdf?: () => void;
   onExportExcel?: () => void;
-  onPrint?: () => void;
   editButtonText?: string;
-  showEditButton?: boolean;
   showExportButtons?: boolean;
-  showPrintButton?: boolean;
+  showEditButton?: boolean;
   showRefreshButton?: boolean;
 };
 
@@ -39,11 +36,9 @@ const DetailPageHeader: FC<DetailPageHeaderProps> = ({
   onRefresh,
   onExportPdf,
   onExportExcel,
-  onPrint,
   editButtonText = "Edit",
   showEditButton = true,
   showExportButtons = true,
-  showPrintButton = true,
   showRefreshButton = true,
 }) => {
 
@@ -73,19 +68,9 @@ const DetailPageHeader: FC<DetailPageHeaderProps> = ({
       style={{ paddingBlock: "10px" }}
     >
       <CustomBreadCrumb items={breadcrumbItems} />
-      
+
       <Flex gap={10} align="center">
         {showRefreshButton && <RefreshButton onClick={onRefresh} />}
-        
-        {showPrintButton && (
-          <CustomAvatar 
-            size="large" 
-            shape="square" 
-            icon={<BsPrinter />}
-            onClick={onPrint}
-          />
-        )}
-
         {showExportButtons && (
           <CustomDropdown
             placement="bottomRight"
@@ -98,7 +83,7 @@ const DetailPageHeader: FC<DetailPageHeaderProps> = ({
             </SecondaryButton>
           </CustomDropdown>
         )}
-        
+
         {showEditButton && (
           <PrimaryButton style={{ padding: "18px 10px" }} onClick={onEdit}>
             <FaPlusSquare /> {editButtonText}

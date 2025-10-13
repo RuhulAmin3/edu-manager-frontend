@@ -62,7 +62,9 @@ export const columns: TableProps["columns"] = [
         const color =
           data == "Monthly"
             ? EDU_MANAGER_TOKENS.colors["edu-primary"]
-            : EDU_MANAGER_TOKENS.colors["edu-danger"];
+            : data === "Contractual"
+            ? EDU_MANAGER_TOKENS.colors["edu-danger"]
+            : EDU_MANAGER_TOKENS.colors["edu-warning"];
         return (
           <Tag color={color} key={data}>
             {" "}

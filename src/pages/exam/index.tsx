@@ -55,7 +55,6 @@ const ClassListPage = () => {
         <CustomBreadCrumb items={[{label:"Exam List"}]} />
         <Flex gap={10} align="center">
           <RefreshButton />
-          <CustomAvatar size="large" shape="square" icon={<BsPrinter />} />
           {/* export buttons */}
           <CustomDropdown
             placement="bottomRight"

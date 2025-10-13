@@ -1,7 +1,7 @@
 /**
  * External Dependencies
 */
-import { BsFiletypeXlsx, BsPrinter } from "react-icons/bs";
+import { BsFiletypeXlsx } from "react-icons/bs";
 import { BiSolidFileExport } from "react-icons/bi";
 import { DownOutlined } from "@ant-design/icons";
 import { GrDocumentPdf } from "react-icons/gr";
@@ -52,8 +52,7 @@ const ClassListPage = () => {
       >
         <CustomBreadCrumb items={classBreadCrumbItems} />
         <Flex gap={10} align="center">
-          <RefreshButton />
-          <CustomAvatar size="large" shape="square" icon={<BsPrinter />} />
+          <RefreshButton /> 
           {/* export buttons */}
           <CustomDropdown
             placement="bottomRight"
@@ -108,7 +107,7 @@ const ClassListPage = () => {
 
           {/* search bar */}
           <CustomInput
-            placeholder="Search by title"
+            placeholder="Search by class name"
             padding="4px 10px"
             style={{ width: "350px" }}
             value={searchTerm}

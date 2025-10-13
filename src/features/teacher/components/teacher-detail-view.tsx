@@ -1,7 +1,7 @@
 /**
  * External Dependencies
  */
-import { Row, Col, message } from "antd";
+import { Row, Col, message, Tag } from "antd";
 import { FC } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import {
@@ -9,7 +9,6 @@ import {
   BookOutlined,
   BankOutlined,
   CalendarOutlined,
-  DollarOutlined,
 } from "@ant-design/icons";
 
 /**
@@ -24,12 +23,13 @@ import EntityDetailLayout from "~/components/ui/entity-detail-layout";
 import InfoCard from "~/components/ui/info-card";
 import LoadingSpin from "~/components/ui/loading-spin";
 import type { Teacher } from "../teacher.types";
+import { EDU_MANAGER_TOKENS } from "~/styles/token";
 
 const TeacherDetailView: FC = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
   const { role }: Record<string, string> = getFromLocalStorage(USER) || {};
-  
+
   const { data: response, isLoading, error, refetch } = useGetTeacherQuery(id as string, {
     skip: !id
   });
@@ -51,10 +51,6 @@ const TeacherDetailView: FC = () => {
 
   const handleExportExcel = () => {
     message.info("Excel export functionality will be implemented");
-  };
-
-  const handlePrint = () => {
-    window.print();
   };
 
   if (isLoading) {
@@ -93,13 +89,6 @@ const TeacherDetailView: FC = () => {
     });
   };
 
-  const formatCurrency = (amount: number) => {
-    return new Intl.NumberFormat("en-US", {
-      style: "currency",
-      currency: "USD",
-    }).format(amount);
-  };
-
   const personalInfoItems = [
     { label: "Full Name", value: fullName },
     { label: "Teacher ID", value: teacherData.teacherId },
@@ -114,8 +103,12 @@ const TeacherDetailView: FC = () => {
   const professionalInfoItems = [
     { label: "Designation", value: teacherData.designation },
     { label: "Subject", value: teacherData.subject },
-    { label: "Employment Type", value: teacherData.type },
-    { label: "Monthly Salary", value: formatCurrency(teacherData.salary) },
+    {
+      label: "Employment Type", value: teacherData.type === "Monthly"
+        ? <Tag color={EDU_MANAGER_TOKENS.colors["edu-primary"]}>{teacherData.type}</Tag> : teacherData.type === "Contractual"
+          ? <Tag color={EDU_MANAGER_TOKENS.colors["edu-danger"]}>{teacherData.type}</Tag> : <Tag color={EDU_MANAGER_TOKENS.colors["edu-warning"]}>{teacherData.type}</Tag>
+    },
+    { label: "Monthly Salary", value: teacherData.salary + " Taka Only" },
   ];
 
   const educationalInfoItems = [
@@ -148,7 +141,6 @@ const TeacherDetailView: FC = () => {
     onRefresh: handleRefresh,
     onExportPdf: handleExportPdf,
     onExportExcel: handleExportExcel,
-    onPrint: handlePrint,
     editButtonText: "Edit Teacher",
   };
 

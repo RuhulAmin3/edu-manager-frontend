@@ -42,7 +42,7 @@ const guardianApi = rootApi.injectEndpoints({
         method: "PATCH",
         body: data,
       }),
-      invalidatesTags: (result, error, { id }) => [{ type: "guardian", id }], // Pessimistic update
+      invalidatesTags: (_result, _error, { id }) => [{ type: "guardian", id }], // Pessimistic update
       async onQueryStarted({ id, data }, { dispatch, queryFulfilled }) {
         // Optimistic Update
         const patchResult = dispatch(

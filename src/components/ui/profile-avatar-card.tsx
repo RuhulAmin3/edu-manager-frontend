@@ -36,7 +36,7 @@ const ProfileAvatarCard: FC<ProfileAvatarCardProps> = ({
       case "active":
         return EDU_MANAGER_TOKENS.colors["edu-success"];
       case "inactive":
-        return EDU_MANAGER_TOKENS.colors["edu-danger"];
+        return EDU_MANAGER_TOKENS.colors["edu-warning"];
       case "blocked":
       case "block":
         return EDU_MANAGER_TOKENS.colors["edu-danger"];
@@ -71,7 +71,7 @@ const ProfileAvatarCard: FC<ProfileAvatarCardProps> = ({
             boxShadow: EDU_MANAGER_TOKENS.shadow["edu-card-shadow"],
           }}
         />
-        
+
         <Flex vertical align="center" gap={8}>
           <NormalText
             textType="middle"
@@ -80,7 +80,7 @@ const ProfileAvatarCard: FC<ProfileAvatarCardProps> = ({
           >
             {name}
           </NormalText>
-          
+
           <NormalText
             textColor={EDU_MANAGER_TOKENS.colors["edu-text-secondary-color"]}
             fontSize={EDU_MANAGER_TOKENS.fontSize["edu-font-base"]}
@@ -88,17 +88,17 @@ const ProfileAvatarCard: FC<ProfileAvatarCardProps> = ({
           >
             ID: {id}
           </NormalText>
-          
+
           {role && (
-            <Tag 
+            <Tag
               color={EDU_MANAGER_TOKENS.colors["edu-primary"]}
               style={{ fontSize: EDU_MANAGER_TOKENS.fontSize["edu-font-sm"] }}
             >
               {role}
             </Tag>
           )}
-          
-          <Tag 
+
+          <Tag
             color={getStatusColor(status)}
             style={{ fontSize: EDU_MANAGER_TOKENS.fontSize["edu-font-sm"] }}
           >

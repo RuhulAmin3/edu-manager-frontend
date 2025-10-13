@@ -7,7 +7,7 @@ type RefreshButtonProps = React.ComponentProps<typeof CustomAvatar>
 
 const RefreshButton: React.FC<RefreshButtonProps> = (props) => {
   return (
-    <CustomAvatar size="large" shape="square" icon={<BiRefresh />} {...props} />
+    <CustomAvatar onClick={() => window.location.reload()} size="large" shape="square" icon={<BiRefresh />} {...props} />
   );
 }
 

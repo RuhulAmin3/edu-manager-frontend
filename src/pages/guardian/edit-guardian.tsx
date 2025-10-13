@@ -112,9 +112,6 @@ const EditGuardianPage = () => {
       </Col>
     );
   }
-
-  console.log("data", data?.data);
-
   return (
     <>
       <Flex

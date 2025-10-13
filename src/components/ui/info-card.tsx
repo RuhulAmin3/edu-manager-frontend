@@ -49,6 +49,7 @@ const InfoCard: FC<InfoCardProps> = ({
   showBorder = true,
   size = "default",
 }) => {
+
   const descriptionItems = items.map((item, index) => ({
     key: index,
     label: item.label,

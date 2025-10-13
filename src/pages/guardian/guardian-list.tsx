@@ -62,8 +62,6 @@ const GuardianListPage = () => {
         <CustomBreadCrumb items={GuardianListBreadCrumbItems} />
         <Flex gap={10} align="center">
           <RefreshButton />
-          <CustomAvatar size="large" shape="square" icon={<BsPrinter />} />
-
           {/* export buttons */}
           <CustomDropdown
             placement="bottomRight"

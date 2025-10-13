@@ -22,7 +22,7 @@ const studentApi = rootApi.injectEndpoints({
       query: (id) => ({
         url: `/student/${id}`,
       }),
-      providesTags: (result, error, id) => [{ type: "student", id }],
+      providesTags: (_result, _error, id) => [{ type: "student", id }],
     }),
 
     // Update a student
@@ -36,7 +36,7 @@ const studentApi = rootApi.injectEndpoints({
         body: data,
       }),
 
-      invalidatesTags: (result, error, { id }) => [
+      invalidatesTags: (_result, _error, { id }) => [
         { type: "student", id },
         "student",
       ], // Pessimistic update
