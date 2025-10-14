@@ -50,12 +50,17 @@ const SubjectsHeader = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 12px;
+  margin-bottom: 4px;
 
   label {
     font-size: 14px;
     font-weight: 500;
     color: #444;
+
+    &::after {
+      content: " *";
+      color: #ff4d4f;
+    }
   }
 `;
 
@@ -132,7 +137,7 @@ const ExamModal = () => {
 
     const isVisible =
         modalName === MODEL_CONSTANT.ADD_EXAM ||
-        modalName === MODEL_CONSTANT.EDIT_EXAM; 
+        modalName === MODEL_CONSTANT.EDIT_EXAM;
 
     return (
         <CustomModal
@@ -145,6 +150,16 @@ const ExamModal = () => {
             onCancel={handleCancel}
             destroyOnClose
             afterOpenChange={afterOpenChange}
+            styles={{
+                body: {
+                    maxHeight: "65vh", // 🔥 scrollable modal body
+                    overflowY: "auto",
+                    paddingRight: "12px",
+                },
+            }}
+            style={{
+                top: 20,
+            }}
         >
             {/* Exam Title */}
             <CustomFormItem
@@ -167,10 +182,11 @@ const ExamModal = () => {
             </CustomFormItem>
 
             {/* Subjects List */}
-            <CustomFormItem
+            <Form.Item
                 layout="vertical"
                 name="subjects"
-                rules={[{ required: true, message: "At least one subject is required" }]}            >
+                rules={[{ required: true, message: "At least one subject is required" }]}
+            >
                 <Form.List
                     name="subjects"
                     rules={[
@@ -200,7 +216,9 @@ const ExamModal = () => {
                                         {...restField}
                                         name={[name, "subjectId"]}
                                         label="Subject"
-                                        rules={[{ required: true, message: "Subject is required" }]}
+                                        rules={[
+                                            { required: true, message: "Subject is required" },
+                                        ]}
                                         style={{ flex: 1 }}
                                     >
                                         <SelectSubjectField size="large" />
@@ -222,7 +240,8 @@ const ExamModal = () => {
                         </>
                     )}
                 </Form.List>
-            </CustomFormItem>
+            </Form.Item>
+
             {/* Teacher */}
             <CustomFormItem
                 label="Teacher"
