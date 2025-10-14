@@ -33,6 +33,7 @@ export const columns: TableProps<ClassDataType>["columns"] = [
     dataIndex: "id",
     align: "center",
     render:(_id:string, record:ClassDataType)=>{
+      console.log("record from constant", record);
       return <ClassListAction record={record} />
     },
   },

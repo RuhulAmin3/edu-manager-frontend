@@ -31,8 +31,8 @@ export const columns: TableProps<SubjectDataType>["columns"] = [
     title: "Action",
     dataIndex: "id",
     align: "center",
-    render: (id:string) => { 
-      return <SubjectListAction id={id} />;
+    render: (id:string, record:SubjectDataType) => { 
+      return <SubjectListAction record={record} />;
     },
   },
 ];

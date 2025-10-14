@@ -10,8 +10,7 @@ import { Flex } from "antd";
  * Internal Dependencies
  */
 
-import EditSubjectModal from "~/features/subject/components/edit-subject-modal";
-import AddSubjectModal from "~/features/subject/components/add-subject-modal";
+import SubjectModal from "~/features/subject/components/subject-modal";
 import { subjectsBreadCrumbItems } from "~/features/subject/subject.constant"; 
 import { MODEL_CONSTANT } from "~/common/constants/modal.constant";
 import { resetQuery, setModalName, setQuery } from "~/redux/slice"; 
@@ -23,8 +22,7 @@ import SubjectList from "~/features/subject/subject-list";
 import CustomInput from "~/components/form/custom-input";
 import DefaultCard from "~/components/ui/default-card";
 import useDebounce from "~/common/hooks/use-debounce";
-import NormalText from "~/components/ui/normal-text";
-import CustomAvatar from "~/components/ui/avatar"; 
+import NormalText from "~/components/ui/normal-text"; 
 
 
 const SubjectListPage = () => {
@@ -87,11 +85,8 @@ const SubjectListPage = () => {
         {/* subject list table */}
         <SubjectList />
 
-        {/* add new subject modal */}
-        <AddSubjectModal/>
-
-        {/* Edit subject modal */}
-        <EditSubjectModal/>
+        {/* Unified subject modal - handles both add and edit */}
+        <SubjectModal/>
       </DefaultCard>
     </>
   );
