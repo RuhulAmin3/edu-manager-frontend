@@ -27,6 +27,7 @@ import useDebounce from "~/common/hooks/use-debounce";
 import NormalText from "~/components/ui/normal-text";
 import ExamList from "~/features/exam/exam-list";
 import { CiFilter } from "react-icons/ci";
+import ExamModal from "~/features/exam/components/exam-model";
 
 const ExamListPage = () => {
   const dispatch = useAppDispatch();
@@ -85,7 +86,9 @@ const ExamListPage = () => {
           </CustomDropdown>
           <PrimaryButton
             style={{ padding: "18px 10px" }}
-            onClick={() => dispatch(setModalName(MODEL_CONSTANT.ADD_CLASS))}
+            onClick={() => { 
+              dispatch(setModalName(MODEL_CONSTANT.ADD_EXAM))
+            }}
           >
             {" "}
             <FaPlusSquare /> Add Exam
@@ -134,11 +137,11 @@ const ExamListPage = () => {
           </Flex>
         </Flex>
 
-        {/* class List in table */}
+        {/* exam List in table */}
         <ExamList />
 
-        {/* add class modal  */}
-        {/* <AddClassModal /> */}
+        {/* exam modal  */} 
+        <ExamModal/>
       </DefaultCard>
     </>
   );

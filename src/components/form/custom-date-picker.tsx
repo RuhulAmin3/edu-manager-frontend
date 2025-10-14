@@ -26,18 +26,45 @@ const StyledDatePicker = styled(DatePicker)`
     .ant-picker {
       border: 1px solid
         ${EDU_MANAGER_TOKENS.colors["edu-form-invalid-border-color"]} !important;
-
+        
       &:focus {
         box-shadow: none !important;
       }
     }
   }
+
+    /* Panel (popup) styling */
+  .ant-picker-panel {
+    background-color: ${EDU_MANAGER_TOKENS.colors["edu-primary"]};
+    color: ${EDU_MANAGER_TOKENS.colors["edu-text-primary-color"]};
+  }
+
+  /* Time panel styling */
+  .ant-picker-time-panel {
+    border-left: 1px solid ${EDU_MANAGER_TOKENS.colors["edu-border-color"]};
+  }
+
+  /* Active cell color */
+  .ant-picker-cell-inner.ant-picker-cell-inner-selected,
+  .ant-picker-cell-inner.ant-picker-cell-inner-focused {
+    background-color: ${EDU_MANAGER_TOKENS.colors["edu-primary"]} !important;
+    color: #fff !important;
+  }
+
+  /* Clock and date hover */
+  .ant-picker-cell-inner:hover {
+    background-color: ${EDU_MANAGER_TOKENS.colors["edu-primary-hover-color"]};
+    color: #fff;
+  }
 `;
+
 const CustomDatePicker: FC<ComponentProps<typeof DatePicker>> = ({
   ...props
 }) => {
   // Explicitly type props to fix type error with ref
-  return <StyledDatePicker {...(props as ComponentProps<typeof StyledDatePicker>)} />;
+  return <StyledDatePicker 
+  {...(props as ComponentProps<typeof StyledDatePicker>)} 
+  />;
 };
 
 export default CustomDatePicker;
