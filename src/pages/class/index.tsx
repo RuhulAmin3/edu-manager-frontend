@@ -12,8 +12,7 @@ import { Flex } from "antd";
 /**
  * Internal Dependencies
 */
-import { classBreadCrumbItems } from "~/features/class/class.constant";
-import AddClassModal from "~/features/class/components/add-class-modal";
+import { classBreadCrumbItems } from "~/features/class/class.constant"; 
 import { MODEL_CONSTANT } from "~/common/constants/modal.constant";
 import { setModalName, setQuery, resetQuery } from "~/redux/slice";
 import SecondaryButton from "~/components/ui/secondary-button";
@@ -27,7 +26,7 @@ import DefaultCard from "~/components/ui/default-card";
 import useDebounce from "~/common/hooks/use-debounce";
 import NormalText from "~/components/ui/normal-text";
 import ClassList from "~/features/class/class-list";
-import CustomAvatar from "~/components/ui/avatar";
+import ClassModal from "~/features/class/components/class-modal";
 
 const ClassListPage = () => {
   const dispatch = useAppDispatch();
@@ -118,8 +117,8 @@ const ClassListPage = () => {
         {/* class List in table */}
         <ClassList />
 
-        {/* add class modal  */}
-        <AddClassModal />
+        {/* Class Modal - Handles both Add and Edit */}
+        <ClassModal />
       </DefaultCard>
     </>
   );

@@ -22,16 +22,15 @@ const ClassList = () => {
       dispatch(setQuery({page, limit}));
   }
 
-  const onTableChange = (pagination:any, filter:any, sorter:any) => {  
+  const onTableChange = (_pagination:any, _filter:any, sorter:any) => {  
    const {field, order} = sorter; 
     const query = {
       sortBy:field,
       sortOrder:order === "ascend" ? "asc" : "desc",
     } 
     dispatch(setQuery(query));
-   } 
+   }
 
-   
   return (
     <CustomTable 
       totalDoc={meta?.totalDoc}

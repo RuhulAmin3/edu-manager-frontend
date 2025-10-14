@@ -1,7 +1,7 @@
 /**
  * External Dependencies
  */
-import { BsFiletypeXlsx, BsPrinter } from "react-icons/bs";
+import { BsFiletypeXlsx } from "react-icons/bs";
 import { BiSolidFileExport } from "react-icons/bi";
 import { DownOutlined } from "@ant-design/icons";
 import { GrDocumentPdf } from "react-icons/gr";
@@ -13,7 +13,6 @@ import { Flex, Popover } from "antd";
  * Internal Dependencies
  */
 import ExamFilterPopoverContent from "~/features/exam/components/exam-filter-popover-content"; 
-import AddClassModal from "~/features/class/components/add-class-modal";
 import { MODEL_CONSTANT } from "~/common/constants/modal.constant";
 import { setModalName, setQuery, resetQuery } from "~/redux/slice";
 import SecondaryButton from "~/components/ui/secondary-button";
@@ -26,11 +25,10 @@ import CustomInput from "~/components/form/custom-input";
 import DefaultCard from "~/components/ui/default-card";
 import useDebounce from "~/common/hooks/use-debounce";
 import NormalText from "~/components/ui/normal-text";
-import CustomAvatar from "~/components/ui/avatar";
 import ExamList from "~/features/exam/exam-list";
 import { CiFilter } from "react-icons/ci";
 
-const ClassListPage = () => {
+const ExamListPage = () => {
   const dispatch = useAppDispatch();
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [popoverOpen, setPopoverOpen] = useState<boolean>(false);
@@ -140,10 +138,10 @@ const ClassListPage = () => {
         <ExamList />
 
         {/* add class modal  */}
-        <AddClassModal />
+        {/* <AddClassModal /> */}
       </DefaultCard>
     </>
   );
 };
 
-export default ClassListPage;
+export default ExamListPage;
