@@ -1,6 +1,6 @@
 /**
  * External dependencies 
- */ 
+ */
 import { BsThreeDotsVertical } from "react-icons/bs";
 import { DeleteOutlined } from "@ant-design/icons";
 import { TbEditCircle } from "react-icons/tb";
@@ -9,24 +9,24 @@ import React, { FC } from "react";
 
 /**
  * Internal dependencies 
- */ 
+ */
 
 import { getFromLocalStorage } from "~/common/utils/local-storage.utils";
-import useShowToastMessage from "~/common/hooks/use-show-toast-message"; 
+import useShowToastMessage from "~/common/hooks/use-show-toast-message";
 import { ModifiedErrorType } from "~/common/types/response.type";
-import { USER } from "~/common/constants/local-storage.constant"; 
+import { USER } from "~/common/constants/local-storage.constant";
 import SecondaryButton from "~/components/ui/secondary-button";
 import CustomDropdown from "~/components/ui/custom-dropdown";
 import { useDeleteGuardianMutation } from "../guardian.api";
-import {MdOutlineRemoveRedEye} from "react-icons/md"; ;
-import { EDU_MANAGER_TOKENS } from "~/styles/token"; 
+import { MdOutlineRemoveRedEye } from "react-icons/md";;
+import { EDU_MANAGER_TOKENS } from "~/styles/token";
 import { styles } from "~/common/styles";
 
 
-const AdminGuardianListAction:FC<{id:string}> = ({id}) => {
-const {role}:Record<string, string> = getFromLocalStorage(USER) || {};
+const AdminGuardianListAction: FC<{ id: string }> = ({ id }) => {
+  const { role }: Record<string, string> = getFromLocalStorage(USER) || {};
 
-const [deleteGuardian, res] = useDeleteGuardianMutation();
+  const [deleteGuardian, res] = useDeleteGuardianMutation();
 
   const handleDelete = (id: string) => {
     deleteGuardian(id);
@@ -61,21 +61,23 @@ const [deleteGuardian, res] = useDeleteGuardianMutation();
           {
             key: "edit",
             label: (
-              <div style={styles.item}>
-                <TbEditCircle style={styles.icon} />
-                <span>Edit</span>
-              </div>
+              <Link to={`/${role?.toLocaleLowerCase()}/update-guardian/${id}`}>
+                <div style={styles.item}>
+                  <TbEditCircle style={styles.icon} />
+                  <span>Edit</span>
+                </div>
+              </Link>
             ),
           },
           {
             key: "view details",
             label: (
-             <Link to={`/${role?.toLocaleLowerCase()}/guardians/${id}`}> 
-              <div style={styles.item}>
-                <MdOutlineRemoveRedEye style={styles.icon} />
-                <span>View Details</span>
-              </div>
-             </Link>
+              <Link to={`/${role?.toLocaleLowerCase()}/guardians/${id}`}>
+                <div style={styles.item}>
+                  <MdOutlineRemoveRedEye style={styles.icon} />
+                  <span>View Details</span>
+                </div>
+              </Link>
             ),
           },
         ]}

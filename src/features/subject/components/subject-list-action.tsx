@@ -1,7 +1,7 @@
 /**
  * External Dependencies
 */
-import React, { FC, useEffect, useState } from "react";
+import { FC } from "react";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import { DeleteOutlined } from "@ant-design/icons";
 import { TbEditCircle } from "react-icons/tb";
@@ -19,39 +19,29 @@ import CustomDropdown from "~/components/ui/custom-dropdown";
 import { useAppDispatch } from "~/common/hooks/redux.hooks";
 import { EDU_MANAGER_TOKENS } from "~/styles/token";
 import { styles } from "~/common/styles";
+import { SubjectDataType } from "../subject.type";
 
-const SubjectListAction: FC<{ id: string }> = ({ id }) => {
+const SubjectListAction: FC<{ record: SubjectDataType }> = ({ record }) => {
   const dispatch = useAppDispatch();
-  const [skip, setSkip] = useState(true);
 
   const [deleteSubject, res] = useDeleteSubjectMutation();
-  const { data, isSuccess, isFetching, refetch } = useGetSubjectQuery(id, {
-    skip: skip,
-  });
 
-  // Edit functinality
-  const handleGetData = () => {
-    dispatch(setEditId(id));
-    setSkip(false);
-    if (!skip) refetch();
-  };
-
-  // set into redux store 
-  useEffect(() => {
-    if (isSuccess && !isFetching) {
-      dispatch(setFormInitialValues(data?.data));
+  const handleEdit = () => {
+    if (record) {
+      dispatch(setEditId(record.id));
+      dispatch(setFormInitialValues({
+        title: record.title,
+        code: record.code,
+      }));
+      dispatch(setModalName(MODEL_CONSTANT.EDIT_SUBJECT));
     }
-  }, [isSuccess, isFetching, dispatch, data]);
-
-  const handleOpenEditModal = (id: string) => {
-    dispatch(setEditId(id));
-    if(isSuccess) dispatch(setModalName(MODEL_CONSTANT.EDIT_SUBJECT));
   };
 
   // delete functinality
-  const handleDelete = (id: string) => {
+  const handleDelete = (id: string) => { 
     deleteSubject(id);
   };
+
 
   useShowToastMessage({
     isError: res.isError,
@@ -68,7 +58,7 @@ const SubjectListAction: FC<{ id: string }> = ({ id }) => {
           {
             key: "delete",
             label: (
-              <div style={styles.item} onClick={() => handleDelete(id)}>
+              <div style={styles.item} onClick={() => handleDelete(record.id)}>
                 <DeleteOutlined
                   style={{
                     ...styles.icon,
@@ -82,15 +72,16 @@ const SubjectListAction: FC<{ id: string }> = ({ id }) => {
           {
             key: "edit",
             label: (
-              <div style={styles.item} onClick={() => handleOpenEditModal(id)}>
+              <div style={styles.item}>
                 <TbEditCircle style={styles.icon} />
                 <span>Edit</span>
               </div>
             ),
+            onClick: handleEdit,
           },
         ]}
       >
-        <SecondaryButton onClick={handleGetData}>
+        <SecondaryButton>
           <BsThreeDotsVertical />
         </SecondaryButton>
       </CustomDropdown>

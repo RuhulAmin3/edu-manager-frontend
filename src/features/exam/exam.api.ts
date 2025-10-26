@@ -1,12 +1,13 @@
 import { rootApi } from "../../redux/api";
+import { ExamType } from "./exam.type";
 
 const examApi = rootApi.injectEndpoints({
   endpoints: (builder) => ({
     // Get all exams
     getAllExams: builder.query({
-      query: (data) => ({
+      query: (params) => ({
         url: "/exam",
-        params: data,
+        params,
       }),
       providesTags: ["exam"],
     }),
@@ -16,65 +17,61 @@ const examApi = rootApi.injectEndpoints({
       query: (id) => ({
         url: `/exam/${id}`,
       }),
-      providesTags: (result, error, id) => [{ type: "exam", id }],
+      providesTags: (_result, _error, id) => [{ type: "exam", id }],
     }),
-
-    // Add a new exam
+    // Add new exam
     addExam: builder.mutation({
       query: (data) => ({
         url: "/exam",
         method: "POST",
         body: data,
       }),
-      invalidatesTags: ["exam"], // Pessimistic update
+      invalidatesTags: ["exam"], // ✅ matches providesTags
     }),
 
-    // Update an exam
+    // Update exam
     updateExam: builder.mutation({
       query: ({ id, data }) => ({
         url: `/exam/${id}`,
         method: "PATCH",
         body: data,
       }),
-      invalidatesTags: (result, error, { id }) => [{ type: "exam", id }], // Pessimistic update
+      // ✅ matches providesTags
+      invalidatesTags: ["exam"],
       async onQueryStarted({ id, data }, { dispatch, queryFulfilled }) {
-        // Optimistic Update
         const patchResult = dispatch(
-          examApi.util.updateQueryData("getAllExams", undefined, (draft) => {
-            const exam = draft?.find((item:Record<string, unknown>) => item.id === id);
+          examApi.util.updateQueryData("getAllExams", {}, (draft) => {
+            const exam = draft?.find((item: ExamType) => item.id === id);
             if (exam) {
               Object.assign(exam, data);
             }
           })
         );
-
         try {
-          await queryFulfilled; // Wait for API response
+          await queryFulfilled;
         } catch {
-          patchResult.undo(); // Rollback on failure
+          patchResult.undo();
         }
       },
     }),
 
-    // Delete an exam
+    // Delete exam
     deleteExam: builder.mutation({
       query: (id) => ({
         url: `/exam/${id}`,
         method: "DELETE",
       }),
-      invalidatesTags: ["exam"], // Pessimistic update
+      invalidatesTags: ["exam"],
       async onQueryStarted(id, { dispatch, queryFulfilled }) {
-        // Optimistic Update
         const patchResult = dispatch(
-          examApi.util.updateQueryData("getAllExams", undefined, (draft) => {
-            return draft?.filter((exam:Record<string, unknown>) => exam.id !== id);
+          examApi.util.updateQueryData("getAllExams", {}, (draft) => {
+            return draft.filter((exam: ExamType) => exam.id !== id);
           })
         );
-
         try {
-          await queryFulfilled; // Wait for API response
+          await queryFulfilled;
         } catch {
-          patchResult.undo(); // Rollback on failure
+          patchResult.undo();
         }
       },
     }),

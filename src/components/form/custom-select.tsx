@@ -35,7 +35,8 @@ const StyledSelect = styled(Select)`
 `;
 
 const CustomSelect: FC<AntSelectProps> = ({ ...rest }) => {
-  return <StyledSelect {...rest} />;
+  return <StyledSelect {...rest}
+  />;
 };
 
 export default CustomSelect;

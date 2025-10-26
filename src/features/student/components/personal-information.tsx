@@ -7,7 +7,6 @@ import React, { FC } from "react";
 /**
  * Internal Dependencies
  * */
-
 import SelectClassField from "~/features/class/components/select-class-field";
 import CustomDatePicker from "~/components/form/custom-date-picker";
 import FormSectionTopbar from "~/components/ui/form-section-topbar";
@@ -69,7 +68,7 @@ const PersonalInformation: FC<{
           <Col xs={24} sm={12} md={12} lg={8} xl={6}>
             <CustomFormItem
               label="First Name"
-              name="firstName"
+              name={["name", "firstName"]}
               layout="vertical"
               rules={[{ required: true }]}
             >
@@ -80,7 +79,7 @@ const PersonalInformation: FC<{
             <CustomFormItem
               label="Middle Name"
               layout="vertical"
-              name="middleName"
+              name={["name", "middleName"]}
             >
               <CustomInput />
             </CustomFormItem>
@@ -88,7 +87,7 @@ const PersonalInformation: FC<{
           <Col xs={24} sm={12} md={12} lg={8} xl={6}>
             <CustomFormItem
               label="Last Name"
-              name="lastName"
+              name={["name", "lastName"]}
               layout="vertical"
               rules={[{ required: true }]}
             >

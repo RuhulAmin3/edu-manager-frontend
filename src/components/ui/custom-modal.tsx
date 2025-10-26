@@ -11,7 +11,7 @@ interface CustomModalProps extends ModalProps {
   okText?: string;
   cancelText?: string;
   loading?: boolean;
-  initialValues?: Record<string, string>;
+  initialValues?: Record<string, any>;
 }
 
 const CustomModal: FC<PropsWithChildren<CustomModalProps>> = ({
@@ -27,7 +27,6 @@ const CustomModal: FC<PropsWithChildren<CustomModalProps>> = ({
   ...props
 }) => {
   const [form] = Form.useForm();
-
   const handleOk = async () => {
     try {
       const values = await form.validateFields();

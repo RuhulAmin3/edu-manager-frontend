@@ -63,7 +63,6 @@ const TeacherListPage = () => {
         <CustomBreadCrumb items={teacherListBreadCrumbItems} />
         <Flex gap={10} align="center">
           <RefreshButton />
-          <CustomAvatar size="large" shape="square" icon={<BsPrinter />} />
 
           {/* export buttons */}
           <CustomDropdown

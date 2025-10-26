@@ -8,17 +8,20 @@ import { DownOutlined } from "@ant-design/icons";
 import { GrDocumentPdf } from "react-icons/gr";
 import { FaPlusSquare } from "react-icons/fa";
 import { useState, useEffect } from "react";
-import { CiFilter } from "react-icons/ci"; 
+import { CiFilter } from "react-icons/ci";
+import { Link } from "react-router-dom";
 import { Flex, Popover } from "antd";
 
 /**
  * Internal Imports
  */
-  
+
 import GuardianFilterPopoverContent from "~/features/guardian/components/guardian-filter-popover-content";
-import { GuardianListBreadCrumbItems } from "~/features/guardian/guardian.constant"; 
-import MultipleViewButtons from "~/components/ui/multiple-view-buttons";  
-import AdminGuardianList from "~/features/guardian/admin-guardian-list"; 
+import { GuardianListBreadCrumbItems } from "~/features/guardian/guardian.constant";
+import { getFromLocalStorage } from "~/common/utils/local-storage.utils";
+import MultipleViewButtons from "~/components/ui/multiple-view-buttons";
+import AdminGuardianList from "~/features/guardian/admin-guardian-list";
+import { USER } from "~/common/constants/local-storage.constant";
 import SecondaryButton from "~/components/ui/secondary-button";
 import CustomDropdown from "~/components/ui/custom-dropdown";
 import { useAppDispatch } from "~/common/hooks/redux.hooks";
@@ -32,10 +35,9 @@ import NormalText from "~/components/ui/normal-text";
 import { setQuery, resetQuery } from "~/redux/slice";
 import CustomAvatar from "~/components/ui/avatar";
 
- 
-
-const GuardianListPage = () => { 
+const GuardianListPage = () => {
   const dispatch = useAppDispatch();
+  const { role }: Record<string, string> = getFromLocalStorage(USER) || {};
   const [cardView, setCardView] = useState(false);
   const [popoverOpen, setPopoverOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState<string>("");
@@ -60,8 +62,6 @@ const GuardianListPage = () => {
         <CustomBreadCrumb items={GuardianListBreadCrumbItems} />
         <Flex gap={10} align="center">
           <RefreshButton />
-          <CustomAvatar size="large" shape="square" icon={<BsPrinter />} />
-
           {/* export buttons */}
           <CustomDropdown
             placement="bottomRight"
@@ -91,11 +91,13 @@ const GuardianListPage = () => {
               Exports
               <DownOutlined size={2} />
             </SecondaryButton>
-          </CustomDropdown> 
+          </CustomDropdown>
+          <Link to={`/${role?.toLocaleLowerCase()}/add-guardian`}>
             <PrimaryButton style={{ padding: "18px 10px" }}>
               {" "}
               <FaPlusSquare /> Add Guardian
-            </PrimaryButton> 
+            </PrimaryButton>
+          </Link>
         </Flex>
       </Flex>
 
@@ -144,7 +146,7 @@ const GuardianListPage = () => {
         </Flex>
 
         {/* Students List in table */}
-        <AdminGuardianList/>
+        <AdminGuardianList />
       </DefaultCard>
     </>
   );

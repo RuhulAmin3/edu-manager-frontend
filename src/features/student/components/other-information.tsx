@@ -13,10 +13,9 @@ const OtherInformation = () => {
      <div style={{marginBlock:"20px"}}>
         <FormSectionTopbar title="Others Information" icon={<HiOutlineBuildingLibrary/>}/>
         <DefaultCard> 
-
         {/* first row */}
         <Row gutter={[16, 16]}>
-          <Col xs={24} md={12}  >
+          <Col xs={24} >
             <CustomFormItem
               label="Address"
               name="address"
@@ -24,15 +23,6 @@ const OtherInformation = () => {
               rules={[{ required: true }]}
             >
               <CustomInput />
-            </CustomFormItem>
-          </Col>
-          <Col xs={24} md={12}  >
-            <CustomFormItem
-              label="Password"
-              name="password"
-              layout="vertical" 
-            >
-              <CustomInput isPassword />
             </CustomFormItem>
           </Col>
           <Col xs={24} md={24}>

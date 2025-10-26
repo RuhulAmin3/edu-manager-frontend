@@ -23,7 +23,7 @@ import {
 import { tagTypes } from "./tag-types";
 
 const baseQuery = fetchBaseQuery({
-  baseUrl: "https://edu-manager-server.vercel.app/api/v1/",
+  baseUrl: "https://edu-manager-backend.onrender.com/api/v1/",
   // baseUrl: "http://localhost:4000/api/v1/",
   prepareHeaders: (headers) => {
     const token = getFromLocalStorage(ACCESS_TOKEN_KEY);
@@ -34,6 +34,7 @@ const baseQuery = fetchBaseQuery({
   },
   credentials: "include",
 });
+
 const baseQueryWithReauth: BaseQueryFn<
   string | FetchArgs,
   unknown,

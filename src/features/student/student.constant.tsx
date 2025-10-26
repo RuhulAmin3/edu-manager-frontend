@@ -1,8 +1,8 @@
-import { Avatar, Flex, TableProps, Tag } from "antd"; 
+import { Avatar, Flex, TableProps, Tag } from "antd";
 import { bloodGroupList } from "~/common/constants";
 import { EDU_MANAGER_TOKENS } from "~/styles/token";
 import AdminStudentListAction from "./components/admin-student-list-action";
- 
+
 export const studentListBreadCrumbItems = [
   {
     label: "Student List",
@@ -34,10 +34,9 @@ export const columns: TableProps["columns"] = [
 
       return (
         <Flex gap={4} align="center" >
-          <Avatar src={image} /> 
-            {`${name?.firstName} ${name?.middleName ? name.middleName : ""} ${
-              name?.lastName
-            }`} 
+          <Avatar src={image} />
+          {`${name?.firstName} ${name?.middleName ? name.middleName : ""} ${name?.lastName
+            }`}
         </Flex>
       );
     },
@@ -73,7 +72,8 @@ export const columns: TableProps["columns"] = [
       const color =
         data == "Active"
           ? EDU_MANAGER_TOKENS.colors["edu-primary"]
-          : EDU_MANAGER_TOKENS.colors["edu-danger"];
+          : data == "Inactive" ? EDU_MANAGER_TOKENS.colors["edu-warning"]
+            : EDU_MANAGER_TOKENS.colors["edu-danger"];
       return (
         <Tag color={color} key={data}>
           {" "}
@@ -86,7 +86,7 @@ export const columns: TableProps["columns"] = [
     title: "Admission Year",
     dataIndex: "admissionYear",
     key: "admissionYear",
-    sorter:true,
+    sorter: true,
   },
   {
     title: "Blood Group",
@@ -104,7 +104,7 @@ export const columns: TableProps["columns"] = [
     fixed: "right",
     render: (id: string) => {
       return (
-         <AdminStudentListAction id={id}/>
+        <AdminStudentListAction id={id} />
       );
     },
   },

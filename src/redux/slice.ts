@@ -4,7 +4,7 @@ interface InitialStateType {
   query: Record<string, unknown>;
   modalName: string;
   editId: string;
-  formInitialValues: Record<string, string>;
+  formInitialValues: Record<string, any>;
 }
 
 const initialState: InitialStateType = {
@@ -32,7 +32,7 @@ const initialSlice = createSlice({
     setModalName: (state, action: PayloadAction<string>) => {
       state.modalName = action.payload;
     },
-    
+
     resetModalName: (state) => {
       state.modalName = "";
     },
@@ -49,7 +49,7 @@ const initialSlice = createSlice({
     // form initial Value
     setFormInitialValues: (
       state,
-      action: PayloadAction<Record<string, string>>
+      action: PayloadAction<Record<string, any>>
     ) => {
       state.formInitialValues = action.payload;
     },
@@ -67,7 +67,7 @@ export const {
   resetModalName,
   setEditId,
   resetEditId,
-  setFormInitialValues, 
+  setFormInitialValues,
   resetFormInitialValues,
 } = initialSlice.actions;
 export const defaultReducer = initialSlice.reducer;
