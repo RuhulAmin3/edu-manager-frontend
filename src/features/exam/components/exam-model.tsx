@@ -182,7 +182,7 @@ const ExamModal = () => {
             </CustomFormItem>
 
             {/* Subjects List */}
-            <Form.Item
+            <CustomFormItem
                 layout="vertical"
                 name="subjects"
                 rules={[{ required: true, message: "At least one subject is required" }]}
@@ -240,7 +240,7 @@ const ExamModal = () => {
                         </>
                     )}
                 </Form.List>
-            </Form.Item>
+            </CustomFormItem>
 
             {/* Teacher */}
             <CustomFormItem

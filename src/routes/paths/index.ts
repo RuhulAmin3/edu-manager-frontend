@@ -38,7 +38,6 @@ import EditStudentPage from "~/pages/student/edit-student";
 import EditTeacherPage from "~/pages/teacher/edit-teacher";
 import EditGuardianPage from "~/pages/guardian/edit-guardian";
 
-
 export const commonRoutes = [
   {
     path: "/", // Home page route
