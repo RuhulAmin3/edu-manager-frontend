@@ -28,6 +28,7 @@ import App from "~/App";
 import ClassListPage from "~/pages/class";
 import SubjectListPage from "~/pages/subject"; 
 import ExamResultListPage from "~/pages/exam-result";
+import ExamDetailsPage from "~/pages/exam/exam-details";
 import FeeListPage from "~/pages/fee";
 import ExpenseListPage from "~/pages/expense";
 import AttendenceListPage from "~/pages/attendence";
@@ -100,6 +101,7 @@ export const adminRoutes = [
 
   // examination routes
   {path:"exams", element:ExamListPage},
+  {path:"exams/:id", element:ExamDetailsPage},
   {path:"exam-result", element:ExamResultListPage},
 
   // acount management routes

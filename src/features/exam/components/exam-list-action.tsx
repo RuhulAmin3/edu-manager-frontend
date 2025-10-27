@@ -21,9 +21,12 @@ import { setEditId, setFormInitialValues, setModalName } from "~/redux/slice";
 import { MODEL_CONSTANT } from "~/common/constants/modal.constant";
 import dayjs from "dayjs";
 
+import { useNavigate } from "react-router-dom";
+
 const ExamListAction: FC<{ record: Record<string, unknown> }> = ({ record }) => {
   const { id } = record;
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
   const [deleteExam, res] = useDeleteExamMutation();
 
   const handleEdit = () => {
@@ -86,6 +89,7 @@ const ExamListAction: FC<{ record: Record<string, unknown> }> = ({ record }) => 
                 <span>View Details</span>
               </div>
             ),
+            onClick: () => navigate(`/admin/exams/${id}`),
           },
         ]}
       >
