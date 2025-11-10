@@ -1,50 +1,89 @@
-Edu Manager Frontend
+# Edu Manager
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Edu Manager is a comprehensive, coaching center management system designed to streamline administrative tasks and enhance communication between students, teachers, and guardians. This project is built with a modern tech stack and offers a user-friendly interface for managing various aspects of a school's operations.
 
-Currently, two official plugins are available:
+**Live URL:** [https://edu-manager.netlify.app/](https://edu-manager.netlify.app/)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Features
 
-## Expanding the ESLint configuration
+- **Dashboard:** A central hub for viewing key metrics and analytics.
+- **Student Management:** Add, edit, and view student information, including personal details, guardian information, and academic records.
+- **Teacher Management:** Manage teacher profiles, including personal, educational, and professional information.
+- **Guardian Management:** Keep track of guardian details and their associated students.
+- **Class and Subject Management:** Organize classes and subjects, and assign teachers to subjects.
+- **Exam and Result Management:** Create exams, record results, and generate reports.
+- **Attendance Tracking:** Monitor student attendance.
+- **Financial Management:** Track fees and expenses.
+- **Notice Board:** Post and view important announcements.
+- **User Authentication:** Secure login for different user roles (Admin, Teacher, Student, Guardian).
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## Tech Stack
 
-- Configure the top-level `parserOptions` property like this:
+- **Frontend:**
+  - **Framework:** React
+  - **Language:** TypeScript
+  - **UI Library:** Ant Design
+  - **Styling:** Styled Components
+  - **State Management:** Redux Toolkit
+  - **Routing:** React Router
+  - **Linting:** ESLint
+  - **Charts:** Ant Design Charts
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ["./tsconfig.node.json", "./tsconfig.app.json"],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-});
+## Project Structure
+
+The project follows a feature-based structure, where each feature has its own folder containing the related components, API calls, types, and constants.
+
+```
+    src
+    ├── assets
+    ├── common
+    ├── components
+    ├── features
+    │   ├── admin
+    │   ├── auth
+    │   ├── class
+    │   ├── exam
+    │   ├── guardian
+    │   ├── student
+    │   ├── subject
+    │   └── teacher
+    ├── layouts
+    ├── pages
+    ├── redux
+    ├── routes
+    └── styles
+```
+## Getting Started
+To get a local copy up and running, follow these simple steps.
+
+### Prerequisites
+
+- Node.js (v18 or higher)
+- npm or yarn
+
+### Installation
+
+1.  **Clone the repo**
+    ```sh
+    git clone https://github.com/your_username/edu-manager-frontend.git
+    ```
+2.  **Install NPM packages**
+    ```sh
+    npm install
+    ```
+3.  **Start the development server**
+    ```sh
+    npm run dev
+    ```
+
+The application will be available at `http://localhost:5173`.
+
+### Building for Production
+
+To create a production build, run:
+
+```sh
+npm run build
 ```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
-
-```js
-// eslint.config.js
-import react from "eslint-plugin-react";
-
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: "18.3" } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs["jsx-runtime"].rules,
-  },
-});
-```
+This will create a `dist` folder with the optimized and minified files.
