@@ -94,11 +94,11 @@ export const sidebarItems = (role:string) => {
           key: `/${lowerCase_role}/add-teacher`,
           icon:<GoDot />,
         }, 
-        {
-          label: <Link to={`/${lowerCase_role}/payments`}>Teacher Payment</Link>,
-          key: `/${lowerCase_role}/payments`,
-          icon:<GoDot />,
-        }, 
+        // {
+        //   label: <Link to={`/${lowerCase_role}/payments`}>Teacher Payment</Link>,
+        //   key: `/${lowerCase_role}/payments`,
+        //   icon:<GoDot />,
+        // }, 
       ],
     },
 

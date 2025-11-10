@@ -72,7 +72,7 @@ const App: React.FC = () => {
         <Text style={{ fontSize: "1.2rem" }}>
           We're working hard to bring you a great experience. Stay tuned!
         </Text>
-        <CountdownContainer>Launching in 10 days</CountdownContainer>
+        <CountdownContainer>Launching within few days</CountdownContainer>
         <StyledButton type="primary" onClick={handleLoginNavigate}>
           Go to Login
         </StyledButton>
