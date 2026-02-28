@@ -1,7 +1,7 @@
 /**
  * External Dependencies
 */
-import { BsFiletypeXlsx, BsPrinter } from "react-icons/bs";
+import { BsFiletypeXlsx } from "react-icons/bs";
 import { BiSolidFileExport } from "react-icons/bi";
 import { DownOutlined } from "@ant-design/icons";
 import { GrDocumentPdf } from "react-icons/gr";
@@ -12,8 +12,7 @@ import { Flex } from "antd";
 /**
  * Internal Dependencies
 */
-import { classBreadCrumbItems } from "~/features/class/class.constant";
-import AddClassModal from "~/features/class/components/add-class-modal";
+import { classBreadCrumbItems } from "~/features/class/class.constant"; 
 import { MODEL_CONSTANT } from "~/common/constants/modal.constant";
 import { setModalName, setQuery, resetQuery } from "~/redux/slice";
 import SecondaryButton from "~/components/ui/secondary-button";
@@ -27,7 +26,7 @@ import DefaultCard from "~/components/ui/default-card";
 import useDebounce from "~/common/hooks/use-debounce";
 import NormalText from "~/components/ui/normal-text";
 import ClassList from "~/features/class/class-list";
-import CustomAvatar from "~/components/ui/avatar";
+import ClassModal from "~/features/class/components/class-modal";
 
 const ClassListPage = () => {
   const dispatch = useAppDispatch();
@@ -52,8 +51,7 @@ const ClassListPage = () => {
       >
         <CustomBreadCrumb items={classBreadCrumbItems} />
         <Flex gap={10} align="center">
-          <RefreshButton />
-          <CustomAvatar size="large" shape="square" icon={<BsPrinter />} />
+          <RefreshButton /> 
           {/* export buttons */}
           <CustomDropdown
             placement="bottomRight"
@@ -108,7 +106,7 @@ const ClassListPage = () => {
 
           {/* search bar */}
           <CustomInput
-            placeholder="Search by title"
+            placeholder="Search by class name"
             padding="4px 10px"
             style={{ width: "350px" }}
             value={searchTerm}
@@ -119,8 +117,8 @@ const ClassListPage = () => {
         {/* class List in table */}
         <ClassList />
 
-        {/* add class modal  */}
-        <AddClassModal />
+        {/* Class Modal - Handles both Add and Edit */}
+        <ClassModal />
       </DefaultCard>
     </>
   );

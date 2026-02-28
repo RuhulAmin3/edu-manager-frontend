@@ -36,7 +36,7 @@ import { getFromLocalStorage } from "~/common/utils/local-storage.utils";
 import { USER } from "~/common/constants/local-storage.constant";
 
 const StudentListPage = () => {
-  const {role }:Record<string, string> = getFromLocalStorage(USER) || {};
+  const { role }:Record<string, string> = getFromLocalStorage(USER) || {};
   const dispatch = useAppDispatch();
   const [cardView, setCardView] = useState(false);
   const [popoverOpen, setPopoverOpen] = useState(false);
@@ -62,7 +62,6 @@ const StudentListPage = () => {
         <CustomBreadCrumb items={studentListBreadCrumbItems} />
         <Flex gap={10} align="center">
           <RefreshButton />
-          <CustomAvatar size="large" shape="square" icon={<BsPrinter />} />
 
           {/* export buttons */}
           <CustomDropdown

@@ -1,15 +1,15 @@
 /**
  * External Dependencies
- * */ 
+ * */
 
 import { MdOutlineKeyboardDoubleArrowRight } from "react-icons/md";
 import { useNavigate, useParams } from "react-router-dom";
 import { useForm } from "antd/es/form/Form";
-import { Flex, Form} from "antd";
+import { Flex, Form } from "antd";
 
 /**
  * Internal Dependencies
- * */ 
+ * */
 
 import StudentPromotionLoadingContent from "~/features/student/components/student-promotion-loading-content";
 import StudentPromotionFrom from "~/features/student/components/student-promotion-from";
@@ -34,7 +34,7 @@ const StudentPromotionPage = () => {
   const { id } = useParams();
   const { role }: Record<string, string> = getFromLocalStorage(USER) || {};
   const [updateStudent, res] = useUpdateStudentMutation();
-  const { data, isLoading } = useGetStudentQuery(id);
+  const { data, isLoading } = useGetStudentQuery(id as string);
   const navigate = useNavigate();
   const [form] = useForm();
   const { className, admissionYear, section, studentId } = data?.data || {};
@@ -44,7 +44,7 @@ const StudentPromotionPage = () => {
     if ("admissionYear" in values) {
       values["admissionYear"] = +(values["admissionYear"] as string);
     }
-    updateStudent({ id, data: values });
+    updateStudent({ id: id as string, data: values });
   };
 
   const afterHandleSubmit = () => {
@@ -86,10 +86,10 @@ const StudentPromotionPage = () => {
             <>
               <Flex align="center" justify="space-between">
                 <StudentPromotionFrom
-                  className={className}
-                  section={section}
-                  session={admissionYear}
-                  studentId={studentId}
+                  className={className as string}
+                  section={section as string}
+                  session={admissionYear as number}
+                  studentId={studentId as string}
                 />
                 <PrimaryButton style={{ paddingBlock: "20px" }}>
                   {" "}

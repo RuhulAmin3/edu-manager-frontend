@@ -94,11 +94,11 @@ export const sidebarItems = (role:string) => {
           key: `/${lowerCase_role}/add-teacher`,
           icon:<GoDot />,
         }, 
-        {
-          label: <Link to={`/${lowerCase_role}/payments`}>Teacher Payment</Link>,
-          key: `/${lowerCase_role}/payments`,
-          icon:<GoDot />,
-        }, 
+        // {
+        //   label: <Link to={`/${lowerCase_role}/payments`}>Teacher Payment</Link>,
+        //   key: `/${lowerCase_role}/payments`,
+        //   icon:<GoDot />,
+        // }, 
       ],
     },
 
@@ -117,12 +117,7 @@ export const sidebarItems = (role:string) => {
           label: <Link to={`/${lowerCase_role}/add-guardian`}>Add New Guardian</Link>,
           key: `/${lowerCase_role}/add-guardian`,
           icon:<GoDot />,
-        },
-        {
-          label: <Link to={`/${lowerCase_role}/guardians/1`}>Guardian Details</Link>, // 1 will be replace by unique student Id
-          key: `/${lowerCase_role}/guardians/1`,
-          icon:<GoDot />,
-        }, 
+        }
       ],
     },
 

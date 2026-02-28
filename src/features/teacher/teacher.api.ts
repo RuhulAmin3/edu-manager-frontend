@@ -1,22 +1,28 @@
 import { rootApi } from "../../redux/api";
+import type {
+  TeacherListApiResponse,
+  TeacherApiResponse,
+  TeacherQueryParams,
+  UpdateTeacherData
+} from "./teacher.types";
 
 const teacherApi = rootApi.injectEndpoints({
   endpoints: (builder) => ({
     // Get all teachers
-    getAllTeachers: builder.query({
-      query: (data) => ({
+    getAllTeachers: builder.query<TeacherListApiResponse, TeacherQueryParams>({
+      query: (params) => ({
         url: "/teacher",
-        params: data,
+        params,
       }),
       providesTags: ["teacher"],
     }),
 
     // Get a single teacher
-    getTeacher: builder.query({
+    getTeacher: builder.query<TeacherApiResponse, string>({
       query: (id) => ({
         url: `/teacher/${id}`,
       }),
-      providesTags: (result, error, id) => [{ type: "teacher", id }],
+      providesTags: (_result, _error, id) => [{ type: "teacher", id }],
     }),
 
     // Add a teacher
@@ -30,24 +36,23 @@ const teacherApi = rootApi.injectEndpoints({
     }),
 
     // Update a teacher
-    updateTeacher: builder.mutation({
+    updateTeacher: builder.mutation<TeacherApiResponse, { id: string; data: UpdateTeacherData }>({
       query: ({ id, data }) => ({
         url: `/teacher/${id}`,
         method: "PATCH",
         body: data,
       }),
-      invalidatesTags: (result, error, { id }) => [{ type: "teacher", id }], // Pessimistic update
+      invalidatesTags: (_result, _error, { id }) => [{ type: "teacher", id }], // Pessimistic update
       async onQueryStarted({ id, data }, { dispatch, queryFulfilled }) {
         // Optimistic Update
         const patchResult = dispatch(
-          teacherApi.util.updateQueryData("getAllTeachers", undefined, (draft) => {
-            const teacher = draft?.find((item:Record<string, unknown>) => item.id === id);
+          teacherApi.util.updateQueryData("getAllTeachers", {}, (draft) => {
+            const teacher = draft?.data?.find((item) => item.id === id);
             if (teacher) {
               Object.assign(teacher, data);
             }
           })
         );
-
         try {
           await queryFulfilled; // Wait for API response
         } catch {
@@ -66,8 +71,11 @@ const teacherApi = rootApi.injectEndpoints({
       async onQueryStarted(id, { dispatch, queryFulfilled }) {
         // Optimistic Update
         const patchResult = dispatch(
-          teacherApi.util.updateQueryData("getAllTeachers", undefined, (draft) => {
-            return draft?.filter((teacher:Record<string, unknown>) => teacher.id !== id);
+          teacherApi.util.updateQueryData("getAllTeachers", {}, (draft) => {
+            return {
+              ...draft,
+              data: draft?.data?.filter((teacher) => teacher.id !== id),
+            };
           })
         );
 

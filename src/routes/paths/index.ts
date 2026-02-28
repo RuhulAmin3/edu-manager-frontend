@@ -28,6 +28,7 @@ import App from "~/App";
 import ClassListPage from "~/pages/class";
 import SubjectListPage from "~/pages/subject"; 
 import ExamResultListPage from "~/pages/exam-result";
+import ExamDetailsPage from "~/pages/exam/exam-details";
 import FeeListPage from "~/pages/fee";
 import ExpenseListPage from "~/pages/expense";
 import AttendenceListPage from "~/pages/attendence";
@@ -35,7 +36,8 @@ import AddAttendencePage from "~/pages/attendence/add-attendence";
 import NoticeListPage from "~/pages/notice";
 import LeaderboardPage from "~/pages/leaderboard";
 import EditStudentPage from "~/pages/student/edit-student";
-
+import EditTeacherPage from "~/pages/teacher/edit-teacher";
+import EditGuardianPage from "~/pages/guardian/edit-guardian";
 
 export const commonRoutes = [
   {
@@ -84,12 +86,14 @@ export const adminRoutes = [
   {path: "teachers", element:TeacherListPage},
   {path: "add-teacher", element:AddTeacherPage}, 
   {path: "teachers/:id", element:TeacherDetailsPage},
+  {path: "update-teacher/:id", element:EditTeacherPage},
   {path: "payments", element:TeacherPaymentList},
 
   // admin guardian route
   {path: "guardians", element:GuardianListPage},
   {path: "add-guardian", element:AddGuardianPage}, 
   {path: "guardians/:id", element:GuardianDetailsPage},
+  {path: "update-guardian/:id", element:EditGuardianPage},
 
   // class and subject route
   {path: "classes", element:ClassListPage},
@@ -97,6 +101,7 @@ export const adminRoutes = [
 
   // examination routes
   {path:"exams", element:ExamListPage},
+  {path:"exams/:id", element:ExamDetailsPage},
   {path:"exam-result", element:ExamResultListPage},
 
   // acount management routes

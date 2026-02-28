@@ -1,5 +1,7 @@
+import ComingSoon from "~/components/ui/comming-soon";
+
 const ForgotPasswordPage = () => {
-  return <div>ForgotPasswordPage</div>;
+  return <ComingSoon/>;
 };
 
 export default ForgotPasswordPage;

@@ -6,20 +6,20 @@ import { TbEditCircle } from "react-icons/tb";
 import { styles } from "~/common/styles";
 import CustomDropdown from "~/components/ui/custom-dropdown";
 import SecondaryButton from "~/components/ui/secondary-button";
-import { EDU_MANAGER_TOKENS } from "~/styles/token"; 
+import { EDU_MANAGER_TOKENS } from "~/styles/token";
 import { ModifiedErrorType } from "~/common/types/response.type";
-import useShowToastMessage from "~/common/hooks/use-show-toast-message"; 
+import useShowToastMessage from "~/common/hooks/use-show-toast-message";
 import { Link } from "react-router-dom";
 import { getFromLocalStorage } from "~/common/utils/local-storage.utils";
-import { USER } from "~/common/constants/local-storage.constant"; 
-import {MdOutlineRemoveRedEye} from "react-icons/md";
+import { USER } from "~/common/constants/local-storage.constant";
+import { MdOutlineRemoveRedEye } from "react-icons/md";
 import { useDeleteTeacherMutation } from "../teacher.api";
 
 
-const AdminTeacherListAction:FC<{id:string}> = ({id}) => {
-const {role}:Record<string, string> = getFromLocalStorage(USER) || {};
+const AdminTeacherListAction: FC<{ id: string }> = ({ id }) => {
+  const { role }: Record<string, string> = getFromLocalStorage(USER) || {};
 
-const [deleteTeacher, res] = useDeleteTeacherMutation();
+  const [deleteTeacher, res] = useDeleteTeacherMutation();
   const handleDelete = (id: string) => {
     deleteTeacher(id);
   };
@@ -53,21 +53,23 @@ const [deleteTeacher, res] = useDeleteTeacherMutation();
           {
             key: "edit",
             label: (
-              <div style={styles.item}>
-                <TbEditCircle style={styles.icon} />
-                <span>Edit</span>
-              </div>
+              <Link to={`/${role?.toLocaleLowerCase()}/update-teacher/${id}`}>
+                <div style={styles.item}>
+                  <TbEditCircle style={styles.icon} />
+                  <span>Edit</span>
+                </div>
+              </Link>
             ),
           },
           {
             key: "view details",
             label: (
-             <Link to={`/${role?.toLocaleLowerCase()}/teachers/${id}`}> 
-              <div style={styles.item}>
-                <MdOutlineRemoveRedEye style={styles.icon} />
-                <span>View Details</span>
-              </div>
-             </Link>
+              <Link to={`/${role?.toLocaleLowerCase()}/teachers/${id}`}>
+                <div style={styles.item}>
+                  <MdOutlineRemoveRedEye style={styles.icon} />
+                  <span>View Details</span>
+                </div>
+              </Link>
             ),
           },
         ]}

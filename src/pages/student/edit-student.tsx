@@ -6,6 +6,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useForm } from "antd/es/form/Form";
 import { useEffect, useState } from "react";
 import { Col, Flex, Skeleton } from "antd";
+import merge from "lodash.merge";
 
 /**
  * Internal dependencies
@@ -37,12 +38,11 @@ const EditStudentPage = () => {
   const [prviewImg, setPreviewImg] = useState<UploadFile[]>();
   const [updateStudent, res] = useUpdateStudentMutation();
   const [uploadFile, fileRes] = useUploadFileMutation();
-  const { data, isLoading } = useGetStudentQuery(id);
-  const [updatedValues, setUpdatedValues] = useState<Record<string, string>>(
+  const { data, isLoading } = useGetStudentQuery(id as string);
+  const [updatedValues, setUpdatedValues] = useState<Record<string, unknown>>(
     {}
-  ); 
+  );
   const navigate = useNavigate();
-
   const handleValueChanges = (values: Record<string, unknown>) => {
     if (
       "image" in values &&
@@ -62,28 +62,21 @@ const EditStudentPage = () => {
         ...prev,
         dateOfBirth: (values["dateOfBirth"] as Date).toISOString(),
       }));
-
     } else {
-      setUpdatedValues((prev) => ({
-        ...prev,
-        ...(values as Record<string, string>),
-      }));
+      setUpdatedValues((prev) => merge({}, prev, values));
     }
   };
-
-  console.log("updatedValues", updatedValues);
-
+  
   const handleSubmit = () => {
-    updateStudent({ id, data: updatedValues });
+    updateStudent({ id: id as string, data: updatedValues });
   };
 
   const afterHandleSubmit = () => {
     navigate(`/${role?.toLowerCase()}/students`);
   };
-
   useEffect(() => {
     if (data?.data) {
-      const initialValues = getFormObj(data?.data);
+      const initialValues = getFormObj(data?.data as unknown as Record<string, unknown>);
       setUpdatedValues((prev) => ({
         ...prev,
         studentId: initialValues.studentId as string,
@@ -185,6 +178,5 @@ const EditStudentPage = () => {
       </CustomForm>
     </>
   );
-};
-
+}
 export default EditStudentPage;

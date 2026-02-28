@@ -47,8 +47,8 @@ export const columns: TableProps["columns"] = [
     dataIndex: "id",
     align: "center",
     fixed:"right",
-    render: (id: string) => {
-      return <ExamListAction id={id} />;
+    render: (_id: string, record:Record<string, unknown>) => {
+      return <ExamListAction record={record} />;
     },
   },
 ];

@@ -9,19 +9,38 @@ import { EDU_MANAGER_TOKENS } from "~/styles/token";
 import { useDeleteClassMutation } from "../class.api";
 import { ModifiedErrorType } from "~/common/types/response.type";
 import useShowToastMessage from "~/common/hooks/use-show-toast-message";
+import { useAppDispatch } from "~/common/hooks/redux.hooks";
+import { MODEL_CONSTANT } from "~/common/constants/modal.constant";
+import { setEditId, setFormInitialValues, setModalName } from "~/redux/slice";
+import { SubjectDataType } from "~/features/subject/subject.type";
+import { ClassDataType } from "../class.type";
 
-const ClassListAction:FC<{id:string}> = ({id}) => {
-const [deleteClass, res] = useDeleteClassMutation();
+const ClassListAction:FC<{record:ClassDataType}> = ({record}) => {
+  const dispatch = useAppDispatch();
+  const [deleteClass, res] = useDeleteClassMutation();
+
   const handleDelete = (id: string) => {
     deleteClass(id);
   };
 
+  const handleEdit = () => {
+    if (record) {
+      dispatch(setEditId(record.id));
+      dispatch(setFormInitialValues({
+        className: record.className,
+        subjectIds: record.subjects?.map((subject: SubjectDataType) => subject.id ?? "") || []
+      }));
+      dispatch(setModalName(MODEL_CONSTANT.EDIT_CLASS));
+    }
+  };
+  
   useShowToastMessage({
     isError: res.isError,
     isSuccess: res.isSuccess,
     error: res.error as ModifiedErrorType,
     successMessage: "Class deleted successfully",
   });
+
   return (
     <>
       <CustomDropdown
@@ -30,7 +49,7 @@ const [deleteClass, res] = useDeleteClassMutation();
           {
             key: "delete",
             label: (
-              <div style={styles.item} onClick={() => handleDelete(id)}>
+              <div style={styles.item} onClick={() => handleDelete(record.id)}>
                 <DeleteOutlined
                   style={{
                     ...styles.icon,
@@ -44,7 +63,7 @@ const [deleteClass, res] = useDeleteClassMutation();
           {
             key: "edit",
             label: (
-              <div style={styles.item}>
+              <div style={styles.item} onClick={handleEdit}>
                 <TbEditCircle style={styles.icon} />
                 <span>Edit</span>
               </div>
